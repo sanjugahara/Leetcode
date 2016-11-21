@@ -2,7 +2,7 @@ package com.daimens.algorithm.november;
 
 /**
  * 
- * @author demon
+ * @author Demon Song
  * Given a string, find the first non-repeating character in it and return it's index. If it doesn't exist, return -1.
  * Examples:
  * s = "leetcode"
