@@ -29,7 +29,7 @@ public class SolutionDay25 {
 		List<String> times = new ArrayList<String>();
 		
 		for (int i = 0 ; i < 12 ;i++){
-			for (int j = 0 ; j < 60 ;){
+			for (int j = 0 ; j < 60 ;j++){
 				//·ûºÏÇé¿ö
 				if(countOne(hours[i])+countOne(minutes[j]) == num){
 					String time = String.valueOf(hours[i])+":";
