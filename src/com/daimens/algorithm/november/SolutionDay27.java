@@ -1,10 +1,10 @@
 package com.daimens.algorithm.november;
 
-import com.sun.xml.internal.bind.v2.model.core.ID;
-
 /**
  * 
- * @author Demon Song Given two non-negative numbers num1 and num2 represented
+ * @author Demon Song
+ * 415. Add Strings
+ * Given two non-negative numbers num1 and num2 represented
  *         as string,return the sum of num1 and num2
  * 
  *         Note: 1.The length of both num1 and num2 is < 5100 2.Both num1 and
