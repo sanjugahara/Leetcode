@@ -7,7 +7,7 @@ package com.daimens.algorithm.december;
  * Given an integer,write a function to determine if it is a power of three.
  *
  */
-public class Solution326 {
+public class Solution326_3 {
 	
 	//补码表示 32位表示范围 
 	public static final int MIN_VALUE = 0X80000000;

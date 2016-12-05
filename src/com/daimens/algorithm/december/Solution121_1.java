@@ -18,7 +18,7 @@ package com.daimens.algorithm.december;
  * In this case ,no transaction is done, i.e. max profit =0.
  *
  */
-public class Solution121 {
+public class Solution121_1 {
 	public int maxProfit(int[] prices) {
 		int minprice = Integer.MAX_VALUE;
 		int maxprofit = 0;

@@ -10,7 +10,7 @@ package com.daimens.algorithm.december;
  * Given 1->1->2->3->3,return 1->2->3
  *
  */
-public class Solution83 {
+public class Solution83_4 {
 	public ListNode deleteDuplicates(ListNode head){
 		if (head == null || head.next == null){
 			return head;

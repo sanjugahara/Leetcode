@@ -18,7 +18,7 @@ import java.util.List;
  * 6^2+8^2 = 100
  * 1^2+0^2+0^2 = 1
  */
-public class Solution202 {
+public class Solution202_2 {
 	
 	//如何在递归的情况下，记录一个全局变量
 	public boolean isHappy(int n) {
@@ -60,7 +60,7 @@ public class Solution202 {
     }
 	
 	public static void main(String[] args) {
-		Solution202 s202 = new Solution202();
+		Solution202_2 s202 = new Solution202_2();
 		s202.isHappy(1);
 	}
 }
