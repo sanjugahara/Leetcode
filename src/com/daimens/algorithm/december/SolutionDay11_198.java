@@ -15,6 +15,8 @@ package com.daimens.algorithm.december;
  * tonight without alerting the police.
  *
  */
+
+//待总结
 public class SolutionDay11_198 {
 	public int rob(int[] num) {
         //   31 23 9 13 49 1 0
