@@ -32,20 +32,20 @@ public class Solution326_3 {
 		return n==1;
 	}
 	
-	// 转换成3进制表示方法
-	public String toString(int n,int radix){
-		if (radix < 2 || radix >36){
-			radix = 10;
-		}
-		
-		
-		
-		
-	}
-	
-	public String toString(int i){
-		
-	}
+//	// 转换成3进制表示方法
+//	public String toString(int n,int radix){
+//		if (radix < 2 || radix >36){
+//			radix = 10;
+//		}
+//		
+//		
+//		
+//		
+//	}
+//	
+//	public String toString(int i){
+//		
+//	}
 }
 
 
