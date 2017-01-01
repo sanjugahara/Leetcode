@@ -1,7 +1,5 @@
 package com.daimens.algorithm.december;
 
-import com.sun.org.apache.bcel.internal.generic.LOOKUPSWITCH;
-
 /**
  * 
  * @author Demon Song
