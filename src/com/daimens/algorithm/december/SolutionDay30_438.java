@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import com.daimens.algorithm.november.SolutionDay30;
-
 /**
  * 
  * @author Demon Song
