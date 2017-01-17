@@ -19,5 +19,5 @@ public class SolutionDay12_088 {
         while(k-->0){
         	nums1[k] = (n==0 || (m>0 && nums1[m-1] > nums2[n-1])) ? nums1[--m] : nums2[--n];
         }
-    }
+    }	
 }
