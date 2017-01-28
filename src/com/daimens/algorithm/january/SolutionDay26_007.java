@@ -11,7 +11,7 @@ package com.daimens.algorithm.january;
  * x = -123,return -321
  *
  */
-public class SolutionDay27_007 {
+public class SolutionDay26_007 {
 
 	public int reverse(int x){
 		long ret = 0;
@@ -33,7 +33,7 @@ public class SolutionDay27_007 {
 	}
 	
 	public static void main(String[] args) {
-		SolutionDay27_007 day27_007 = new SolutionDay27_007();
+		SolutionDay26_007 day27_007 = new SolutionDay26_007();
 		day27_007.reverse(1);
 	}
 }

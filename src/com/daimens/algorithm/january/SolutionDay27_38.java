@@ -15,7 +15,7 @@ package com.daimens.algorithm.january;
  * 3. Can you do it like a boss? Do it without using any builtin function __builtion_procount in C++ 
  * or in any other language.
  */
-public class SolutionDay28_38 {
+public class SolutionDay27_38 {
 	
 	public int[] countBits(int num){
 		int[] ret = new int[num+1];

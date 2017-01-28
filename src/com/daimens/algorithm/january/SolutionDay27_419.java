@@ -25,7 +25,7 @@ package com.daimens.algorithm.january;
  * 
  *
  */
-public class SolutionDay28_419 {
+public class SolutionDay27_419 {
 	//DFS算法  找到矩阵里所有的船的数目
 	/**
 	 * 思路:

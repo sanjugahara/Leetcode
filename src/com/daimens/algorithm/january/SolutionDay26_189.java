@@ -10,7 +10,7 @@ package com.daimens.algorithm.january;
  * Try to come up as many solutions as you can, there are at least 3 different ways to solve this problem.
  *
  */
-public class SolutionDay27_189 {
+public class SolutionDay26_189 {
 	
 	public void rotate(int[] nums,int k){
 		k = k % nums.length;
