@@ -19,7 +19,7 @@ import java.util.List;
  * [2,3]
  *
  */
-public class SolutinDay30_442 {
+public class SolutionDay30_442 {
 	public List<Integer> findDuplicates(int[] nums){
 		int[] ctMap = new int[nums.length]; 
 		for(int i = 0; i < nums.length; i++){
