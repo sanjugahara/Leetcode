@@ -3,7 +3,7 @@ package com.daimens.algorithm.february;
 /**
  * 
  * @author Demon Song
- * 23.Product of Array Except self
+ * 238.Product of Array Except self
  * Given an array of n integers where n > 1,nums,return an array output such that output[i] is equal
  * to the product of all the elements of nums except nums[i].
  * Solve it without division and in O(n).
