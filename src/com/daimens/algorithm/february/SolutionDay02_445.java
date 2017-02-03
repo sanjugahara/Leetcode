@@ -2,8 +2,6 @@ package com.daimens.algorithm.february;
 
 import java.util.Stack;
 
-import sun.security.util.Length;
-
 /**
  * 
  * @author Demon Song
@@ -41,6 +39,8 @@ public class SolutionDay02_445 {
 			if(!s1.empty()) sum += s1.pop();
 			if(!s2.empty()) sum += s2.pop();
 			list.val = sum % 10;
+			
+			//这里还是要仔细琢磨下
 			ListNode head = new ListNode(sum/10);
 			head.next = list;
 			list = head;
