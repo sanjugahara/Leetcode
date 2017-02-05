@@ -12,6 +12,7 @@ package com.daimens.algorithm.february;
  */
 public class SolutionDay04_343 {
 	
+	//这个dp 是O(n)
 	public int integerBreak(int n) {
 		int[] dp = new int[n+1];
 		for(int i = 0; i < n+1 ;i++){
