@@ -64,6 +64,8 @@ public class SolutionDay08_486 {
 //		return dp[0][n-1] >= 0;
 //	}
 	
+	
+	//dp[i][j]表示数组下标i到j之间取数字为子问题，它等于能够在i到j之间获得的所有数字之和的最大值
 	public boolean PredictTheWinner(int[] nums) {
         if(nums.length <= 2) return true;
         int n = nums.length;
