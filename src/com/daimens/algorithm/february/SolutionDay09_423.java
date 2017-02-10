@@ -22,130 +22,69 @@ package com.daimens.algorithm.february;
  */
 public class SolutionDay09_423 {
 	
-	public String originalDigits(String s){
-		//找0元素,统计每个字符出现的频次么？貌似可以的
-		int[] bucket = new int[26];
-		for (char temp : s.toCharArray()){
-			bucket[temp-'a']++;
-		}
-		
-		int[] digits = new int[10];
-		
-		//定义查找顺序 0 6 8 7 5 9 4 3 2 1
-		char[] series = {'z','x','g','s','v','i','u','r','w','e'};
-		String[] keys = {"zero","six","eight","seven","five","nine","four","three","two","one"};
-		int[] nums = {0,6,8,7,5,9,4,3,2,1};
-		
-		for (int i = 0; i < digits.length; i++){
-			char selectId = series[i];
-			if(bucket[selectId - 'a'] != 0){
-				int frequency = bucket[selectId - 'a'];
-				for (char tmp : keys[i].toCharArray()){
-					bucket[tmp - 'a'] -= frequency;
-				}
-				digits[nums[i]] += frequency;
-			}
-		}
-		
-//		//0 - zero
-//		if(bucket['z'-'a'] != 0){
-//			int frequency = bucket['z'-'a'];
-//			bucket['z'-'a'] -= frequency;
-//			bucket['e'-'a'] -= frequency;
-//			bucket['r'-'a'] -= frequency;
-//			bucket['o'-'a'] -= frequency;
-//			digits[0] += frequency;
+//	public String originalDigits(String s){
+//		//找0元素,统计每个字符出现的频次么？貌似可以的
+//		int[] bucket = new int[26];
+//		for (char temp : s.toCharArray()){
+//			bucket[temp-'a']++;
 //		}
-//		//6 - six
-//		if(bucket['x'-'a'] != 0){
-//			int frequency = bucket['x'-'a'];
-//			bucket['s'-'a'] -= frequency;
-//			bucket['i'-'a'] -= frequency;
-//			bucket['x'-'a'] -= frequency;
-//			digits[6] += frequency;
+//		
+//		int[] digits = new int[10];
+//		
+//		//定义查找顺序 0 6 8 7 5 9 4 3 2 1
+//		char[] series = {'z','x','g','s','v','i','u','r','w','e'};
+//		String[] keys = {"zero","six","eight","seven","five","nine","four","three","two","one"};
+//		int[] nums = {0,6,8,7,5,9,4,3,2,1};
+//		
+//		for (int i = 0; i < digits.length; i++){
+//			char selectId = series[i];
+//			if(bucket[selectId - 'a'] != 0){
+//				int frequency = bucket[selectId - 'a'];
+//				for (char tmp : keys[i].toCharArray()){
+//					bucket[tmp - 'a'] -= frequency;
+//				}
+//				digits[nums[i]] += frequency;
+//			}
 //		}
-//		//8 - eight
-//		if(bucket['g'-'a'] != 0){
-//			int frequency = bucket['g'-'a'];//跟顺序有关
-//			bucket['e'-'a'] -= frequency;
-//			bucket['i'-'a'] -= frequency;
-//			bucket['g'-'a'] -= frequency;
-//			bucket['h'-'a'] -= frequency;
-//			bucket['t'-'a'] -= frequency;
-//			digits[8] += frequency;
+//		
+//		
+//		StringBuilder res = new StringBuilder();
+//		for (int i = 0; i < digits.length; i++){
+//			int frequency = digits[i];
+//			for (int j = 0; j < frequency; j ++){
+//				res.append(i);
+//			}
 //		}
-//		//7 - seven
-//		if(bucket['s'-'a'] != 0){
-//			int frequency = bucket['s'-'a'];//跟顺序有关
-//			bucket['s'-'a'] -= frequency;
-//			bucket['e'-'a'] -= frequency;
-//			bucket['v'-'a'] -= frequency;
-//			bucket['e'-'a'] -= frequency;
-//			bucket['n'-'a'] -= frequency;
-//			digits[7] += frequency;
-//		}		
-//		//5 - seven
-//		if(bucket['v'-'a'] != 0){
-//			int frequency = bucket['v'-'a'];//跟顺序有关
-//			bucket['f'-'a'] -= frequency;
-//			bucket['i'-'a'] -= frequency;
-//			bucket['v'-'a'] -= frequency;
-//			bucket['e'-'a'] -= frequency;
-//			digits[5] += frequency;
-//		}	
-//		//9 - nine
-//		if(bucket['i'-'a'] != 0){
-//			int frequency = bucket['i'-'a'];//跟顺序有关
-//			bucket['n'-'a'] -= frequency;
-//			bucket['i'-'a'] -= frequency;
-//			bucket['n'-'a'] -= frequency;
-//			bucket['e'-'a'] -= frequency;
-//			digits[9] += frequency;
-//		}
-//		//4 - four
-//		if(bucket['u'-'a'] != 0){
-//			int frequency = bucket['u'-'a'];//跟顺序有关
-//			bucket['f'-'a'] -= frequency;
-//			bucket['o'-'a'] -= frequency;
-//			bucket['u'-'a'] -= frequency;
-//			bucket['r'-'a'] -= frequency;
-//			digits[4] += frequency;
-//		}
-//		//3 - three
-//		if(bucket['r'-'a'] != 0){
-//			int frequency = bucket['r'-'a'];//跟顺序有关
-//			bucket['t'-'a'] -= frequency;
-//			bucket['h'-'a'] -= frequency;
-//			bucket['r'-'a'] -= frequency;
-//			bucket['e'-'a'] -= frequency;
-//			bucket['e'-'a'] -= frequency;
-//			digits[3] += frequency;
-//		}
-//		//2 - two
-//		if(bucket['w'-'a'] != 0){
-//			int frequency = bucket['w'-'a'];//跟顺序有关
-//			bucket['t'-'a'] -= frequency;
-//			bucket['w'-'a'] -= frequency;
-//			bucket['o'-'a'] -= frequency;
-//			digits[2] += frequency;
-//		}		
-//		//1 - one
-//		if(bucket['e'-'a'] != 0){
-//			int frequency = bucket['e'-'a'];//跟顺序有关
-//			bucket['o'-'a'] -= frequency;
-//			bucket['n'-'a'] -= frequency;
-//			bucket['e'-'a'] -= frequency;
-//			digits[1] += frequency;
-//		}
-		
-		StringBuilder res = new StringBuilder();
-		for (int i = 0; i < digits.length; i++){
-			int frequency = digits[i];
-			for (int j = 0; j < frequency; j ++){
-				res.append(i);
-			}
-		}
-		return res.toString();
+//		return res.toString();
+//	}
+	
+	public String originalDigits(String s) {
+	    int[] count = new int[10];
+	    for (int i = 0; i < s.length(); i++){
+	        char c = s.charAt(i);
+	        if (c == 'z') count[0]++;
+	        if (c == 'w') count[2]++;
+	        if (c == 'x') count[6]++;
+	        if (c == 's') count[7]++; //7-6
+	        if (c == 'g') count[8]++;
+	        if (c == 'u') count[4]++; 
+	        if (c == 'f') count[5]++; //5-4
+	        if (c == 'h') count[3]++; //3-8
+	        if (c == 'i') count[9]++; //9-8-5-6
+	        if (c == 'o') count[1]++; //1-0-2-4
+	    }
+	    count[7] -= count[6];
+	    count[5] -= count[4];
+	    count[3] -= count[8];
+	    count[9] = count[9] - count[8] - count[5] - count[6];
+	    count[1] = count[1] - count[0] - count[2] - count[4];
+	    StringBuilder sb = new StringBuilder();
+	    for (int i = 0; i <= 9; i++){
+	        for (int j = 0; j < count[i]; j++){
+	            sb.append(i);
+	        }
+	    }
+	    return sb.toString();
 	}
 	
 }
