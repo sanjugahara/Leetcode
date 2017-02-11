@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * 
  * @author Demon Song
- * 216.Combination Sum II
+ * 216.Combination Sum III
  * Find all possible combinations of k numbers that add up to a number n,given that only
  * numbers from 1 to 9 can be used and each combination should be a unique set of numbers.
  * 
@@ -32,6 +32,7 @@ public class SolutionDay11_216 {
 	
 	//这种递归的传参相当的有趣
 	private void combination(List<List<Integer>> ans,List<Integer> comb,int k, int start,int n){
+		//终止条件
 		if(comb.size() == k && n == 0){
 			//复制一份comb
 			List<Integer> list = new ArrayList<Integer>(comb);
