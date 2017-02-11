@@ -33,6 +33,8 @@ public class SolutionDay10_318 {
 		int len  = words.length;
 		int[] value = new int[len];
 		
+		
+		//This is a good idea.
 		for (int i = 0; i < len; i++){
 			String tmp = words[i];
 			value[i] = 0;
