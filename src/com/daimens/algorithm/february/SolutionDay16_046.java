@@ -34,10 +34,10 @@ public class SolutionDay16_046 {
 		}
 
 		for (int i = 0; i < nums.length; i++) {
-			if (ans.contains(nums[i])) continue;
+			if (ans.contains(nums[i])) continue; //这句话 重点关注下
 			ans.add(nums[i]);
 			helper(res, ans, nums);
-			ans.remove(ans.size() - 1);
+			ans.remove(ans.size() - 1); //这句话 重点关注下 backtrack的精髓
 		}
 	}
 	
