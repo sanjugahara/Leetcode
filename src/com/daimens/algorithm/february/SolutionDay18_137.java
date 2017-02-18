@@ -18,7 +18,6 @@ public class SolutionDay18_137 {
 	//	Second time -> clear "ones" but save it in "twos" for later check
 	//
 	//	Third time -> try to save in "ones" but value saved in "twos" clear it.
-	// 和数组的顺序还无关的吧，但内在逻辑是什么？
 	public int singleNumber(int[] nums){
 		int ones = 0,twos = 0;
 		for (int i = 0; i < nums.length; i++){
