@@ -20,12 +20,22 @@ public class SolutionDay20_096 {
 	public int numTrees(int n){
 		int[] dp = new int[n+1];
 		dp[0] = dp[1] = 1;
+		//外层循环累加每种状态，便于计算后一种状态
 		for (int i = 2; i <= n; ++i){
+			//内层循环计算G(n)的值
 			for (int j = 1; j <=i; ++j){
 				dp[i] += dp[j-1] * dp[i-1];
 			}
 		}
 		return dp[n];
 	}
+	
+//	The tricky part is that we could consider the number of unique BST out of sequence [1,2] as G(2), and the number of of unique BST out of sequence [4, 5, 6, 7] as G(4). Therefore, F(3,7) = G(2) * G(4).
+//
+//			i.e.
+//
+//			F(i, n) = G(i-1) * G(n-i)	1 <= i <= n 
+	
+	// 4 5 6 7 和 1 2 3 4的G(4)是等价，所以无非算法 F(i,n)之间中间差了多少颗数。
 
 }
