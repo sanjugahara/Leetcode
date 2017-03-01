@@ -14,7 +14,7 @@ package com.daimens.algorithm.march;
  *
  */
 public class SolutionDay01_162 {
-	//描述递增递减关系
+	//描述递增递减关系 binary search 排除不需要的那一部分
 	public int findPeakElement(int[] nums) {
 		int N = nums.length;
 		if (N == 1) {
