@@ -28,8 +28,6 @@ public class SolutionDay05_502 {
 			}
 			
 			//无关紧要的情况
-			
-			
 			if(count['B'-'A'] > N){ 
 				sum -= 1;
 			}
