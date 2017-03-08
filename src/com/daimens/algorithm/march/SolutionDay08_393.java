@@ -64,6 +64,6 @@ public class SolutionDay08_393 {
 			
 		}
 		
-        return false;
+        return isValid;
     }
 }
