@@ -32,6 +32,7 @@ package com.daimens.algorithm.march;
  */
 public class SolutionDay07_376 {
 	
+	Class c=SolutionDay07_376.class;
 	// not work
 //	public int wiggleMaxLength(int[] nums){
 //		if(nums.length == 0) return 0;
