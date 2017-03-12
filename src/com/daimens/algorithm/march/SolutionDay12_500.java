@@ -65,7 +65,7 @@ public class SolutionDay12_500 {
 //		while (index < len){
 //			// 逆序
 //			StringBuilder tmp = new StringBuilder();
-//			for (int i = index; i < k + index && i < len; i++){
+//			for (int i = index; i < k + index && i < len; i++){ // 就是求最小值的情况 Math.min(k + index,len)
 //				tmp.append(s.charAt(i));
 //			}
 //			
@@ -83,27 +83,43 @@ public class SolutionDay12_500 {
 //	}
 	
 	//使用substring 用时 10ms
+//	public String reverseStr(String s, int k) {
+//		int len = s.length();
+//		if(len == 0) return "";
+//		
+//		StringBuilder sb = new StringBuilder();
+//		
+//		int index = 0;
+//		
+//		while(index < len){
+//			
+//			int last = index + k  < s.length() ? index+k : s.length(); //这 其实就是求最小值的情况
+//			sb.append(new StringBuilder(s.substring(index, last)).reverse().toString());
+//			
+//			index = last;
+//			last = index + k < s.length() ? index + k : s.length();
+//			sb.append(s.substring(index,last));
+//			
+//			index = last;
+//		}
+//		
+//		return sb.toString();
+//	}
+	
+	//beautiful solution 7ms
 	public String reverseStr(String s, int k) {
-		int len = s.length();
-		if(len == 0) return "";
-		
-		StringBuilder sb = new StringBuilder();
-		
-		int index = 0;
-		
-		while(index < len){
-			
-			int last = index + k  < s.length() ? index+k : s.length();
-			sb.append(new StringBuilder(s.substring(index, last)).reverse().toString());
-			
-			index = last;
-			last = index + k < s.length() ? index + k : s.length();
-			sb.append(s.substring(index,last));
-			
-			index = last;
+		char[] res = s.toCharArray();
+
+		for (int i = 0; i < s.length(); i += 2 * k) {
+			int j = Math.min(res.length - 1, i + k - 1);
+			// 找出开头逆序的所有元素
+			for (int h = i; h <= (i + j) / 2; h++) { // 进行数组交换
+				char tmp = res[h];
+				res[h] = res[i + j - h];
+				res[i + j - h] = tmp;
+			}
 		}
-		
-		return sb.toString();
+		return new String(res);
 	}
 	
 	
