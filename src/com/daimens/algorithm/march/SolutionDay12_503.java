@@ -24,12 +24,6 @@ public class SolutionDay12_503 {
 				index ++;
 			}
 			
-			
-			
-			
-			
-			
-			
 		}
 		
 		return null;
@@ -43,6 +37,7 @@ public class SolutionDay12_503 {
 		sb.append(s.charAt(first));
 		sb.append(s.length()-2);
 		sb.append(s.charAt(last));
+		
 		return sb.toString();
 	}
 	
