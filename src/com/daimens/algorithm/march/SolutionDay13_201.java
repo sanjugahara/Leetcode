@@ -40,7 +40,7 @@ public class SolutionDay13_201 {
 		if(m == 0) return 0;
 		
 		int moveFactor = 1;
-		while( m != n){  //只操作第一个元素和最后一个元素，中间元素完全可以不去考虑！！！
+		while( m != n){  //只操作第一个元素和最后一个元素，中间元素完全可以不去考虑！！！+++
 			m >>= 1;
 			n >>= 1;
 			moveFactor <<= 1;
