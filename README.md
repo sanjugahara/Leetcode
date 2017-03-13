@@ -10,8 +10,8 @@
 本次周赛主要分为以下4道题：
 
 - 541 [Reverse String II (3分)](https://github.com/demonSong/leetcode/issues/1)
-- 539 Minimum Time Difference (5分)
-- 536 Construct Binary Tree from String (6分)
+- 539 [Minimum Time Difference (5分)](https://github.com/demonSong/leetcode/issues/2)
+- 536 [Construct Binary Tree from String (6分)](https://github.com/demonSong/leetcode/issues/3)
 - 527 Word Abbreviation (8分)
 
 ---
