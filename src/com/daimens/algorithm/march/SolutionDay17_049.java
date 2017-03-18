@@ -65,6 +65,7 @@ public class SolutionDay17_049 {
 //					tmp.add(strs[i]);
 //					map.put(key, tmp);
 //					break;
+					//map.get(key).add(strs[i]);来代替
 //				}
 //			}
 //			
