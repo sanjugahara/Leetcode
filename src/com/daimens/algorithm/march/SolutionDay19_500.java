@@ -106,6 +106,7 @@ public class SolutionDay19_500 {
 		return new int[] { best, height };
 	}
 	
+	
 	public static void main(String[] args) {
 		SolutionDay19_500 day = new SolutionDay19_500();
 	}
