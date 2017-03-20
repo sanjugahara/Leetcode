@@ -23,5 +23,5 @@
 
 - 543 [Diameter of Binary Tree (4分)](https://github.com/demonSong/leetcode/issues/4)
 - 538 [Convert BST to Greater Tree (6分)](https://github.com/demonSong/leetcode/issues/5)
-- 542 01 Matrix (7分)
+- 542 [01 Matrix (7分)](https://github.com/demonSong/leetcode/issues/6)
 - 544 Output Contest Matches (7分)
