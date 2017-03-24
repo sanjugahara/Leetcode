@@ -59,15 +59,28 @@ public class SolutionDay24_513 {
 	
 	public int findBottomLeftValue(TreeNode root) {
 		
-		dfs(root, 0, ans);
-		return ans[1];
+		return dfs(root, 0, ans);
 	}
 	
 	int[] ans = new int[]{-1,0}; // 表示位置 和 值
 	
-	private void dfs(TreeNode root, int layer, int[] ans){
+//	private void dfs(TreeNode root, int layer, int[] ans){
+//		
+//		if(root == null) return;
+//		
+//		if(ans[0] < layer){
+//			ans[0] = layer;
+//			ans[1] = root.val;
+//		}
+//		
+//		dfs(root.left, layer+1, ans);	
+//		dfs(root.right, layer+1, ans);
+//		
+//	}
+	
+	private int dfs(TreeNode root, int layer, int[] ans){
 		
-		if(root == null) return;
+		if(root == null) return -1; //无效返回
 		
 		if(ans[0] < layer){
 			ans[0] = layer;
@@ -77,7 +90,13 @@ public class SolutionDay24_513 {
 		dfs(root.left, layer+1, ans);	
 		dfs(root.right, layer+1, ans);
 		
+		//一定是遍历完了所有的节点，才会到这里来，我们关注最终状态
+		
+		return ans[1];
+		
 	}
+	
+	
 	
 	
 }
