@@ -19,9 +19,19 @@
 # **LeetCode Weekly Contest 24**
 
 ## **赛题**
-本次周赛主要分为一下4道题：
+本次周赛主要分为以下4道题：
 
 - 543 [Diameter of Binary Tree (4分)](https://github.com/demonSong/leetcode/issues/4)
 - 538 [Convert BST to Greater Tree (6分)](https://github.com/demonSong/leetcode/issues/5)
 - 542 [01 Matrix (7分)](https://github.com/demonSong/leetcode/issues/6)
 - 544 Output Contest Matches (7分)
+
+# **LeetCode Weekly Contest 25**
+
+## **赛题**
+本次周赛主要分为以下4道题：
+
+- 507 [Perfect Number (3分)](https://github.com/demonSong/leetcode/issues/7)
+- 537 Complex Number Multiplication (6分)
+- 545 boundary of Binary Tree (8分)
+- 546 Remove Boxes (9分)
