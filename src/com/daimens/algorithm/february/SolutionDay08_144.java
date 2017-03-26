@@ -22,22 +22,47 @@ import java.util.Stack;
  */
 public class SolutionDay08_144 {
 	
+//	public List<Integer> preorderTraversal(TreeNode root){
+//		List<Integer> list = new ArrayList<Integer>();
+//		Stack<TreeNode> stack = new Stack<TreeNode>();
+//		TreeNode cur = root;
+//		while(cur != null){
+//			list.add(cur.val);
+//			if(cur.right !=null){
+//				stack.push(cur.right);
+//			}
+//			
+//			cur = cur.left;
+//			if(cur == null && !stack.empty()){
+//				cur = stack.pop();
+//			}
+//		}
+//		return list;
+//	}
+	
 	public List<Integer> preorderTraversal(TreeNode root){
-		List<Integer> list = new ArrayList<Integer>();
-		Stack<TreeNode> stack = new Stack<TreeNode>();
-		TreeNode cur = root;
-		while(cur != null){
-			list.add(cur.val);
-			if(cur.right !=null){
-				stack.push(cur.right);
-			}
-			
-			cur = cur.left;
-			if(cur == null && !stack.empty()){
-				cur = stack.pop();
+		
+		if(root == null) return new ArrayList<>();
+		
+		Stack<TreeNode> stack = new Stack<>();
+		List<Integer> ans = new ArrayList<>();
+		
+		TreeNode curr = root;
+
+		while(!stack.isEmpty() || curr != null){
+
+			if(curr != null){ //curr 还可以用来检测当前curr节点是否含有左节点和右节点
+			    stack.push(curr);
+				ans.add(curr.val);
+				curr = curr.left;
+				
+			}else{
+				TreeNode node = stack.pop();
+				curr = node.right; 
 			}
 		}
-		return list;
+		
+		return ans;
 	}
 	
 	public static void main(String[] args) {

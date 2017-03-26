@@ -21,22 +21,49 @@ import java.util.Stack;
  */
 public class SolutionDay05_094 {
 	
+//	public List<Integer> inorderTraversal(TreeNode root) {
+//		
+//		List<Integer> list = new ArrayList<Integer>();
+//		Stack<TreeNode> stack = new Stack<TreeNode>();
+//		TreeNode cur = root;
+//		while(cur !=null || !stack.empty()){
+//			while(cur !=null){
+//				stack.add(cur);
+//				cur = cur.left;
+//			}
+//			cur = stack.pop();
+//			list.add(cur.val);
+//			cur = cur.right;
+//		}
+//        return list;
+//    }
+	
 	public List<Integer> inorderTraversal(TreeNode root) {
+		if(root == null) return new ArrayList<>();
+		List<Integer> ans = new ArrayList<>();
+		Stack<TreeNode> stack = new Stack<>();
 		
-		List<Integer> list = new ArrayList<Integer>();
-		Stack<TreeNode> stack = new Stack<TreeNode>();
-		TreeNode cur = root;
-		while(cur !=null || !stack.empty()){
-			while(cur !=null){
-				stack.add(cur);
-				cur = cur.left;
+		TreeNode curr = root;
+		
+		while(curr != null || !stack.isEmpty()){
+			
+			if(curr != null){
+				stack.push(curr);
+				curr = curr.left;
+			}else{
+				TreeNode node = stack.pop();
+				ans.add(node.val);
+				curr = node.right;
 			}
-			cur = stack.pop();
-			list.add(cur.val);
-			cur = cur.right;
+			
 		}
-        return list;
-    }
+		
+		
+		return ans;
+	}
+	
+	
+	
 }
 
 class TreeNode {
