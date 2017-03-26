@@ -14,7 +14,7 @@ package com.daimens.algorithm.march;
  * Note:The input number n will not exceed 100,000,000. (1e8)
  *
  */
-public class SolutionDay26_500 {
+public class SolutionDay26_507 {
 	
 	public boolean checkPerfectNumber(int num) {
 		
@@ -33,7 +33,7 @@ public class SolutionDay26_500 {
 	
 	
 	public static void main(String[] args) {
-		SolutionDay26_500 day = new SolutionDay26_500();
+		SolutionDay26_507 day = new SolutionDay26_507();
 	}
 
 }
