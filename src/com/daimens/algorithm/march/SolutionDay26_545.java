@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-public class SolutionDay26_502 {
+public class SolutionDay26_545 {
 
 	public List<Integer> boundaryOfBinaryTree(TreeNode root) {
 		if (root == null)
@@ -118,7 +118,7 @@ public class SolutionDay26_502 {
 //	}
 
 	public static void main(String[] args) {
-		SolutionDay26_502 day = new SolutionDay26_502();
+		SolutionDay26_545 day = new SolutionDay26_545();
 
 		TreeNode root = new TreeNode(1);
 
