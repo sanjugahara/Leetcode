@@ -33,34 +33,61 @@ public class SolutionDay28_117 {
 	
 	
 	//layer
+//	public void connect(TreeLinkNode root) {
+//		if(root == null) return;
+//		Map<Integer, List<TreeLinkNode>> map = new HashMap<>();
+//		preorder(root, map, 0);
+//		for(int num : map.keySet()){
+//			List<TreeLinkNode> nodes = map.get(num);
+//			
+//			TreeLinkNode curr = nodes.get(0);
+//			for (int i = 1; i < nodes.size(); i++){
+//				curr.next = nodes.get(i);
+//				curr = curr.next;
+//			}
+//		}
+//    }
+//	
+//	
+//	private void preorder(TreeLinkNode root, Map<Integer, List<TreeLinkNode>> map,int layer){
+//		if(root == null) return;
+//		
+//		map.put(layer, map.getOrDefault(layer, new ArrayList<>()));
+//		
+//		if(map.containsKey(layer)){
+//			map.get(layer).add(root);
+//		}
+//		
+//		preorder(root.left, map,layer + 1);
+//		preorder(root.right,map,layer + 1);
+//	}
+	
+	
+	//不需要额外的空间
 	public void connect(TreeLinkNode root) {
-		if(root == null) return;
-		Map<Integer, List<TreeLinkNode>> map = new HashMap<>();
-		preorder(root, map, 0);
-		for(int num : map.keySet()){
-			List<TreeLinkNode> nodes = map.get(num);
+		TreeLinkNode dummyHead = new TreeLinkNode(0);
+		TreeLinkNode pre = dummyHead;
+		
+		while(root != null){
 			
-			TreeLinkNode curr = nodes.get(0);
-			for (int i = 1; i < nodes.size(); i++){
-				curr.next = nodes.get(i);
-				curr = curr.next;
+			if(root.left != null){
+				pre.next = root.left;
+				pre = pre.next;
 			}
+			
+			if(root.right != null){
+				pre.next = root.right;
+				pre = pre.next;
+			}
+			
+			root = root.next;
+			if(root == null){
+				pre = dummyHead;
+				root = dummyHead.next;
+				dummyHead.next = null;
+			}
+			
 		}
-    }
-	
-	
-	private void preorder(TreeLinkNode root, Map<Integer, List<TreeLinkNode>> map,int layer){
-		if(root == null) return;
-		
-		map.put(layer, map.getOrDefault(layer, new ArrayList<>()));
-		
-		if(map.containsKey(layer)){
-			map.get(layer).add(root);
-		}
-		
-		preorder(root.left, map,layer + 1);
-		preorder(root.right,map,layer + 1);
 	}
-	
 	
 }
