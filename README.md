@@ -35,3 +35,14 @@
 - 537 [Complex Number Multiplication (6分)](https://github.com/demonSong/leetcode/issues/8)
 - 545 [Boundary of Binary Tree (8分)](https://github.com/demonSong/leetcode/issues/9)
 - 546 Remove Boxes (9分)
+
+# **LeetCode Weekly Contest 26**
+
+## **赛题**
+本次周赛主要分为以下4道题：
+
+- 521 Longest Uncommon Subsequence I (3分)
+- 522 Longest Uncommon Subsequence II (6分)
+- 547 Friend Circles (7分)
+- 548 Split Array with Equal Sum (9分)
+- [统一链接](https://github.com/demonSong/leetcode/issues/10)

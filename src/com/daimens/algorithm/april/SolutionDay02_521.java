@@ -24,7 +24,7 @@ package com.daimens.algorithm.april;
  *  but not a subsequence of any other strings in the group of two strings.
  * 
  */
-public class SolutionDay02_500 {
+public class SolutionDay02_521 {
 	
 	public int findLUSlength(String a, String b) {
 		
@@ -43,7 +43,7 @@ public class SolutionDay02_500 {
     }
 	
 	public static void main(String[] args) {
-		SolutionDay02_500 day = new SolutionDay02_500();
+		SolutionDay02_521 day = new SolutionDay02_521();
 	}
 
 }

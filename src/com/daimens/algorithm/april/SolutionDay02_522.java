@@ -2,10 +2,31 @@ package com.daimens.algorithm.april;
 
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.HashSet;
-import java.util.Set;
 
-public class SolutionDay02_501 {
+/**
+ * 
+ * @author DemonSong 522.Longest Uncommon Subsequence II Given a list of
+ *         strings, you need to find the longest uncommon subsequence among
+ *         them. The longest uncommon subsequence is defined as the longest
+ *         subsequence of one of these strings and this subsequence should not
+ *         be any subsequence of the other strings. A subsequence is a sequence
+ *         that can be derived from one sequence by deleting some characters
+ *         without changing the order of the remaining elements. Trivially, any
+ *         string is a subsequence of itself and an empty string is a
+ *         subsequence of any string. The input will be a list of strings, and
+ *         the output needs to be the length of the longest uncommon
+ *         subsequence. If the longest uncommon subsequence doesn't exist,
+ *         return -1. 
+ *         
+ *         Example 1: Input: "aba", "cdc", "eae" Output: 3 
+ *         
+ *         Note:
+ *         1. All the given strings' lengths will not exceed 10. 
+ *         2. The length of the given list will be in the range of [2, 50].
+ * 
+ *
+ */
+public class SolutionDay02_522 {
 	
 //	public int findLUSlength(String[] strs) {
 //		
@@ -96,7 +117,6 @@ public class SolutionDay02_501 {
 		
 		if(strs.length == 0) return -1;
 		
-		
 		Arrays.sort(strs,new Comparator<String>() {
 			@Override
 			public int compare(String o1, String o2) {
@@ -128,34 +148,49 @@ public class SolutionDay02_501 {
 	}
 	
 	//这个也是需要重写的！！！
+//	private boolean isSubSequnce(String seq, String subSeq){ //没有先后顺序
+//		
+//		if (seq.length() < subSeq.length()) {
+//			String tmp = seq;
+//			seq = subSeq;
+//			subSeq = tmp;
+//		}
+//		
+//		if (seq.length() == subSeq.length() && seq.equals(subSeq)) return true;
+//		
+//		int index_seq = 0;
+//		int index_sub = 0;
+//		while (index_seq < seq.length()){
+//			
+//			if (seq.charAt(index_seq) == subSeq.charAt(index_sub)){
+//				index_sub ++;
+//			}
+//			index_seq ++;
+//			
+//			if(index_sub == subSeq.length())
+//				return true;
+//		}
+//		
+//		return false;
+//	}
+	
 	private boolean isSubSequnce(String seq, String subSeq){ //没有先后顺序
-		
 		if (seq.length() < subSeq.length()) {
 			String tmp = seq;
 			seq = subSeq;
 			subSeq = tmp;
 		}
 		
-		if (seq.length() == subSeq.length() && seq.equals(subSeq)) return true;
-		
-		int index_seq = 0;
-		int index_sub = 0;
-		while (index_seq < seq.length()){
-			
-			if (seq.charAt(index_seq) == subSeq.charAt(index_sub)){
-				index_sub ++;
-			}
-			index_seq ++;
-			
-			if(index_sub == subSeq.length())
-				return true;
+		int j = 0;
+		for (int i = 0; i < seq.length(); i++){
+			if(seq.charAt(i) == subSeq.charAt(j)) j++;
+
+			if(j == subSeq.length()) return true;
 		}
-		
 		return false;
 	}
-	
 	public static void main(String[] args) {
-		SolutionDay02_501 day = new SolutionDay02_501();
+		SolutionDay02_522 day = new SolutionDay02_522();
 		
 		String[] strs = {"aaa","aaa","aa"};
 		System.out.println(day.isSubSequnce("aa","aaa"));
