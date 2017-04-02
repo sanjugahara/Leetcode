@@ -5,7 +5,9 @@ import java.util.Queue;
 
 /**
  * 
- * @author DemonSong 547.Friend Circles
+ * @author DemonSong 
+ * 
+ * 547.Friend Circles
  * 
  *         There are N students in a class. Some of them are friends, while some
  *         are not. Their friendship is transitive in nature. For example, if A
@@ -36,7 +38,7 @@ import java.util.Queue;
  * 
  *
  */
-public class SolutionDay02_502 {
+public class SolutionDay02_547 {
 	
 //	public int findCircleNum(int[][] M) {
 //		
@@ -173,7 +175,7 @@ public class SolutionDay02_502 {
 	
 	
 	public static void main(String[] args) {
-		SolutionDay02_502 day = new SolutionDay02_502();
+		SolutionDay02_547 day = new SolutionDay02_547();
 		int[][] M = {{1,0,0,1},{0,1,1,0},{0,1,1,1},{1,0,1,1}};
 		
 		day.findCircleNum(M);

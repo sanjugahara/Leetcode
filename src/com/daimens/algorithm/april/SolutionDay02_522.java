@@ -5,7 +5,8 @@ import java.util.Comparator;
 
 /**
  * 
- * @author DemonSong 522.Longest Uncommon Subsequence II Given a list of
+ * @author DemonSong 
+ * 522.Longest Uncommon Subsequence II Given a list of
  *         strings, you need to find the longest uncommon subsequence among
  *         them. The longest uncommon subsequence is defined as the longest
  *         subsequence of one of these strings and this subsequence should not
@@ -147,7 +148,6 @@ public class SolutionDay02_522 {
 		return max;
 	}
 	
-	//这个也是需要重写的！！！
 //	private boolean isSubSequnce(String seq, String subSeq){ //没有先后顺序
 //		
 //		if (seq.length() < subSeq.length()) {
