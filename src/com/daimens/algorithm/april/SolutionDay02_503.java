@@ -29,7 +29,7 @@ import java.util.Set;
  *
  */
 public class SolutionDay02_503 {
-	
+//	
 //	public boolean splitArray(int[] nums) {
 //		
 //		if(nums.length <= 6) return false;
@@ -84,21 +84,7 @@ public class SolutionDay02_503 {
 			Set<Integer> set = new HashSet<>();
 			for (int i = 1; i < j -1; i++){
 				if ((sum[j-1]-nums[i]) == (sum[i]-nums[i]) * 2){
-					
-					
 					set.add(sum[i-1]);
-					
-					
-					//int hh = sum[nums.length-1] - sum[j];
-					
-//					for (int k = j + 2 ; k < nums.length -1; k++){
-//						if((hh-nums[k]) == (sum[k] - nums[k] - sum[j]) * 2){
-//
-//							canSplit = sum[i]-nums[i] == sum[k]-nums[k]-sum[j];
-//							
-//							return canSplit;
-//						}
-//					}
 				}
 			}
 			
