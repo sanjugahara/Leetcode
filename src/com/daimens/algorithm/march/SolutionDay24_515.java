@@ -24,35 +24,60 @@ import java.util.Map;
  */
 public class SolutionDay24_515 {
 	
-	public List<Integer> largestValues(TreeNode root) {
-		
-		if(root == null) return new ArrayList<Integer>();
-		int layer = 0;
-		Map<Integer,Integer> map = new HashMap<>();
-		dfs(root, layer, map);
-		
-        return new ArrayList<>(map.values());
-    }
+//	public List<Integer> largestValues(TreeNode root) {
+//		
+//		if(root == null) return new ArrayList<Integer>();
+//		int layer = 0;
+//		Map<Integer,Integer> map = new HashMap<>();
+//		dfs(root, layer, map);
+//		
+//        return new ArrayList<>(map.values());
+//    }
 	
 	//深度
 	
-	private void dfs(TreeNode root, int layer,Map<Integer,Integer> ans){
+//	private void dfs(TreeNode root, int layer,Map<Integer,Integer> ans){
+//		
+//		if(root == null) return;
+//		
+//		if(ans.get(layer) == null)
+//			ans.put(layer,root.val);
+//		else{
+//			int num = ans.get(layer);
+//			if(root.val > num){
+//				ans.put(layer,root.val);
+//			}
+//		}
+//		
+//		layer = layer + 1;
+//		dfs(root.left, layer,ans);
+//		dfs(root.right, layer,ans);
+//		
+//	}
+	
+	public List<Integer> largestValues(TreeNode root) {
 		
+		if(root == null) return new ArrayList<>();
+		
+		List<Integer> ans = new ArrayList<>();
+		dfs(root, 0, ans);
+		return ans;
+	}
+	
+	private void dfs(TreeNode root, int layer, List<Integer> ans){
 		if(root == null) return;
 		
-		if(ans.get(layer) == null)
-			ans.put(layer,root.val);
-		else{
-			int num = ans.get(layer);
-			if(root.val > num){
-				ans.put(layer,root.val);
-			}
+		if(ans.size() == layer){
+			ans.add(root.val);
+		}else{
+//			if(ans.get(layer) < root.val){
+//				ans.set(layer, root.val);
+//			}
+			ans.set(layer, Math.max(ans.get(layer), root.val));
 		}
 		
-		layer = layer + 1;
-		dfs(root.left, layer,ans);
-		dfs(root.right, layer,ans);
-		
+		dfs(root.left, layer+1, ans);
+		dfs(root.right, layer+1, ans);
 	}
 	
 	public static void main(String[] args) {
