@@ -10,7 +10,7 @@ package com.daimens.algorithm.april;
  * The Array may contain duplicates.
  *
  */
-public class SolutionDay06_54 {
+public class SolutionDay06_154 {
 	
 	 public int findMin(int[] nums) {
 	       
@@ -35,7 +35,7 @@ public class SolutionDay06_54 {
 	    }
 	
 	public static void main(String[] args) {
-		SolutionDay06_54 day = new SolutionDay06_54();
+		SolutionDay06_154 day = new SolutionDay06_154();
 		int[] nums = {10,10,10,1,10};
 		day.findMin(nums);
 	}
