@@ -3,6 +3,22 @@ package com.daimens.algorithm.april;
 import java.util.Arrays;
 import java.util.PriorityQueue;
 
+/**
+ * 
+ * @author DemonSong
+ * 556. Next Greater Element III
+ * Given a positive 32-bit integer n, you need to find the smallest 32-bit integer 
+ * which has exactly the same digits existing in the integer n and is greater in value than n. 
+ * If no such positive 32-bit integer exists, you need to return -1.
+ * Example 1:
+ * Input: 12
+ * Output: 21
+ * 
+ * Example 2:
+ * Input: 21
+ * Output: -1
+ *
+ */
 public class SolutionDay09_502 {
 	
 //	public int nextGreaterElement(int n) {
@@ -73,87 +89,116 @@ public class SolutionDay09_502 {
 //		}
 //	}
 	
+//	public int nextGreaterElement(int n) {
+//		String num = Integer.toString(n);
+//
+//		// 找到第一个递减的元素
+//		int index = -1;
+//
+//		for (int i = num.length() - 1; i >= 1; i--) {
+//			if (num.charAt(i - 1) < num.charAt(i)) {
+//				index = i - 1; // 要置换的下标
+//				break;
+//			}
+//
+//		}
+//
+//		if (index == -1)
+//			return -1;
+//
+//		int changeEle = num.charAt(index) - '0';
+//
+//		int min = Integer.MAX_VALUE;
+//		int index2 = -1;
+//		for (int i = num.length() - 1; i >= index; i--) {
+//			if (num.charAt(i) - '0' > num.charAt(index) - '0') {
+//				min = Math.min(num.charAt(i) - '0', min);
+//				if (num.charAt(i) - '0' == min) {
+//					index2 = i;
+//				}
+//			}
+//		}
+//
+//		PriorityQueue<Integer> queue = new PriorityQueue<>();
+//		for (int i = index + 1; i < num.length(); i++) {
+//			// change
+//			if (index2 == i)
+//				queue.add(changeEle);
+//			else
+//				queue.add(num.charAt(i) - '0');
+//		}
+//
+//		String ans = "";
+//
+//		ans += num.substring(0, index);
+//		ans += min;
+//
+//		while (!queue.isEmpty()) {
+//			ans += queue.poll();
+//		}
+//
+//		try {
+//			return Integer.parseInt(ans);
+//		} catch (NumberFormatException e) {
+//			return -1;
+//		}
+//	}
+	
 	public int nextGreaterElement(int n) {
-		String num = Integer.toString(n);
-
-		// 找到第一个递减的元素
-		int index = -1;
-
-		for (int i = num.length() - 1; i >= 1; i--) {
-			if (num.charAt(i - 1) < num.charAt(i)) {
-				index = i - 1; // 要置换的下标
-				break;
-			}
-
-		}
-
-		if (index == -1)
-			return -1;
-
-		int changeEle = num.charAt(index) - '0';
-
-		int min = Integer.MAX_VALUE;
-		int index2 = -1;
-		for (int i = num.length() - 1; i >= index; i--) {
-			if (num.charAt(i) - '0' > num.charAt(index) - '0') {
-				min = Math.min(num.charAt(i) - '0', min);
-				if (num.charAt(i) - '0' == min) {
-					index2 = i;
-				}
-			}
-		}
-
-		PriorityQueue<Integer> queue = new PriorityQueue<>();
-		for (int i = index + 1; i < num.length(); i++) {
-			// change
-			if (index2 == i) {
-				queue.add(changeEle);
-			}
-			else
-				queue.add(num.charAt(i) - '0');
-		}
-
-		String ans = "";
-
-		ans += num.substring(0, index);
-		ans += min;
-
-		while (!queue.isEmpty()) {
-			ans += queue.poll();
-		}
-
+		char[] num = Integer.toString(n).toCharArray();
+		nextPermutation(num);
 		try {
-			return Integer.parseInt(ans);
+			int ans = Integer.parseInt(new String(num));
+			if (ans <= n){
+				return -1;
+			}
+			return ans;
 		} catch (NumberFormatException e) {
-
 			return -1;
 		}
 	}
 	
 	
+	private void swap(char[] a, int i , int j){
+		char tmp = a[i];
+		a[i] = a[j];
+		a[j] = tmp;
+	}
 	
-	private boolean valid(int a1, int a2){
-		String s1 = Integer.toString(a1);
-		String s2 = Integer.toString(a2);
+	private void reverse(char[] a ,int start, int end){
 		
-		char[] c1 = s1.toCharArray();
-		char[] c2 = s2.toCharArray();
-		
-		Arrays.sort(c1);
-		Arrays.sort(c2);
-		
-		for (int i =0; i < c1.length; i++){
-			if(c1[i] != c2[i])
-				return false;
+		while(start < end){
+			swap(a, start, end);
+			start ++;
+			end --;
 		}
 		
-		return true;
 	}
+	
+	private char[] nextPermutation(char[] num){
+
+		int i = num.length-2;
+		while (i >= 0 && num[i] - num[i+1] >= 0){
+			i--;
+		}
+		
+		if (i == -1)
+			return num;
+		
+		int j = num.length-1;
+		while(j > i && num[j] <= num[i]){
+			j--;
+		}
+		
+		swap(num, i, j);
+		reverse(num, i+1, num.length-1);
+		
+		return num;
+	}
+	
 	
 	public static void main(String[] args) {
 		SolutionDay09_502 day = new SolutionDay09_502();
-		
-		int n = 561296;
 		day.nextGreaterElement(12443322);
 	}
 

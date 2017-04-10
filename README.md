@@ -46,3 +46,14 @@
 - 547 Friend Circles (7分)
 - 548 Split Array with Equal Sum (9分)
 - [统一链接](https://github.com/demonSong/leetcode/issues/10)
+
+# **LeetCode Weekly Contest 27解题思路**
+
+## **赛题**
+本次周赛主要分为以下4道题：
+
+- 557 Reverse Words in a String III (3分)
+- 554 Brick Wall (6分)
+- 556 Next Greater Element III (7分)
+- 549 Binary Tree Longest Consecutive Sequence II (9分)
+- [统一链接](https://github.com/demonSong/leetcode/issues/11)
