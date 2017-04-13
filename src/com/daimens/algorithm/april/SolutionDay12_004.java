@@ -21,38 +21,38 @@ package com.daimens.algorithm.april;
  *
  */
 public class SolutionDay12_004 {
-//	public double findMedianSortedArrays(int[] nums1, int[] nums2) {
-//		
-//		int[] array = merge(nums1,nums2);
-//		
-//		if(array.length == 0) return 0;
-//		
-//		int div = array.length / 2;
-//		
-//		if (array.length % 2 == 0)
-//			return (array[div] + array[div-1]) / 2.0;
-//		else
-//			return array[div];
-//    }
-//	
-//	
-//	
-//	private int[] merge(int[] nums1, int[] nums2){
-//		
-//		int[] arrays = new int[nums1.length + nums2.length];
-//		
-//		int i = 0, j = 0, k = 0;
-//		while(i < nums1.length && j < nums2.length){
-//			if (nums1[i] <= nums2[j]) arrays[k++] = nums1[i++];
-//			else arrays[k++] = nums2[j++];
-//		}
-//		
-//		while (i < nums1.length) arrays[k++] = nums1[i++];
-//		while (j < nums2.length) arrays[k++] = nums2[j++];
-//		
-//		
-//		return arrays;
-//	}
+	public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+		
+		int[] array = merge(nums1,nums2);
+		
+		if(array.length == 0) return 0;
+		
+		int div = array.length / 2;
+		
+		if (array.length % 2 == 0)
+			return (array[div] + array[div-1]) / 2.0;
+		else
+			return array[div];
+    }
+	
+	
+	
+	private int[] merge(int[] nums1, int[] nums2){
+		
+		int[] arrays = new int[nums1.length + nums2.length];
+		
+		int i = 0, j = 0, k = 0;
+		while(i < nums1.length && j < nums2.length){
+			if (nums1[i] <= nums2[j]) arrays[k++] = nums1[i++];
+			else arrays[k++] = nums2[j++];
+		}
+		
+		while (i < nums1.length) arrays[k++] = nums1[i++];
+		while (j < nums2.length) arrays[k++] = nums2[j++];
+		
+		
+		return arrays;
+	}
 	
 //	public double findMedianSortedArrays(int[] nums1, int[] nums2) {
 //		
@@ -127,39 +127,59 @@ public class SolutionDay12_004 {
 //			return div;
 //	}
 	
-	public double findMedianSortedArrays(int[] nums1, int[] nums2) {
-		
-		int N1 = nums1.length;
-		int N2 = nums2.length;
-		
-		if (N1 < N2) return findMedianSortedArrays(nums2, nums1);
-		
-		if (N2 == 0) return ((double)nums1[(N1-1)/2] + (double)nums1[N1/2])/2;
-		
-		int lo = 0, hi = N2 * 2;
-		
-		while (lo <= hi){
-			
-			int mid2 = (lo + hi) /2;
-			int mid1 = N1 + N2 - mid2;
-			
-			double L1 = (mid1 == 0) ? Integer.MIN_VALUE : nums1[(mid1 - 1)  /2];
-			double L2 = (mid2 == 0) ? Integer.MIN_VALUE : nums2[(mid2-1)/2];
-			double R1 = (mid1 == N1 * 2) ? Integer.MAX_VALUE : nums1[(mid1)/2];
-	        double R2 = (mid2 == N2 * 2) ? Integer.MAX_VALUE : nums2[(mid2)/2];
-	        
-	        if (L1 > R2) lo = mid2 + 1;		// A1's lower half is too big; need to move C1 left (C2 right)
-	        else if (L2 > R1) hi = mid2 - 1;	// A2's lower half too big; need to move C2 left.
-	        else return (Math.max(L1,L2) + Math.min(R1, R2)) / 2;
-	        
-		}
-		
-		return -1;
+//	public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+//		
+//		int N1 = nums1.length;
+//		int N2 = nums2.length;
+//		
+//		if (N1 < N2) return findMedianSortedArrays(nums2, nums1);
+//		
+//		if (N2 == 0) return ((double)nums1[(N1-1)/2] + (double)nums1[N1/2])/2;
+//		
+//		int lo = 0, hi = N2 * 2;
+//		
+//		while (lo <= hi){
+//			
+//			int mid2 = (lo + hi) /2;
+//			int mid1 = N1 + N2 - mid2;
+//			
+//			double L1 = (mid1 == 0) ? Integer.MIN_VALUE : nums1[(mid1 - 1)  /2];
+//			double L2 = (mid2 == 0) ? Integer.MIN_VALUE : nums2[(mid2-1)/2];
+//			double R1 = (mid1 == N1 * 2) ? Integer.MAX_VALUE : nums1[(mid1)/2];
+//	        double R2 = (mid2 == N2 * 2) ? Integer.MAX_VALUE : nums2[(mid2)/2];
+//	        
+//	        if (L1 > R2) lo = mid2 + 1;		// A1's lower half is too big; need to move C1 left (C2 right)
+//	        else if (L2 > R1) hi = mid2 - 1;	// A2's lower half too big; need to move C2 left.
+//	        else return (Math.max(L1,L2) + Math.min(R1, R2)) / 2;
+//	        
+//		}
+//		
+//		return -1;
+//	}
+
+	
+//	public double findMedianSortedArrays(int[] nums1, int[] nums2){
+//		
+//		int N1 = nums1.length;
+//		int N2 = nums2.length;
+//		
+//		if (N1 > N2) return findMedianSortedArrays(nums2, nums1);
+//		
+//		if (N1 == 0) return (nums2[(N2-1) /2] + nums2[N2/2]) / 2;
+//		
+//		
+//	}
+	
+	
+	//不管是奇数还是偶数都能找到对应的中值
+	private double findMedian(int[] nums){
+		int N = nums.length;
+		return (nums[(N-1)/2] + nums[N/2]) / 2.0;
 	}
 	
 	public static void main(String[] args) {
 		SolutionDay12_004 day = new SolutionDay12_004();
-		int[] nums = {1,2,3,4};
-		
+		int[] nums = {1,2,3,4,5};
+		System.out.println(day.findMedian(nums));
 	}
 }
