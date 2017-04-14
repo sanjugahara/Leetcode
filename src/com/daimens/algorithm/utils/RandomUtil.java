@@ -1,5 +1,7 @@
 package com.daimens.algorithm.utils;
 
+import java.util.Random;
+
 /**
  * 
  * @author Demon Song
@@ -28,5 +30,14 @@ public abstract class RandomUtil {
 			}
 		}
 		return result;
+	}
+	
+	public static Long[] randomLongArray(int length, int size){
+		Long[] random = new Long[size];
+		Random rand = new Random();
+		for (int i = 0; i < size; i++){
+			random[i] = (long) rand.nextInt((int)Math.pow(10, 9));
+		}
+		return random;
 	}
 }

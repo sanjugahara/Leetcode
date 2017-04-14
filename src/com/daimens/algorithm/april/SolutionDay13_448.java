@@ -27,7 +27,7 @@ public class SolutionDay13_448 {
 		}
 		
 		List<Integer> ans = new ArrayList<>();
-		for (int i = 0; i < map.length; i++){
+		for (int i = 1; i < map.length; i++){
 			if (map[i] == 0){
 				ans.add(i);
 			}
