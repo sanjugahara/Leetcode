@@ -57,3 +57,14 @@
 - 556 Next Greater Element III (7分)
 - 549 Binary Tree Longest Consecutive Sequence II (9分)
 - [统一链接](https://github.com/demonSong/leetcode/issues/11)
+
+# **LeetCode Weekly Contest 28解题思路**
+
+## **赛题**
+本次周赛主要分为以下4道题：
+
+- 551 Student Attendance Record I (3分)
+- 553 Optimal Division (6分)
+- 555 Split Assembled Strings (8分)
+- 552 Student Attendance Record II (10分)
+- [统一链接](https://github.com/demonSong/leetcode/issues/12)
