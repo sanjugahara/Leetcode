@@ -58,9 +58,7 @@ public class SolutionDay18_139 {
 		
 		for (int i = 1; i <= s.length(); i++){
 			for (int j = 0; j < i; j++){
-				System.out.println("进入if之前：" +s.substring(j,i));
 				if(f[j] && wordDict.contains(s.substring(j, i))){
-					System.out.println("进入if之后：" +s.substring(j,i));
 					f[i] = true;
 					break;
 				}
