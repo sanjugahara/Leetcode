@@ -1,5 +1,6 @@
 package com.daimens.algorithm.april;
 
+import java.awt.image.RescaleOp;
 import java.util.Arrays;
 
 /**
@@ -62,6 +63,25 @@ public class SolutionDay18_152 {
 //	    }
 //	    return res;
 //	  }
+	
+	// 如果存在负值 那么最小情况一定是负的
+	public int maxProduct(int[] nums){
+		if (nums == null || nums.length == 0) return 0;
+		int[] f = new int[nums.length];
+		int[] g = new int[nums.length];
+		f[0] = nums[0];
+		g[0] = nums[0];
+		
+		int max = nums[0];
+		for (int i = 1; i < nums.length; i++){
+			f[i] = Math.max(nums[i], Math.max(nums[i] * f[i-1], nums[i] * g[i-1]));
+			g[i] = Math.min(nums[i], Math.min(nums[i] * f[i-1], nums[i] * g[i-1]));
+			max = Math.max(max, f[i]);
+		}
+		
+		return max;
+	}
+	
 	
 	public static void main(String[] args) {
 		SolutionDay18_152 day = new SolutionDay18_152();
