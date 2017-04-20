@@ -1,10 +1,12 @@
 package com.daimens.algorithm.april;
 
+import java.util.HashSet;
+
 /**
  * 
- * @author DemonSong 
+ * @author DemonSong
  * 
- * 403.Frog Jump
+ *         403.Frog Jump
  * 
  *         A frog is crossing a river. The river is divided into x units and at
  *         each unit there may or may not exist a stone. The frog can jump on a
@@ -43,5 +45,82 @@ package com.daimens.algorithm.april;
  *
  */
 public class SolutionDay20_403 {
+	// public boolean canCross(int[] stones) {
+	// if (stones.length == 0) return false;
+	// return canJump(stones, 0, 1);
+	// }
+	//
+	//
+	// private boolean canJump(int[] stones, int position, int step){
+	// if (position == stones.length - 1) return true;
+	//
+	// if (stones[position] + step != stones[position + 1]) return false;
+	// //if (position == stones.length-2 && stones[position] + step <
+	// stones[position + 1]) return false;
+	//
+	// boolean canCross = true;
+	// canCross = canJump(stones,position+ step -1,step-1) ||
+	// canJump(stones,position+step,step) ||
+	// canJump(stones,position+step+1,step+1);
+	//
+	// return canCross;
+	// }
+	//
+	//// public boolean canCross(int[] stones) {
+	//// return true;
+	//// }
+
+	public boolean canCross(int[] stones) {
+		if (stones == null || stones.length == 0) {
+			return false;
+		}
+		int n = stones.length;
+		if (n == 1) {
+			return true;
+		}
+		if (stones[1] != 1) {
+			return false;
+		}
+		if (n == 2) {
+			return true;
+		}
+		int last = stones[n - 1];
+		HashSet<Integer> hs = new HashSet();
+		for (int i = 0; i < n; i++) {
+			if (i > 3 && stones[i] > stones[i - 1] * 2) {
+				return false;
+			} // The two stones are too far away.
+			hs.add(stones[i]);
+		}
+		return canReach(hs, last, 1, 1);
+	}
+
+	private boolean canReach(HashSet<Integer> hs, int last, int pos, int jump) {
+		if (pos + jump - 1 == last || pos + jump == last || pos + jump + 1 == last) {
+			return true;
+		}
+		if (hs.contains(pos + jump + 1)) {
+			if (canReach(hs, last, pos + jump + 1, jump + 1)) {
+				return true;
+			}
+		}
+		if (hs.contains(pos + jump)) {
+			if (canReach(hs, last, pos + jump, jump)) {
+				return true;
+			}
+		}
+		if (jump > 1 && hs.contains(pos + jump - 1)) {
+			if (canReach(hs, last, pos + jump - 1, jump - 1)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public static void main(String[] args) {
+		SolutionDay20_403 day = new SolutionDay20_403();
+		int[] stones = { 0, 1, 3, 5, 6, 8, 12, 17 };
+		day.canCross(stones);
+	}
 
 }
