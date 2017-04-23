@@ -109,4 +109,9 @@ class Interval{
 		end = e;
 	}
 	
+	@Override
+	public String toString() {
+		return "["+start+","+end+"]";
+	}
+	
 }

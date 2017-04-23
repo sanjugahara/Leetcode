@@ -25,7 +25,7 @@ import java.util.Map;
  *         Output: False
  *
  */
-public class SolutionDay16_500 {
+public class SolutionDay16_551 {
 
 //	public boolean checkRecord(String s) {
 //
@@ -64,34 +64,72 @@ public class SolutionDay16_500 {
 //		return true;
 //	}
 	
+//	public boolean checkRecord(String s){
+//		int[] map = new int[26];
+//		for (int i = 0; i < s.length(); i++){
+//			map[s.charAt(i)-'A']++;
+//		}
+//		if (map['A'-'A'] > 1) return false;
+//		
+//		int countL = 1;
+//		for (int i = 1; i < s.length(); i++){
+//			if (s.charAt(i-1) == 'L' && s.charAt(i) == s.charAt(i-1)){
+//				countL ++;
+//			}else{
+//				if (countL > 2) return false;
+//				countL = 1;
+//			}
+//		}
+//		
+//		if (countL > 2) return false;
+//		
+//		return true;
+//	}
+	
+//	public boolean checkRecord(String s){
+//		int countA = 0;
+//		int countL = 0;
+//		
+//		int maxL = 0;
+//		for (int i = 0; i < s.length(); i++){
+//			if (s.charAt(i) == 'A') countA ++;
+//			if(!valid(s, 'L', i)) continue;
+//			if ( i != 0 && s.charAt(i-1) == 'L' && s.charAt(i) == s.charAt(i-1)) countL++;
+//			else countL = 0;
+//			maxL = Math.max(maxL, countL+1);
+//		}
+//		
+//		if (countA > 1 || maxL > 2) return false;
+//		
+//		return true;
+//	}
+//	
+//	private boolean valid(String s, char c, int i){
+//		int len = s.length();
+//		if (i >= 0 && i < len && s.charAt(i) == c) return true;
+//		return false;
+//	}
+	
 	public boolean checkRecord(String s){
-		int[] map = new int[26];
+		int countA = 0;
+		int countL = 0;
+		
+		int maxL = 0;
 		for (int i = 0; i < s.length(); i++){
-			map[s.charAt(i)-'A']++;
+			if (s.charAt(i) == 'A') countA ++;
+			countL = s.charAt(i) == 'L' ? countL + 1 : 0;
+			maxL = Math.max(maxL, countL);
 		}
 		
-		if (map['A'-'A'] > 1) return false;
-		
-		int countL = 1;
-		for (int i = 1; i < s.length(); i++){
-			if (s.charAt(i-1) == 'L' && s.charAt(i) == s.charAt(i-1)){
-				countL ++;
-			}else{
-				if (countL > 2) return false;
-				countL = 1;
-			}
-		}
-		
-		if (countL > 2) return false;
+		if (countA > 1 || maxL > 2) return false;
 		
 		return true;
 	}
 	
-	
 
 	public static void main(String[] args) {
-		SolutionDay16_500 day = new SolutionDay16_500();
-		day.checkRecord("PPALLL");
+		SolutionDay16_551 day = new SolutionDay16_551();
+		day.checkRecord("PPAAAAALLALLL");
 	}
 
 }

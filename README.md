@@ -68,3 +68,14 @@
 - 555 Split Assembled Strings (8分)
 - 552 Student Attendance Record II (10分)
 - [统一链接](https://github.com/demonSong/leetcode/issues/12)
+
+# **LeetCode Weekly Contest 29解题思路**
+
+## **赛题**
+本次周赛主要分为以下4道题：
+
+- 563 Binary Tree Tilt (3分)
+- 561 Array Partition I (6分)
+- 562 Longest Line of Consecutive One in Matrix (8分)
+- 564 Find the Closest Palindrome (10分)
+- [统一链接](https://github.com/demonSong/leetcode/issues/13)
