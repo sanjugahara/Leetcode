@@ -1,5 +1,7 @@
 package com.daimens.algorithm.april;
 
+import java.util.Stack;
+
 /**
  * 
  * @author DemonSong
@@ -58,7 +60,57 @@ public class SolutionDay25_085 {
 //    }
 
 	public int maximalRectangle(char[][] matrix) {
-		return 0;
+
+		int row = matrix.length;
+		if (row == 0)
+			return 0;
+		int col = matrix[0].length;
+		if (col == 0)
+			return 0;
+
+		int[][] w = new int[row + 1][col + 1];
+
+		for (int j = 1; j < col + 1; j++) {
+			if (matrix[0][j - 1] == '1') {
+				w[1][j] = 1; // 宽
+			}
+		}
+
+		for (int i = 2; i < row + 1; i++) {
+			for (int j = 1; j < col + 1; j++) {
+				if (matrix[i - 1][j - 1] == '1') {
+					w[i][j] = w[i-1][j] + 1;
+				}
+			}
+		}
+
+		int max = 0;
+		for (int i = 1; i < row+1; i++){
+			max = Math.max(max,largestRectangleArea(w[i]));
+		}
+
+		return max;
+	}
+	
+	public int largestRectangleArea(int[] heights) {
+
+		Stack<Integer> stack = new Stack<>();
+
+		int max = 0;
+		for (int i = 0; i <= heights.length; i++) {
+			int curr = (i == heights.length) ? 0 : heights[i];
+			int count = 0;
+			while (!stack.isEmpty() && heights[stack.peek()] > curr) {
+				int pos = stack.pop();
+				max = Math.max(max, heights[pos] * (i - pos));
+				heights[pos] = curr;
+				count++;
+			}
+			i -= count;
+			stack.push(i);
+		}
+
+		return max;
 	}
 	
 	public static void main(String[] args) {
