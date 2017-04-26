@@ -31,6 +31,7 @@ public class SolutionDay18_221 {
 			for (int j = 0; j < m; j++){
 				if (matrix[i][j] == '1'){
 					dp[i+1][j+1] = Math.min(dp[i][j+1], Math.min(dp[i+1][j], dp[i][j])) + 1;
+					//状态记录，该dp[i][j]的状态表示，在端点 i 和 j 中能够取到的最大square?
 					max = Math.max(max, dp[i+1][j+1]);
 				}
 			}
