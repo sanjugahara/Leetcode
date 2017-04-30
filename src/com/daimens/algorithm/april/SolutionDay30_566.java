@@ -31,7 +31,7 @@ package com.daimens.algorithm.april;
  *         given r and c are all positive.
  *
  */
-public class SolutionDay30_500 {
+public class SolutionDay30_566 {
 
 	public int[][] matrixReshape(int[][] nums, int r, int c) {
 
