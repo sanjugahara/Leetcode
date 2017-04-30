@@ -79,3 +79,14 @@
 - 562 Longest Line of Consecutive One in Matrix (8分)
 - 564 Find the Closest Palindrome (10分)
 - [统一链接](https://github.com/demonSong/leetcode/issues/13)
+
+# **LeetCode Weekly Contest 30解题思路**
+
+## **赛题**
+本次周赛主要分为以下4道题：
+
+- 566 Reshape the Matrix (3分)
+- 560 Subarray Sum Equals K (6分)
+- 567 Permutation in String (7分)
+- 568 Maximum Vacation Days (9分)
+- [统一链接](https://github.com/demonSong/leetcode/issues/14)
