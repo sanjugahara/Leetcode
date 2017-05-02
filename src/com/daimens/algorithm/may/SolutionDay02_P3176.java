@@ -1,7 +1,5 @@
 package com.daimens.algorithm.may;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -75,52 +73,43 @@ import java.util.Scanner;
  */
 public class SolutionDay02_P3176 {
 	
+	static int N = 350;
+	static int[][] dp = new int[N][N];
+	static int[][] score = new int[N][N];
 	public static void main(String[] args) {
 		
 		Scanner in = new Scanner(System.in);
 		int n = in.nextInt();
 		
-		List<List<Integer>> nums = new ArrayList<>();
 		for (int i = 0; i < n; i++){
-			String s = in.next();
-			List<Integer> tmp = new ArrayList<>();
-			String[] ss = s.split(" ");
-			for (String t : ss){
-				tmp.add(Integer.parseInt(t));
+			for (int j = 0; j <= i; j++){
+				score[i][j] = in.nextInt();
 			}
-			nums.add(tmp);
 		}
 		
-		System.out.println(solve(nums));
+		dp[0][0] = score[0][0];
 		
-		in.close();
-	}
-	
-	public static int solve(List<List<Integer>> nums){
-		int N = 351;
-		int[][] dp = new int[N][N];
-		dp[1][0] = nums.get(0).get(0); 
-		int row = nums.size();
-		for (int i = 0; i < row; i++){
-			for (int j = 0; j < nums.get(i).size();j++){
+		for (int i = 1; i < n; i++) {
+			for (int j = 0; j <= i; j++) {
 				if (j == 0){
-					dp[i+1][j] = dp[i][0];
+					dp[i][0] = dp[i-1][0] + score[i][j];
 					continue;
 				}
-				if (j == nums.get(i).size()-1){
-					dp[i+1][j] = dp[i][j-1];
+				if (j == i){
+					dp[i][j] = dp[i-1][j-1] + score[i][j];
 					continue;
 				}
-				
-				dp[i+1][j] = Math.max(dp[i][j], dp[i][j-1]);
+				dp[i][j] = Math.max(dp[i-1][j], dp[i-1][j-1]) + score[i][j];
 			}
 		}
 		
 		int max = 0;
-		for (int i = 0; i < N; i++) {
-			max = Math.max(max, dp[nums.size()][i]);
+		for (int j = 0; j < n; j++){
+			max = Math.max(max,dp[n-1][j]);
 		}
-		return max;
-	}
-	
+		
+		System.out.println(max);
+		
+		in.close();
+	}	
 }
