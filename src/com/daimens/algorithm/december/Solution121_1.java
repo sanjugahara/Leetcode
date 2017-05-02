@@ -19,17 +19,43 @@ package com.daimens.algorithm.december;
  *
  */
 public class Solution121_1 {
+//	public int maxProfit(int[] prices) {
+//		int minprice = Integer.MAX_VALUE;
+//		int maxprofit = 0;
+//		for (int i =0;i<prices.length;i++){
+//			if (prices[i] < minprice){
+//				//如果是当前最低的价格,总能在未来找到最大值，利益最大化。
+//				minprice = prices[i];
+//			}else if (prices[i]-minprice > maxprofit){
+//				maxprofit = prices[i] - minprice;
+//			}
+//		}
+//		return maxprofit;
+//    }
+	
+//	public int maxProfit(int[] prices) {
+//		
+//		int buy = Integer.MIN_VALUE;
+//		int sell = 0;
+//		
+//		for (int price : prices){
+//			buy = Math.max(buy, -price);
+//			sell = Math.max(sell, buy + price);
+//		}
+//		
+//		return sell;
+//	}
+	
 	public int maxProfit(int[] prices) {
-		int minprice = Integer.MAX_VALUE;
-		int maxprofit = 0;
-		for (int i =0;i<prices.length;i++){
-			if (prices[i] < minprice){
-				//如果是当前最低的价格,总能在未来找到最大值，利益最大化。
-				minprice = prices[i];
-			}else if (prices[i]-minprice > maxprofit){
-				maxprofit = prices[i] - minprice;
-			}
+		int sum = 0;
+		int max = 0;
+		
+		for (int i = 1; i < prices.length;i++){
+			sum = Math.max(0, sum += prices[i]-prices[i-1]);
+			max = Math.max(max, sum);
 		}
-		return maxprofit;
-    }
+		
+		return max;
+	}
+	
 }

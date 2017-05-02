@@ -43,15 +43,36 @@ public class SolutionDay21_309 {
 //        return maxProfit;
 //    }
 	
+//	public int maxProfit(int[] prices) {
+//		int sell = 0,prev_sell = 0,buy = Integer.MIN_VALUE,prev_buy;
+//		for (int price : prices){
+//			prev_buy = buy;
+//			buy = Math.max(prev_sell- price, prev_buy);
+//			prev_sell = sell;
+//	        sell = Math.max(prev_buy + price, prev_sell);
+//		}
+//		return sell;
+//	}
+	
 	public int maxProfit(int[] prices) {
-		int sell = 0,prev_sell = 0,buy = Integer.MIN_VALUE,prev_buy;
-		for (int price : prices){
-			prev_buy = buy;
-			buy = Math.max(prev_sell- price, prev_buy);
-			prev_sell = sell;
-	        sell = Math.max(prev_buy + price, prev_sell);
+		
+		int n = prices.length;
+		
+		int[] buy = new int[n+1];
+		int[] sell = new int[n+1];
+		int[] rest = new int[n+1];
+		
+		buy[0] = Integer.MIN_VALUE;
+		sell[0] = rest[0] = 0;
+		
+		for (int i = 0; i < n; i++) {
+			
+			buy[i+1] = Math.max(rest[i] - prices[i], buy[i]); // 买的操作,但却要跟原来的buy[i]进行比较？
+			sell[i+1] = Math.max(buy[i] + prices[i], sell[i]);
+			rest[i+1] = Math.max(sell[i], Math.max(rest[i], buy[i]));
 		}
-		return sell;
+		
+		return sell[n];
 	}
 	
 	public static void main(String[] args) {
