@@ -55,18 +55,34 @@ public class SolutionDay06_392 {
 //		}
 //	}
 	
+//	public boolean isSubsequence(String s, String t){
+//		if(s.length() == 0) return true;
+//		int indexS = 0 ,indexT = 0;
+//		while(indexT < t.length()){
+//			if(t.charAt(indexT) == s.charAt(indexS)){
+//				indexS ++;
+//				if(indexS == s.length()) return true;
+//			}
+//			indexT ++;
+//		}
+//		
+//		return false;
+//	}
+	
 	public boolean isSubsequence(String s, String t){
-		if(s.length() == 0) return true;
-		int indexS = 0 ,indexT = 0;
-		while(indexT < t.length()){
-			if(t.charAt(indexT) == s.charAt(indexS)){
-				indexS ++;
-				if(indexS == s.length()) return true;
-			}
-			indexT ++;
-		}
 		
-		return false;
+		if (s.isEmpty()) return true;
+		int n = s.length();
+		boolean[] isSeq = new boolean[n];
+		
+		int index = 0;
+		for (int i = 0; i < t.length(); i++){
+			if (s.charAt(index) == t.charAt(i)){
+				isSeq[index++] = true;
+				if (isSeq[n-1]) return true;
+			}
+		}
+		return isSeq[n-1];
 	}
 
 }
