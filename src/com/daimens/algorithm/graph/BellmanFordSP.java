@@ -16,13 +16,14 @@ public class BellmanFordSP {
 	public BellmanFordSP(EdgeWeightedDigraph G, int s) {
 		distTo = new double[G.V()];
 		edgeTo = new DirectedEdge[G.V()];
-		onQueue = new boolean[G.V()];
 		for (int v = 0; v < G.V(); v++){
 			distTo[v] = Double.POSITIVE_INFINITY;
 		}
 		distTo[s] = 0.0;
 		
 		for (int pass = 0; pass < G.V(); pass++){
+			
+			// 需要遍历E条边
 			for (int v = 0; v < G.V(); v++){
 				relax(G, v);
 			}
