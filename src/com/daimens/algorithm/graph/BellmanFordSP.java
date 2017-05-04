@@ -22,6 +22,12 @@ public class BellmanFordSP {
 		}
 		distTo[s] = 0.0;
 		
+		for (int pass = 0; pass < G.V(); pass++){
+			for (int v = 0; v < G.V(); v++){
+				relax(G, v);
+			}
+		}
+		System.out.println();
 	}
 	
 	/**
@@ -40,10 +46,14 @@ public class BellmanFordSP {
 		}
 	}
 	
+	public boolean hasPathTo(int v){
+		return distTo[v] < Double.POSITIVE_INFINITY;
+	}
+	
 	
 	public static void main(String[] args) {
 		In in = new In("./data/tinyEWD.txt");
-		EdgeWeightedDigraph g = new EdgeWeightedDigraph(in);
-		System.out.println(g);
+		EdgeWeightedDigraph G = new EdgeWeightedDigraph(in);
+		BellmanFordSP sp = new BellmanFordSP(G, 0);
 	}
 }
