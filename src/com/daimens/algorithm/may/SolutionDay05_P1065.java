@@ -64,35 +64,6 @@ public class SolutionDay05_P1065 {
 		in.close();
 	}
 
-	public static int solve(int[] l, int[] w){
-		int n = l.length;
-		Pair[] pairs = new Pair[n];
-		for (int i = 0; i < n; i++){
-			pairs[i] = new Pair(l[i],w[i]);
-		}
-		
-		Arrays.sort(pairs, new Comparator<Pair>() {
-			@Override
-			public int compare(Pair o1, Pair o2) {
-				return o1.start != o2.start ? o1.start-o2.start : o1.end - o2.end;
-			}
-		});
-		
-		int[] dp = new int[n];
-		int max = 0;
-		for (int i = 0; i < n; i++){
-			dp[i] = 1;
-			for (int j = 0; j < i; ++j){
-				if (pairs[i].end < pairs[j].end){
-					dp[i] = Math.max(dp[i], dp[j]+1);
-				}
-				max = Math.max(max, dp[i]);
-			}
-		}
-		
-		return max;
-	}
-	
 //	public static int solve(int[] l, int[] w){
 //		int n = l.length;
 //		Pair[] pairs = new Pair[n];
@@ -108,18 +79,47 @@ public class SolutionDay05_P1065 {
 //		});
 //		
 //		int[] dp = new int[n];
-//		int len = 0;
+//		int max = 0;
 //		for (int i = 0; i < n; i++){
-//			int index = Arrays.binarySearch(dp, 0,len,pairs[i].end);
-//			if (index < 0)
-//				index = -(index + 1);
-//			dp[index] = pairs[i].end;
-//			if (index == len)
-//				len ++;
+//			dp[i] = 1;
+//			for (int j = 0; j < i; ++j){
+//				if (pairs[i].end < pairs[j].end){
+//					dp[i] = Math.max(dp[i], dp[j]+1);
+//				}
+//				max = Math.max(max, dp[i]);
+//			}
 //		}
 //		
-//		return len;
+//		return max;
 //	}
+	
+	public static int solve(int[] l, int[] w){
+		int n = l.length;
+		Pair[] pairs = new Pair[n];
+		for (int i = 0; i < n; i++){
+			pairs[i] = new Pair(l[i],w[i]);
+		}
+		
+		Arrays.sort(pairs, new Comparator<Pair>() {
+			@Override
+			public int compare(Pair o1, Pair o2) {
+				return o1.start != o2.start ? o1.start-o2.start : o1.end - o2.end;
+			}
+		});
+		
+		int[] dp = new int[n];
+		int len = 0;
+		for (int i = 0; i < n; i++){
+			int index = Arrays.binarySearch(dp, 0,len,-pairs[i].end);
+			if (index < 0)
+				index = -(index + 1);
+			dp[index] = -pairs[i].end;
+			if (index == len)
+				len ++;
+		}
+		
+		return len;
+	}
 }
 
 class Pair{
