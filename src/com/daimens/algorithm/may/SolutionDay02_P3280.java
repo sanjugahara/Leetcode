@@ -104,5 +104,6 @@ public class SolutionDay02_P3280 {
 		}
 		
 		System.out.println(dp[0][M-1]);
+		in.close();
 	}
 }
