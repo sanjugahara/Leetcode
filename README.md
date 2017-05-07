@@ -90,3 +90,14 @@
 - 567 Permutation in String (7分)
 - 568 Maximum Vacation Days (9分)
 - [统一链接](https://github.com/demonSong/leetcode/issues/14)
+
+# **LeetCode Weekly Contest 31解题思路**
+
+## **赛题**
+本次周赛主要分为以下4道题：
+
+- 575 Distribute Candies (4分)
+- 572 Subtree of Another Tree (6分)
+- 573 Squirrel Simulation (7分)
+- 576 Out of Boundary Paths (9分)
+- [统一链接](https://github.com/demonSong/leetcode/issues/15)
