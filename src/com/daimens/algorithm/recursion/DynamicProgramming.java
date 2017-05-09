@@ -13,7 +13,7 @@ public class DynamicProgramming {
 			int c = bag[i].capacity;
 			int[] w = bag[i].w;
 			int[] v = bag[i].v;
-			System.out.println("测试样例" +(i+1)+":" + (isRight(solve(w, v, c), bag[i]) ? "正确" : "错误"));
+			System.out.println("测试样例" +(i+1)+":" + (isRight(dpSolve3(w, v, c), bag[i]) ? "正确" : "错误"));
 		}
 		
 	}
@@ -109,6 +109,16 @@ public class DynamicProgramming {
 		}
 
 		return dp[w.length][c];
+	}
+	
+	public static int dpSolve3(int[] w, int[] v, int c){
+		int[] dp = new int[c+1];
+		for (int i = 0; i < w.length; i++){
+			for (int j = c; j >= w[i]; j--){
+				dp[j] = Math.max(dp[j], dp[j-w[i]]+v[i]);
+			}
+		}
+		return dp[c];
 	}
 
 }
