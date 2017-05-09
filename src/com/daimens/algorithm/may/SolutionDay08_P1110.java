@@ -59,7 +59,7 @@ public class SolutionDay08_P1110 {
 		int front = 0, rear = 0;
 		for(int i = 0; i < n-1; i++){
 			//队列中最小元素的坐标小于i-m+1，直接删除，不再需要
-			while (front <= rear && (q[front] < (i - m+1))) front++; //删除
+			if (front <= rear && (q[front] < (i - m+1))) front++; //删除
 			while (front <= rear && a[i] <= a[q[rear]]) rear--; //加入  
 			// a[i] > a[q[rear]] 加入的元素为单调递增， 从队尾加入单调递增的元素
 			q[++rear] = i;

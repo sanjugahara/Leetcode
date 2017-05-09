@@ -60,42 +60,6 @@ public class SolutionDay08_P2392 {
 		in.close();
 	}
 
-//	public static int solve(int[] H, int[] A, int[] C) {
-//		Pair[] p = new Pair[H.length];
-//		for (int i = 0; i < H.length; i++) {
-//			p[i] = new Pair(H[i], A[i], C[i]);
-//		}
-//
-//		Arrays.sort(p, new Comparator<Pair>() {
-//			@Override
-//			public int compare(Pair o1, Pair o2) {
-//				return o1.a - o2.a;
-//			}
-//		});
-//
-//		int[][] dp = new int[H.length][11];
-//		for (int k = 1; k <= p[0].c; k++) {
-//			dp[0][k] = k * p[0].h <= p[0].a ? k * p[0].h : 0;
-//		}
-//
-//		for (int i = 1; i < H.length; i++) {
-//			for (int k = 1; k <= p[i].c; k++) {
-//				for (int j = 1; j <= p[i - 1].c; j++) {
-//					if (k * p[i].h + dp[i - 1][j] <= p[i].a) {
-//						dp[i][k] = Math.max(k * p[i].h + dp[i - 1][j], dp[i][k]);
-//					}
-//				}
-//			}
-//		}
-//
-//		int max = 0;
-//		for (int k = 0; k <= p[H.length - 1].c; k++) {
-//			max = Math.max(max, dp[H.length - 1][k]);
-//		}
-//
-//		return max;
-//	}
-
 	public static int solve(int[] H, int[] A, int[] C) {
 		int n = H.length;
 		Pair[] p = new Pair[n];
@@ -121,9 +85,11 @@ public class SolutionDay08_P2392 {
 			int m = p[i].c; // 数量
 
 			int V = p[i].a;
-
+			
+			// 划分成w份
 			for (int mod = 0; mod < w; ++mod) {
 				int l = 0, r = 0;
+				//更新dp[mod],dp[mod+w],dp[mod+2w],dp[mod+3w],...,d[V]
 				for (int j = 0; mod + j * w <= V; ++j) {
 					// 维持单调队列的递减特性
 					while (r > l && (dp[pos[1]][mod + j * w] - j * v) > q[r - 1].first) {
@@ -148,7 +114,7 @@ public class SolutionDay08_P2392 {
 
 		return max;
 	}
-	
+
 	private static class Pair {
 		int h;
 		int a;
@@ -160,72 +126,6 @@ public class SolutionDay08_P2392 {
 			this.c = c;
 		}
 	}
-	
-//	public static int solve(int[] H, int[] A, int[] C) {
-//		int n = H.length;
-//		Pair[] p = new Pair[n];
-//		for (int i = 0; i < n; i++) {
-//			p[i] = new Pair(H[i], A[i], C[i]);
-//		}
-//
-//		Arrays.sort(p, new Comparator<Pair>() {
-//			@Override
-//			public int compare(Pair o1, Pair o2) {
-//				return o1.a - o2.a;
-//			}
-//		});
-//		
-//		int[] dp = new int[40000 + 16];
-//		
-//		for (int i = 0; i < n; i++){
-//			for (int k = p[i].c; k >= 1; k--){
-//				for (int j = p[i].a; j >= p[i].h; j--){
-//					dp[j] = Math.max(dp[j], dp[j-p[i].h] + p[i].h);
-//				}
-//			}
-//		}
-//		
-//		int max = 0;
-//		for (int j = p[n-1].a; j >= 0; j--){
-//			max = Math.max(max, dp[j]);
-//		}
-//		return max;
-//	}
-	
-//	public static int solve(int[] H, int[] A, int[] C){
-//		int n = H.length;
-//		Pair[] p = new Pair[n];
-//		for (int i = 0; i < n; i++) {
-//			p[i] = new Pair(H[i], A[i], C[i]);
-//		}
-//
-//		Arrays.sort(p, new Comparator<Pair>() {
-//			@Override
-//			public int compare(Pair o1, Pair o2) {
-//				return o1.a - o2.a;
-//			}
-//		});
-//		
-//		
-//		int[][] dp = new int[p[0].c][p[0].a+1];
-//		
-//		for (int j = p[0].h; j <= p[0].a; j++){
-//			dp[0][j] = p[0].h;
-//		}
-//		
-//		for (int i = 1; i < p[0].c; i++){
-//			for (int j = 0; j <= p[0].a; j++){
-//				if (j - p[0].h < 0){
-//					dp[i][j] = dp[i-1][j];
-//				}else{
-//					dp[i][j] = Math.max(dp[i-1][j], dp[i-1][j-p[0].h] + p[0].h);
-//				}
-//			}
-//		}
-//		
-//		
-//		return 0;
-//	}
 
 	private static void swap(int[] pos) {
 		int tmp = pos[0];
@@ -242,5 +142,107 @@ public class SolutionDay08_P2392 {
 			this.second = second;
 		}
 	}
-	
+
+	// public static int solve(int[] H, int[] A, int[] C) {
+	// Pair[] p = new Pair[H.length];
+	// for (int i = 0; i < H.length; i++) {
+	// p[i] = new Pair(H[i], A[i], C[i]);
+	// }
+	//
+	// Arrays.sort(p, new Comparator<Pair>() {
+	// @Override
+	// public int compare(Pair o1, Pair o2) {
+	// return o1.a - o2.a;
+	// }
+	// });
+	//
+	// int[][] dp = new int[H.length][11];
+	// for (int k = 1; k <= p[0].c; k++) {
+	// dp[0][k] = k * p[0].h <= p[0].a ? k * p[0].h : 0;
+	// }
+	//
+	// for (int i = 1; i < H.length; i++) {
+	// for (int k = 1; k <= p[i].c; k++) {
+	// for (int j = 1; j <= p[i - 1].c; j++) {
+	// if (k * p[i].h + dp[i - 1][j] <= p[i].a) {
+	// dp[i][k] = Math.max(k * p[i].h + dp[i - 1][j], dp[i][k]);
+	// }
+	// }
+	// }
+	// }
+	//
+	// int max = 0;
+	// for (int k = 0; k <= p[H.length - 1].c; k++) {
+	// max = Math.max(max, dp[H.length - 1][k]);
+	// }
+	//
+	// return max;
+	// }
+
+	// public static int solve(int[] H, int[] A, int[] C) {
+	// int n = H.length;
+	// Pair[] p = new Pair[n];
+	// for (int i = 0; i < n; i++) {
+	// p[i] = new Pair(H[i], A[i], C[i]);
+	// }
+	//
+	// Arrays.sort(p, new Comparator<Pair>() {
+	// @Override
+	// public int compare(Pair o1, Pair o2) {
+	// return o1.a - o2.a;
+	// }
+	// });
+	//
+	// int[] dp = new int[40000 + 16];
+	//
+	// for (int i = 0; i < n; i++){
+	// for (int k = p[i].c; k >= 1; k--){
+	// for (int j = p[i].a; j >= p[i].h; j--){
+	// dp[j] = Math.max(dp[j], dp[j-p[i].h] + p[i].h);
+	// }
+	// }
+	// }
+	//
+	// int max = 0;
+	// for (int j = p[n-1].a; j >= 0; j--){
+	// max = Math.max(max, dp[j]);
+	// }
+	// return max;
+	// }
+
+	// public static int solve(int[] H, int[] A, int[] C){
+	// int n = H.length;
+	// Pair[] p = new Pair[n];
+	// for (int i = 0; i < n; i++) {
+	// p[i] = new Pair(H[i], A[i], C[i]);
+	// }
+	//
+	// Arrays.sort(p, new Comparator<Pair>() {
+	// @Override
+	// public int compare(Pair o1, Pair o2) {
+	// return o1.a - o2.a;
+	// }
+	// });
+	//
+	//
+	// int[][] dp = new int[p[0].c][p[0].a+1];
+	//
+	// for (int j = p[0].h; j <= p[0].a; j++){
+	// dp[0][j] = p[0].h;
+	// }
+	//
+	// for (int i = 1; i < p[0].c; i++){
+	// for (int j = 0; j <= p[0].a; j++){
+	// if (j - p[0].h < 0){
+	// dp[i][j] = dp[i-1][j];
+	// }else{
+	// dp[i][j] = Math.max(dp[i-1][j], dp[i-1][j-p[0].h] + p[0].h);
+	// }
+	// }
+	// }
+	//
+	//
+	// return 0;
+	// }
+
 }
