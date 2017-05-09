@@ -6,8 +6,10 @@ import java.util.Scanner;
  * 
  * @author DemonSong
  * 
- *         1979. Red and Black Description
- * 
+ *         1979. Red and Black 
+ *         
+ *         Description
+ *         
  *         There is a rectangular room, covered with square tiles. Each tile is
  *         colored either red or black. A man is standing on a black tile. From
  *         a tile, he can move to one of four adjacent tiles. But he can't move
