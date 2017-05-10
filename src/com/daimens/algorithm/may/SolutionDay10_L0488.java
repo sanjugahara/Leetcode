@@ -99,7 +99,6 @@ public class SolutionDay10_L0488 {
 		return min_step;
 	}
 	
-	// RBYYYBBRRB
 	private String removeConsecutive(String board) {
 		char[] cc = board.toCharArray();
 		for (int i = 0, j = 0; j < cc.length; j++){
@@ -112,12 +111,12 @@ public class SolutionDay10_L0488 {
 	
 	public static void main(String[] args) {
 		SolutionDay10_L0488 day = new SolutionDay10_L0488();
-		String s = "RBYYYBBRRB";
-		//System.out.println(day.removeConsecutive(s));
+		String s = "BBB";
+		System.out.println(day.removeConsecutive(s));
 		//day.findMinStep("RBYYBBRRB", "YRBGB");
 		day.findMinStep("WWRRBBWW", "WRBRW");
-		String x = "ww";
-		System.out.println(x.substring(0, 0) + x.substring(2));
+		//String x = "ww";
+		//System.out.println(x.substring(0, 0) + x.substring(2));
 	}
 	
 	

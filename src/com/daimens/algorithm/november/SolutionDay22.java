@@ -33,11 +33,9 @@ public class SolutionDay22 {
 		int palindrome = 0;
 		boolean pureEven = true;
 		for (int i = 0 ; i < bucket.length; i++){
-			//为偶数的情况
 			if (bucket[i] %2 == 0){
 				palindrome += bucket[i];
 			}
-			//为奇数且大于等于3的情况
 			else{
 				pureEven = false;
 				if(bucket[i] >= 3){
