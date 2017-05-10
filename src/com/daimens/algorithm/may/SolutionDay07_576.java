@@ -24,7 +24,7 @@ package com.daimens.algorithm.may;
  *         range [0,50].
  *
  */
-public class SolutionDay07_503 {
+public class SolutionDay07_576 {
 
 	// public int findPaths(int m, int n, int N, int i, int j) {
 	//
@@ -170,7 +170,7 @@ public class SolutionDay07_503 {
 	}
 
 	public static void main(String[] args) {
-		SolutionDay07_503 day = new SolutionDay07_503();
+		SolutionDay07_576 day = new SolutionDay07_576();
 		// day.findPaths(2, 2, 2, 0, 0);
 		// day.findPaths(10, 10, 10, 5, 5);
 		day.findPaths(1, 3, 3, 0, 1);
