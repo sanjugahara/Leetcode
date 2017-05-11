@@ -54,14 +54,13 @@ public class SolutionDay11_L0417 {
 //        }
 //        return ans;
 //    }
-	
+//	
 //	int[][] direction = {{-1,0},{1,0},{0,-1},{0,1}};
 //	static boolean a = false;
 //	static boolean p = false;
 //	
-//	//全局扫描过后才能知道答案
 //	private void dfs(List<int[]> ans, int[][] matrix, int i, int j, int row, int col, int[] local, boolean[][] visited){
-//		if (i < 0 || i >= row || j < 0 || j >= col || matrix[i][j] > matrix[local[0]][local[1]] || visited[i][j]){
+//		if ((i != local[0] || j != local[1]) && (i < 0 || i >= row || j < 0 || j >= col || matrix[i][j] >= matrix[local[0]][local[1]] || visited[i][j])){
 //			if (i < 0 || j < 0) a = true;
 //			if (i >= row || j >= col) p = true;
 //			
