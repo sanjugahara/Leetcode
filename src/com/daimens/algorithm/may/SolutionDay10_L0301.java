@@ -92,7 +92,6 @@ public class SolutionDay10_L0301 {
 		}else{
 			ans.add(reversed);
 		}
-		
 	}
 	
 	public static void main(String[] args) {
