@@ -1,7 +1,7 @@
 package com.daimens.algorithm.may;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedList;
+import java.util.Queue;
 
 /**
  * 
@@ -75,41 +75,111 @@ public class SolutionDay11_L0207 {
 //		return ans.contains(add);
 //	}
 	
+//	public boolean canFinish(int numCourses, int[][] prerequisites) {
+//		List<Integer> graph[] = new ArrayList[numCourses];
+//		for (int i = 0; i < numCourses; i++){
+//			graph[i] = new ArrayList<>();
+//		}
+//		boolean[] visited = new boolean[numCourses];
+//		for (int[] pre : prerequisites){
+//			graph[pre[0]].add(pre[1]);
+//		}
+//		
+//		for (int i = 0; i < numCourses; i++){
+//			if (dfs(graph, visited, i)){
+//				return false;
+//			}
+//		}
+//		return true;
+//	}
+//	
+//	private boolean dfs(List<Integer> graph[], boolean[] visited,int start){
+//		if (visited[start]) return true;
+//		visited[start] = true;
+//		for (int i = 0; i < graph[start].size(); i++){
+//			if(dfs(graph, visited, graph[start].get(i))){
+//				return true;
+//			}
+//		}
+//		visited[start] = false;
+//		return false;
+//	}
+	
+//	public boolean canFinish(int numCourses, int[][] prerequisites) {
+//		List<Integer> graph[] = new ArrayList[numCourses];
+//		for (int i = 0; i < numCourses; i++){
+//			graph[i] = new ArrayList<>();
+//		}
+//		boolean[] visited = new boolean[numCourses];
+//		boolean[] onStack = new boolean[numCourses];
+//		for (int[] pre : prerequisites){
+//			graph[pre[0]].add(pre[1]);
+//		}
+//		
+//		isCycle = false;
+//		for (int i = 0; i < numCourses; i++){
+//			if (!visited[i]){
+//				dfs(graph, i, visited, onStack);
+//			}
+//		}
+//		return !hasCycle();
+//	}
+//	
+//	private void dfs(List<Integer> g[], int v,boolean[] visited, boolean[] onStack){
+//		visited[v] = true;
+//		onStack[v] = true;
+//		for (int w : g[v]){
+//			if (this.hasCycle()) return;
+//			if (!visited[w]) dfs(g, w, visited, onStack);
+//			else if (onStack[w]){
+//				isCycle = true;
+//			}
+//		}
+//		onStack[v] = false;
+//	}
+//	
+//	boolean isCycle = false;
+//	private boolean hasCycle(){
+//		return isCycle;
+//	}
+	
 	public boolean canFinish(int numCourses, int[][] prerequisites) {
-		List<Integer> graph[] = new ArrayList[numCourses];
-		for (int i = 0; i < numCourses; i++){
-			graph[i] = new ArrayList<>();
-		}
-		boolean[] visited = new boolean[numCourses];
+		int[] indegree = new int[numCourses];
+		int[][] matrix = new int[numCourses][numCourses];
+		
 		for (int[] pre : prerequisites){
-			graph[pre[0]].add(pre[1]);
+			int prepr = pre[1];
+			int ready = pre[0];
+			indegree[ready]++;
+			matrix[prepr][ready] = 1;
 		}
 		
+		Queue<Integer> queue = new LinkedList<>();
 		for (int i = 0; i < numCourses; i++){
-			if (dfs(graph, visited, i)){
-				return false;
+			if (indegree[i] == 0){
+				queue.offer(i);
 			}
 		}
-		return true;
-	}
-	
-	private boolean dfs(List<Integer> graph[], boolean[] visited,int start){
-		if (visited[start]) return true;
-		visited[start] = true;
-		for (int i = 0; i < graph[start].size(); i++){
-			if(dfs(graph, visited, graph[start].get(i))){
-				return true;
+		
+		int count = 0;
+		while (!queue.isEmpty()){
+			int v = queue.poll();
+			count ++;
+			for (int i = 0; i < numCourses; i++){
+				if (matrix[v][i] == 1){
+					matrix[v][i] = 0;
+					indegree[i]--;
+					if (indegree[i] == 0) queue.offer(i);
+				}
 			}
 		}
-		//这句话是关键
-		visited[start] = false;
-		return false;
+		return count == numCourses;
 	}
 	
 	public static void main(String[] args) {
 		SolutionDay11_L0207 day = new SolutionDay11_L0207();
 		int[][] num = {{0,1},{1,0}};
-		day.canFinish(2, num);
+		day.canFinish(3, new int[][]{});
 	}
 
 }
