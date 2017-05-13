@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 /**
  * 
@@ -45,55 +46,87 @@ import java.util.List;
  */
 public class SolutionDay11_L0210 {
 	
+//	public int[] findOrder(int numCourses, int[][] prerequisites) {
+//		List<Integer> graph[] = new ArrayList[numCourses];
+//		for (int i = 0; i < numCourses; i++) {
+//			graph[i] = new ArrayList<>();
+//		}
+//		boolean[] visited = new boolean[numCourses];
+//		boolean[] onStack = new boolean[numCourses];
+//		for (int[] pre : prerequisites) {
+//			graph[pre[1]].add(pre[0]);
+//		}
+//
+//		isCycle = false;
+//		ans = new LinkedList<>();
+//		for (int i = 0; i < numCourses; i++) {
+//			if (!visited[i]) {
+//				dfs(graph, i, visited, onStack);
+//			}
+//		}
+//		
+//		if (hasCycle()) return new int[]{};
+//		int[] res = new int[ans.size()];
+//		for (int i = 0; i < ans.size(); i++){
+//			res[i] = ans.get(i);
+//		}
+//		return res;
+//	}
+//
+//	List<Integer> ans = new LinkedList<>();
+//	private void dfs(List<Integer> g[], int v, boolean[] visited, boolean[] onStack) {
+//		visited[v] = true;
+//		onStack[v] = true;
+//		for (int w : g[v]) {
+//			if (this.hasCycle())
+//				return;
+//			if (!visited[w])
+//				dfs(g, w, visited, onStack);
+//			else if (onStack[w]) {
+//				isCycle = true;
+//			}
+//		}
+//		onStack[v] = false;
+//		ans.add(0,v);
+//	}
+//
+//	boolean isCycle = false;
+//	private boolean hasCycle() {
+//		return isCycle;
+//	}
+	
 	public int[] findOrder(int numCourses, int[][] prerequisites) {
-		List<Integer> graph[] = new ArrayList[numCourses];
-		for (int i = 0; i < numCourses; i++) {
-			graph[i] = new ArrayList<>();
+		int[] ans = new int[numCourses];
+		int[] indegree = new int[numCourses];
+		int[][] matrix = new int[numCourses][numCourses];
+		
+		for (int[] pre : prerequisites){
+			int prepr = pre[1];
+			int ready = pre[0];
+			indegree[ready]++;
+			matrix[prepr][ready] = 1;
 		}
-		boolean[] visited = new boolean[numCourses];
-		boolean[] onStack = new boolean[numCourses];
-		for (int[] pre : prerequisites) {
-			graph[pre[1]].add(pre[0]);
-		}
-
-		isCycle = false;
-		ans = new LinkedList<>();
-		for (int i = 0; i < numCourses; i++) {
-			if (!visited[i]) {
-				dfs(graph, i, visited, onStack);
+		
+		Queue<Integer> queue = new LinkedList<>();
+		for (int i = 0; i < numCourses; i++){
+			if (indegree[i] == 0){
+				queue.offer(i);
 			}
 		}
 		
-		if (hasCycle()) return new int[]{};
-		int[] res = new int[ans.size()];
-		for (int i = 0; i < ans.size(); i++){
-			res[i] = ans.get(i);
-		}
-		return res;
-	}
-
-	List<Integer> ans = new LinkedList<>();
-	private void dfs(List<Integer> g[], int v, boolean[] visited, boolean[] onStack) {
-		visited[v] = true;
-		onStack[v] = true;
-		for (int w : g[v]) {
-			if (this.hasCycle())
-				return;
-			if (!visited[w])
-				dfs(g, w, visited, onStack);
-			else if (onStack[w]) {
-				isCycle = true;
+		int count = 0;
+		while (!queue.isEmpty()){
+			int v = queue.poll();
+			ans[count ++] = v;
+			for (int i = 0; i < numCourses; i++){
+				if (matrix[v][i] == 1){
+					indegree[i]--;
+					if (indegree[i] == 0) queue.offer(i);
+				}
 			}
 		}
-		onStack[v] = false;
-		ans.add(0,v);
+		return count == numCourses ? ans : new int[0];
 	}
-
-	boolean isCycle = false;
-	private boolean hasCycle() {
-		return isCycle;
-	}
-	
 	
 //	public int[] findOrder(int numCourses, int[][] prerequisites) {
 //		
