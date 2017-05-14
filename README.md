@@ -101,3 +101,15 @@
 - 573 Squirrel Simulation (7分)
 - 576 Out of Boundary Paths (9分)
 - [统一链接](https://github.com/demonSong/leetcode/issues/15)
+
+
+# **LeetCode Weekly Contest 32解题思路**
+
+## **赛题**
+本次周赛主要分为以下4道题：
+
+- 581 Shortest Unsorted Continuous Subarray (4分)
+- 582 Kill Process (6分)
+- 583 Delete Operation for Two Strings (7分)
+- 587 Erect the Fence (9分)
+- [统一链接](https://github.com/demonSong/leetcode/issues/16)

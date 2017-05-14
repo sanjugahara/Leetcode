@@ -37,7 +37,7 @@ import java.util.Queue;
  *         >= 1.
  *
  */
-public class SolutionDay14_L0501 {
+public class SolutionDay14_L0582 {
 
 	// public List<Integer> killProcess(List<Integer> pid, List<Integer> ppid,
 	// int kill) {
@@ -93,9 +93,9 @@ public class SolutionDay14_L0501 {
 		}
 		return ans;
 	}
-
+	
 	public static void main(String[] args) {
-		SolutionDay14_L0501 day = new SolutionDay14_L0501();
+		SolutionDay14_L0582 day = new SolutionDay14_L0582();
 		int[] nums = { 1, 2, 3 };
 		int[] nums2 = { 0, 1, 1 };
 		List<Integer> pid = new ArrayList<>();
