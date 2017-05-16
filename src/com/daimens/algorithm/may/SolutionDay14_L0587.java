@@ -1,5 +1,6 @@
 package com.daimens.algorithm.may;
 
+import java.awt.image.RescaleOp;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -7,6 +8,7 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.Stack;
 
 /**
  * 
@@ -147,10 +149,7 @@ public class SolutionDay14_L0587 {
 	
 	//Solution 2: 分治法
 //	public List<Point> outerTrees(Point[] points) {
-//		List<Point> pp = new ArrayList<>();
-//		for (Point p : points){
-//			pp.add(p);
-//		}
+//		List<Point> pp = Arrays.asList(points);
 //		helper(pp,true);
 //		helper(pp, false);
 //		return new ArrayList<>(ans);
@@ -241,7 +240,124 @@ public class SolutionDay14_L0587 {
 	}
 	
 	public List<Point> outerTrees(Point[] points) {
-		return GrahamScan(points);
+		return boundaryScan(points);
+	}
+	
+	private List<Point> boundaryScan(Point[] points){
+		int n = points.length;
+		if (n <= 3) return Arrays.asList(points);
+		int minIndex = -1;
+		int min = Integer.MAX_VALUE;
+		for (int i = 0; i < n; i++){
+			if (points[i].y < min){
+				min = points[i].y;
+				minIndex = i;
+			}
+		}
+		
+		Point tmp = points[0];
+		points[0] = points[minIndex];
+		points[minIndex] = tmp;
+		
+		Stack<Point> stack = new Stack<>();
+		boolean[] visited = new boolean[n];
+		while (stack.isEmpty() || stack.peek() != points[0]){
+			if (stack.isEmpty()) stack.push(points[0]);
+			visited[0] = true;
+			Point vertex = stack.peek();
+			Point minVertex = null;
+			int index = -1;
+			//每次都选择pints[0]
+			for (int i = 0; i < n; i++){
+				if (!visited[i]){
+					minVertex = points[i];
+					index = i;
+					break;
+				}
+			}
+			
+			if (index == -1) {
+				stack.push(points[0]);
+				break;
+			}
+			
+			//顶点还需要被使用一次
+			for (int i = 0; i < n; i++){
+				if (equal(vertex, points[i])) continue;
+				if (!visited[i] && cross(vertex, points[i], minVertex) >= 0){
+					minVertex = points[i];
+					index = i;
+				}
+				
+			}
+			visited[index] = true;
+ 			stack.push(minVertex);
+		}
+		stack.pop();
+		return new ArrayList<>(stack);
+	}
+	
+	
+	private List<Point> jarvisMarch(Point[] points){
+		List<Point> ans = new ArrayList<>();
+		if (points == null || points.length == 0) return ans;
+		Set<Point> visited = new HashSet<>();
+		
+		Point start = points[0];
+		for (int i = 1; i < points.length; i++){
+			if (points[i].y > start.y || (points[i].y == start.y && points[i].x < start.x)){
+				start = points[i];
+			}
+		}
+		if(points.length == 1) return Arrays.asList(points);
+		
+		Point cur = start;
+		while (cur != null && visited.add(cur)){
+			ans.add(cur);
+			for (int i = 0; i < points.length; i++){
+				if (visited.contains(points[i])) continue;
+				if (isBorder(cur, points[i], points)){
+					cur = points[i];
+					break;
+				}
+			}
+		}
+		
+		for (int i = 0; i < points.length; i++){
+			if (visited.contains(points[i]) || ans.contains(points[i])) continue;
+			int size = ans.size();
+			for (int j = 0; j < size; j++){
+				Point p = ans.get(j);
+				if (isBorder(p, points[i], points)){
+					visited.add(points[i]);
+					ans.add(points[i]);
+					break;
+				}
+			}
+		}
+		
+		return ans;
+	}
+	
+	private boolean isBorder(Point p1, Point p2, Point [] points){
+        int dx = p1.x-p2.x;
+        int dy = p1.y-p2.y;
+        int b = p1.x*dy - p1.y*dx;
+        int prev = 0;
+        for(int i = 0;i<points.length;i++){
+            int x = points[i].x;
+            int y = points[i].y;
+            int sign = dx*y-dy*x+b;
+            if(sign== 0) continue;
+            if(sign*prev < 0) return false;
+            if(sign <0) prev = -1;
+            else prev = 1;
+        }
+        return true;
+    }
+	
+	private int distance(Point p1, Point p2) {
+		return (p1.x - p2.x) * (p1.x - p2.x) + (p1.y - p2.y) * (p1.y - p2.y);
 	}
 	
 	private List<Point> GrahamScan(Point[] points){
@@ -275,7 +391,6 @@ public class SolutionDay14_L0587 {
 		for (int i = 0; i < len; i++){
 			ret.add(points[stack[i]]);
 		}
-		
 		return ret;
 	}
 	
@@ -448,17 +563,17 @@ public class SolutionDay14_L0587 {
 
 	public static void main(String[] args) {
 		SolutionDay14_L0587 day = new SolutionDay14_L0587();
-//		Point[] points = new Point[6];
-//		points[0] = new Point(1,1);
-//		points[1] = new Point(2,2);
-//		points[2] = new Point(2,0);
-//		points[3] = new Point(2,4);
-//		points[4] = new Point(3,3);
-//		points[5] = new Point(4,2);
-		Point[] points = new Point[3];
-		points[0] = new Point(1,2);
+		Point[] points = new Point[6];
+		points[0] = new Point(1,1);
 		points[1] = new Point(2,2);
-		points[2] = new Point(4,2);
+		points[2] = new Point(2,0);
+		points[3] = new Point(2,4);
+		points[4] = new Point(3,3);
+		points[5] = new Point(4,2);
+//		Point[] points = new Point[3];
+//		points[0] = new Point(1,2);
+//		points[1] = new Point(2,2);
+//		points[2] = new Point(4,2);
 		
 //		Point[] points = new Point[8];
 //		points[0] = new Point(3,7);
@@ -469,6 +584,13 @@ public class SolutionDay14_L0587 {
 //		points[5] = new Point(8,5);
 //		points[6] = new Point(7,13);
 //		points[7] = new Point(4,13);
+		
+//		Point[] points = new Point[5];
+//		points[0] = new Point(0,1);
+//		points[1] = new Point(1,0);
+//		points[2] = new Point(100,99);
+//		points[3] = new Point(100,100);
+//		points[4] = new Point(99,100);
 		
 		
 		day.outerTrees(points);
