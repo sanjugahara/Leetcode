@@ -34,19 +34,59 @@ import javafx.scene.control.Cell;
  *
  */
 public class SolutionDay13_L0407 {
-
+	
+	private class Cell{
+		int row;
+		int col;
+		int height;
+		public Cell(int row, int col, int height){
+			this.row = row;
+			this.col = col;
+			this.height = height;
+		}
+	}
+	
 	public int trapRainWater(int[][] heightMap) {
 		int row = heightMap.length;
 		if (row <= 2) return 0;
 		int col = heightMap[0].length;
 		if (col <= 2) return 0;
 		
-		int[][] dir = {{-1,0},{1,0},{0,-1}};
+		int[][] dir = {{-1,0},{1,0},{0,-1},{0,1}};
+		
+		// 从最低的cell遍历
+		PriorityQueue<Cell> queue = new PriorityQueue<>(1,new Comparator<Cell>(){
+			@Override
+			public int compare(Cell o1, Cell o2) {
+				return o1.height - o2.height;
+			}
+		});
+		boolean[][] visited = new boolean[row][col];
+		for (int i = 0; i < row; i++){
+			visited[i][0] = true;
+			visited[i][col-1] = true;
+			queue.offer(new Cell(i, 0, heightMap[i][0]));
+			queue.offer(new Cell(i, col-1, heightMap[i][col-1]));
+		}
+		
+		for (int i = 0; i < col; i++){
+			visited[0][i] = true;
+			visited[row-1][i] = true;
+			queue.offer(new Cell(0, i, heightMap[0][i]));
+			queue.offer(new Cell(row-1, i, heightMap[row-1][i]));
+		}
 		
 		int area = 0;
-		for (int i = 1; i < row - 1; i++) {
-			int minHeight = heightMap[i][0];
-			for (int j = 1; j < col -1; j ++){
+		while (!queue.isEmpty()){
+			Cell cell = queue.poll();
+			for (int[] d : dir){
+				int nrow = cell.row + d[0];
+				int ncol = cell.col + d[1];
+				if (nrow >=0 && nrow < row && ncol >= 0 && ncol < col && !visited[nrow][ncol]){
+					visited[nrow][ncol] = true;
+					area += Math.max(0, cell.height-heightMap[nrow][ncol]);
+					queue.offer(new Cell(nrow, ncol, Math.max(heightMap[nrow][ncol], cell.height)));
+				}
 			}
 		}
 		return area;
@@ -58,3 +98,5 @@ public class SolutionDay13_L0407 {
 		day.trapRainWater(heightMap);
 	}
 }
+
+
