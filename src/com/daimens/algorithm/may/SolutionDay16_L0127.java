@@ -85,45 +85,43 @@ public class SolutionDay16_L0127 {
 //			}
 //			map.put(key, container);
 //		}
-//		
-//		
 //		int ans = helper(map, beginWord, endWord, new HashSet<>());
 //		return ans >= 1 << 30 ? 0 : ans;
 //    }
-	
-	private int helper(Map<String, List<String>> map,String beginWord, String endWord, Set<String> visited){
-		if (visited.contains(beginWord)) return 1<<30;
-		visited.add(beginWord);
-		for (String find : map.get(beginWord)){
-			if (find.equals(endWord)){
-				visited.remove(beginWord); // 特殊情况的返回 也需要删除遍历过的状态
-				return 2;
-			}
-		}
-		int min = Integer.MAX_VALUE;
-		for (String find : map.get(beginWord)){
-			int x = 1 + helper(map, find, endWord, visited);
-			min = Math.min(min, x);
-		}
-		visited.remove(beginWord);
-		return min;
-	}
-	
-	
-	private boolean oneDiff(String a, String b){
-		if (a.equals(b)) return false;
-		char[] aa = a.toCharArray();
-		char[] bb = b.toCharArray();
-		
-		int oneDiff = 0;
-		for (int i = 0; i < aa.length; i++){
-			if (aa[i] != bb[i]){
-				oneDiff ++;
-				if (oneDiff >= 2) return false;
-			}
-		}
-		return true;
-	}
+//	
+//	private int helper(Map<String, List<String>> map,String beginWord, String endWord, Set<String> visited){
+//		if (visited.contains(beginWord)) return 1<<30;
+//		visited.add(beginWord);
+//		for (String find : map.get(beginWord)){
+//			if (find.equals(endWord)){
+//				visited.remove(beginWord);
+//				return 2;
+//			}
+//		}
+//		int min = Integer.MAX_VALUE;
+//		for (String find : map.get(beginWord)){
+//			int x = 1 + helper(map, find, endWord, visited);
+//			min = Math.min(min, x);
+//		}
+//		visited.remove(beginWord);
+//		return min;
+//	}
+//	
+//	
+//	private boolean oneDiff(String a, String b){
+//		if (a.equals(b)) return false;
+//		char[] aa = a.toCharArray();
+//		char[] bb = b.toCharArray();
+//		
+//		int oneDiff = 0;
+//		for (int i = 0; i < aa.length; i++){
+//			if (aa[i] != bb[i]){
+//				oneDiff ++;
+//				if (oneDiff >= 2) return false;
+//			}
+//		}
+//		return true;
+//	}
 
 	private void test(){
 		String each = "ccc";
