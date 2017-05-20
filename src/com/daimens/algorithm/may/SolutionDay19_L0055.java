@@ -22,18 +22,17 @@ package com.daimens.algorithm.may;
 public class SolutionDay19_L0055 {
 	
 //	public boolean canJump(int[] nums) {
-//        dp = new boolean[nums.length];
-//		return canJump(nums,0);
+//        boolean[] dp = new boolean[nums.length];
+//		return canJump(nums,0,dp);
 //    }
 //
-//	boolean[] dp;
-//	private boolean canJump(int[] nums, int pos){
+//	private boolean canJump(int[] nums, int pos,boolean[] dp){
 //		if (dp[pos]) return false;
 //		if (pos >= nums.length - 1) return true;
 //		else{
 //			int step = nums[pos];
 //			for (int i = 1; i <= step; i++){
-//				if (canJump(nums,pos + i)){
+//				if (canJump(nums,pos + i,dp)){
 //					return true;
 //				}
 //			}
@@ -77,6 +76,7 @@ public class SolutionDay19_L0055 {
 		for (int i = 0; i < nums.length; i++){
 			if (i > max) return false;
 			max = Math.max(max, nums[i] + i);
+			if (max >= nums.length-1) return true;
 		}
 		return true;
 	}

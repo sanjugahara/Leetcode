@@ -90,8 +90,6 @@ public class SolutionDay19_L0502 {
 			q1.offer(pairs[i]);
 		}
 		
-		
-		
 		int total = W;
 		for (int i = 0; i < k; i++){
 			while (!q1.isEmpty() && q1.peek().capital <= total){
