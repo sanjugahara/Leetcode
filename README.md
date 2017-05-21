@@ -113,3 +113,14 @@
 - 583 Delete Operation for Two Strings (7分)
 - 587 Erect the Fence (9分)
 - [统一链接](https://github.com/demonSong/leetcode/issues/16)
+
+# **LeetCode Weekly Contest 33解题思路**
+
+## **赛题**
+本次周赛主要分为以下4道题：
+
+- 594 Longest Harmonious Subsequence (3分)
+- 593 Valid Square (6分)
+- 592 Fraction Addition and Subtraction (7分)
+- 588 Design In-Memory File System (9分)
+- [统一链接](https://github.com/demonSong/leetcode/issues/17)
