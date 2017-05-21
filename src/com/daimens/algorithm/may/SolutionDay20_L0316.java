@@ -57,39 +57,50 @@ public class SolutionDay20_L0316 {
 //		return sb.toString();
 //	}
 	
+//	public String removeDuplicateLetters(String s) {
+//		char[] c = s.toCharArray();
+//		int[]  map = new int[26];
+//		for (int i = 0; i < c.length; i++){
+//			map[c[i]-'a']++;
+//		}
+//		
+//		int lf = 0, rt = s.length()-1;
+//		while (lf < rt){
+//			while (lf < rt && ! (map[c[lf]-'a'] >= 2)) lf ++;
+//			while (lf < rt && ! (map[c[rt]-'a'] >= 2)) rt --;
+//			
+//			if (lf >= rt) break;
+//			
+//			if (c[lf] <= c[rt]){
+//				map[c[lf]-'a']--;
+//				c[lf] = '#';
+//				lf++;
+//			}else{
+//				map[c[rt]-'a']--;
+//				c[rt] = '#';
+//				rt--;
+//			}
+//		}
+//		
+//		StringBuilder sb = new StringBuilder();
+//		for (int i = 0; i < c.length; i++){
+//			if (c[i] != '#'){
+//				sb.append(new String(new char[]{c[i]}));
+//			}
+//		}
+//		return sb.toString();
+//	}
+	
 	public String removeDuplicateLetters(String s) {
-		char[] c = s.toCharArray();
-		int[]  map = new int[26];
-		for (int i = 0; i < c.length; i++){
-			map[c[i]-'a']++;
-		}
-		
-		int lf = 0, rt = s.length()-1;
-		while (lf < rt){
-			while (lf < rt && ! (map[c[lf]-'a'] >= 2)) lf ++;
-			while (lf < rt && ! (map[c[rt]-'a'] >= 2)) rt --;
-			
-			if (lf >= rt) break;
-			
-			if (c[lf] <= c[rt]){
-				map[c[lf]-'a']--;
-				c[lf] = '#';
-				lf++;
-			}else{
-				map[c[rt]-'a']--;
-				c[rt] = '#';
-				rt--;
-			}
-		}
-		
-		StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < c.length; i++){
-			if (c[i] != '#'){
-				sb.append(new String(new char[]{c[i]}));
-			}
-		}
-		return sb.toString();
-	}
+        int[] cnt = new int[26];
+        int pos = 0; // the position for the smallest s[i]
+        for (int i = 0; i < s.length(); i++) cnt[s.charAt(i) - 'a']++;
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) < s.charAt(pos)) pos = i;
+            if (--cnt[s.charAt(i) - 'a'] == 0) break;
+        }
+        return s.length() == 0 ? "" : s.charAt(pos) + removeDuplicateLetters(s.substring(pos + 1).replaceAll("" + s.charAt(pos), ""));
+    }
 	
 	public static void main(String[] args) {
 		SolutionDay20_L0316 day = new SolutionDay20_L0316();
