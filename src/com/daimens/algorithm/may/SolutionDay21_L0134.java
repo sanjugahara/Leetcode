@@ -1,9 +1,5 @@
 package com.daimens.algorithm.may;
 
-import java.awt.image.RescaleOp;
-
-import jdk.management.resource.internal.TotalResourceContext;
-
 /**
  * 
  * @author DemonSong
