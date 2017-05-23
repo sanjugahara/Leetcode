@@ -19,31 +19,53 @@ import java.util.List;
  */
 public class SolutionDay23_L0093 {
 	
+//	public List<String> restoreIpAddresses(String s) {
+//		List<String> ans = new ArrayList<>();
+//		backTrack(ans, "", 3, s, 0);
+//		return ans;
+//    }
+//	
+//	private void backTrack(List<String> ans, String ip, int k, String address, int index){
+//		if (k == 0){
+//			if (valid(address.substring(index))){
+//				ip += address.substring(index);
+//				ans.add(ip);
+//				return;
+//			}
+//		} else {
+//			for (int i = 0; i < 3; i++) {
+//				if (index + i >= address.length())
+//					continue;
+//				String cut = address.substring(index, index + i + 1);
+//				if (valid(cut)) {
+//					ip += cut + ".";
+//					backTrack(ans, ip, k - 1, address, index + i + 1);
+//					ip = ip.substring(0, ip.length() - (i + 1) - 1);
+//				}
+//			}
+//		}
+//	}
+	
 	public List<String> restoreIpAddresses(String s) {
 		List<String> ans = new ArrayList<>();
-		backTrack(ans, "", 3, s, 0);
-		return ans;
-    }
-	
-	private void backTrack(List<String> ans, String ip, int k, String address, int index){
-		if (k == 0){
-			if (valid(address.substring(index))){
-				ip += address.substring(index);
-				ans.add(ip);
-				return;
-			}
-		} else {
-			for (int i = 0; i < 3; i++) {
-				if (index + i >= address.length())
-					continue;
-				String cut = address.substring(index, index + i + 1);
-				if (valid(cut)) {
-					ip += cut + ".";
-					backTrack(ans, ip, k - 1, address, index + i + 1);
-					ip = ip.substring(0, ip.length() - (i + 1) - 1);
+		for (int i = 1; i < 4; i++){
+			if (i >= s.length()) continue;
+			for (int j = i + 1; j < i + 4; j++){
+				if (j >= s.length()) continue;
+				for (int k = j + 1; k < j + 4; k++){
+					if (k >= s.length()) continue;
+					String s1 = s.substring(0, i);
+					String s2 = s.substring(i, j);
+					String s3 = s.substring(j, k);
+					String s4 = s.substring(k);
+					if (valid(s1) && valid(s2) && valid(s3) && valid(s4)){
+						ans.add(s1+"."+s2+"."+s3+"."+s4);
+					}
 				}
 			}
 		}
+		
+		return ans;
 	}
 	
 	private boolean valid(String s){
