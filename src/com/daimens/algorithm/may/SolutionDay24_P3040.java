@@ -134,5 +134,4 @@ public class SolutionDay24_P3040 {
 		
 		return total;
 	}
-
 }
