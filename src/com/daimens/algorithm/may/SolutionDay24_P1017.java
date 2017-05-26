@@ -39,7 +39,7 @@ import java.util.Scanner;
  *         2 1
  *
  */
-public class SolutionDay34_P1017 {
+public class SolutionDay24_P1017 {
 	
 	public static void main(String[] args) {
 		Scanner in = new Scanner(System.in);

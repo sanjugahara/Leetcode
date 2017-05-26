@@ -21,7 +21,6 @@ public class SolutionDay25_L0023 {
         for (ListNode list : lists){
         	queue.offer(list);
         }
-        
         while (!queue.isEmpty()){
         	tail.next = queue.poll();
         	tail = tail.next;
@@ -29,7 +28,6 @@ public class SolutionDay25_L0023 {
         		queue.offer(tail);
         	}
         }
-        
 		return dummy.next;
     }
 }

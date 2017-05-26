@@ -1,5 +1,8 @@
 package com.daimens.algorithm.may;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
+
 /**
  * 
  * @author DemonSong
@@ -27,7 +30,16 @@ package com.daimens.algorithm.may;
 public class SolutionDay25_L0239 {
 	
 	public int[] maxSlidingWindow(int[] nums, int k) {
-		return null;
+		if (nums == null || k == 0) return new int[0];
+		int[] ans = new int[nums.length - k + 1];
+		Deque<Integer> queue = new ArrayDeque<>();
+		for (int i = 0, c = 0; i < nums.length; i++){
+			while (!queue.isEmpty() && queue.peek() < i - k + 1) queue.poll();
+			while (!queue.isEmpty() && nums[queue.peekLast()] <= nums[i]) queue.pollLast();
+			queue.offer(i);
+			if (i >= k -1) ans[c++] = nums[queue.peek()]; 
+		}
+		return ans;
     }
 	
 	
