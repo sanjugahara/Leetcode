@@ -97,18 +97,14 @@ public class SolutionDay26_P3614 {
 				cur ++;
 			}
 			while (!queue.isEmpty() && lotions[i][1] != 0){
-				if (queue.peek()[1] < lotions[i][0]){
-					queue.poll();
-				}
-				else{
+				int max = queue.peek()[1]; queue.poll();
+				if (max >= lotions[i][0]){
 					res ++;
 					lotions[i][1]--;
-					queue.poll();
 				}
 			}
 		}
 		return res;
 	}
-
 }
 
