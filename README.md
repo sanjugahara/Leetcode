@@ -124,3 +124,14 @@
 - 592 Fraction Addition and Subtraction (7分)
 - 588 Design In-Memory File System (9分)
 - [统一链接](https://github.com/demonSong/leetcode/issues/17)
+
+# **LeetCode Weekly Contest 34解题思路**
+
+## **赛题**
+本次周赛主要分为以下4道题：
+
+- Leetcode 598. Range Addition II (5分)
+- Leetcode 599. Minimum Index Sum of Two Lists (6分)
+- Leetcode 565. Array Nesting (7分)
+- Leetcode 600. Non-negative Integers without Consecutive Ones (9分)
+- [统一链接](https://github.com/demonSong/leetcode/issues/18)

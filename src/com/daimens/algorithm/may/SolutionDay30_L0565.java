@@ -54,9 +54,9 @@ public class SolutionDay30_L0565 {
 		int size = 0;
 		for (int i = 0; i < nums.length; i++){
 			if (nums[i] == -1) continue;
-			int next = nums[i];
-			int step = 1;
-			while (next != i){
+			int next = i;
+			int step = 0;
+			while (next >= 0){
 				step++;
 				int tmp = nums[next];
 				nums[next] = -1;
