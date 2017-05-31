@@ -88,7 +88,7 @@ public class PriorityQueue<Key extends Comparable<Key>> {
 	}
 	
 	public static void main(String[] args) {
-		int[] test = RandomUtil.randomSet(1, 100, 10);
+		int[] test = RandomUtil.randomSet(0, 10, 9);
 		PriorityQueue<Integer> queue = new PriorityQueue<>(10, (a, b) -> (b-a));
 		for (int i = 0; i < test.length; i++){
 			queue.offer(test[i]);

@@ -119,10 +119,6 @@ public class Sort {
 		//insertionSort(elements);
 		System.out.println(isSorted(elements));
 		
-		
-		//RADIXSORT
-		Long[] data = RandomUtil.randomLongArray(10, 500);
-		System.out.println(isSorted(data));
 	}
 		
 }
