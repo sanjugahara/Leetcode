@@ -34,6 +34,14 @@ public class Sort {
 		}
 	}
 	
+	public static void insertionSort(String[] elements, int lo, int hi, int d){
+		for (int i = lo + 1; i <= hi; i++){
+			for (int j = i; j > lo && elements[j].charAt(d) < elements[j-1].charAt(d); j--){
+				swap(elements, j, j-1);
+			}
+		}
+	}
+	
 	//递归插入排序
 	public static void insertionSort(String[] elements){
 		insertionSort(elements,elements.length-1);
@@ -113,9 +121,9 @@ public class Sort {
 	}
 	
 	public static void main(String[] args) {
-		String[] elements = LoadData.loadStringArray();
+		String[] elements = LoadData.loadStringArray("./data/1000words.txt");
 		System.out.println(isSorted(elements));
-		selectionSort(elements);
+		insertionSort(elements,0,elements.length-1,1);
 		//insertionSort(elements);
 		System.out.println(isSorted(elements));
 		

@@ -9,10 +9,10 @@ public abstract class LoadData {
 	
 	
 	
-	public static String[] loadStringArray(){
+	public static String[] loadStringArray(String path){
 		List<String> res = new ArrayList<>();
         try {
-            In in = new In("./data/1000words.txt");
+            In in = new In(path);
             while (!in.isEmpty()) {
                 String s = in.readLine();
                 res.add(s);
@@ -73,7 +73,7 @@ public abstract class LoadData {
 	}
 	
 	public static void main(String[] args) {
-		String[] ans = loadStringArray();
+		String[] ans = loadStringArray("./data/1000words.txt");
 	}
 }
 
