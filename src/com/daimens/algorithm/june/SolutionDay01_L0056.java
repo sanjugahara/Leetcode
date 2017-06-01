@@ -18,19 +18,6 @@ import java.util.List;
  */
 public class SolutionDay01_L0056 {
 	
-	class Interval{
-		int start;
-		int end;
-		Interval(){
-			start = 0;
-			end = 0;
-		}
-		Interval(int s, int e){
-			start = s;
-			end = e;
-		}
-	}
-	
 	public List<Interval> merge(List<Interval> intervals) {
 		if (intervals.size() == 0) return new ArrayList<>();
 		Collections.sort(intervals, (a,b) -> a.start != b.start ? a.start - b.start : a.end - b.end);
@@ -38,7 +25,7 @@ public class SolutionDay01_L0056 {
 		int start = intervals.get(0).start;
 		int end = intervals.get(0).end;
 		for (Interval inter : intervals){
-			if (end > inter.start){
+			if (end >= inter.start){
 				end = Math.max(end, inter.end);
 			}else{
 				ans.add(new Interval(start, end));
@@ -50,4 +37,17 @@ public class SolutionDay01_L0056 {
 		return ans;
     }
 
+}
+
+class Interval{
+	int start;
+	int end;
+	Interval(){
+		start = 0;
+		end = 0;
+	}
+	Interval(int s, int e){
+		start = s;
+		end = e;
+	}
 }
