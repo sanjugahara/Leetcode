@@ -58,7 +58,6 @@ public class SolutionDay04_L0503 {
 		int j = code.indexOf(end);
 		
 		if (i == -1 || j == -1) return code;
-		if (i > j) return code;
 		
 		
 		
