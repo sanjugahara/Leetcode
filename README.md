@@ -135,3 +135,14 @@
 - Leetcode 565. Array Nesting (7分)
 - Leetcode 600. Non-negative Integers without Consecutive Ones (9分)
 - [统一链接](https://github.com/demonSong/leetcode/issues/18)
+
+# **LeetCode Weekly Contest 35解题思路**
+
+## **赛题**
+本次周赛主要分为以下4道题：
+
+- Leetcode 605. Can Place Flowers (4分)
+- Leetcode 606. Construct String from Binary Tree (5分)
+- Leetcode 609. Find Duplicate File in System (7分)
+- Leetcode 591. Tag Validator (10分)
+- [统一链接](https://github.com/demonSong/leetcode/issues/19)
