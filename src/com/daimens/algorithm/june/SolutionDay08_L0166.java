@@ -95,7 +95,7 @@ public class SolutionDay08_L0166 {
 	
 	public static void main(String[] args) {
 		SolutionDay08_L0166 day = new SolutionDay08_L0166();
-		System.out.println(day.fractionToDecimal(-1,Integer.MIN_VALUE));
+		System.out.println(day.fractionToDecimal(94911151,94911150));
 		System.out.println((long) 1 / 133);
 	}
 	
