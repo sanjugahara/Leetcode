@@ -19,21 +19,58 @@ package com.daimens.algorithm.june;
  */
 public class SolutionDay08_L0008 {
 	
+//	public int myAtoi(String str) {
+//		if (str.isEmpty() || !valid(str)) return 0;
+//		char[] c = str.toCharArray();
+//		int i = 0;
+//		while (i < c.length && c[i] == ' ') i++;
+//		int flag = 1;
+//		if (c[i] == '+' || c[i] == '-'){
+//			flag = c[i] == '-' ? -1 : 1;
+//		}
+////		if (i < c.length && c[i] == '-'){
+////			flag = -1;
+////			i++;
+////		}
+////		if (i < c.length && c[i] == '+'){
+////			flag = 1;
+////			i++;
+////		}
+//		
+//		long val = 0;
+//		while (i < c.length && Character.isDigit(c[i])) {
+//			if (Integer.MAX_VALUE / 10 < val || Integer.MAX_VALUE / 10 == val && Integer.MAX_VALUE % 10 < (c[i] - '0'))
+//				return flag == 1 ? Integer.MAX_VALUE : Integer.MIN_VALUE;
+//			val = val * 10 + (c[i++] - '0');
+//		}
+//		val = val * flag;
+////		if (val > Integer.MAX_VALUE) return Integer.MAX_VALUE;
+////		if (val < Integer.MIN_VALUE) return Integer.MIN_VALUE;
+//		return (int)val;
+//	}
+//	
+//	private boolean valid(String str){
+//		boolean existMinus = false;
+//		boolean existPluss = false;
+//		for (int i = 0; i < str.length(); ++i){
+//			if (str.charAt(i) == '+') existPluss = true;
+//			if (str.charAt(i) == '-') existMinus = true;
+//		}
+//		
+//		return ! (existMinus && existPluss);
+//	}
+	
 	public int myAtoi(String str) {
-		if (str.isEmpty() || !valid(str)) return 0;
+		if (str.isEmpty()) return 0;
 		char[] c = str.toCharArray();
 		int i = 0;
 		while (i < c.length && c[i] == ' ') i++;
-		int flag = 1;
-		if (i < c.length && c[i] == '-'){
-			flag = -1;
-			i++;
-		}
-		if (i < c.length && c[i] == '+'){
-			flag = 1;
-			i++;
-		}
 		
+		int flag = 1;
+		if (c[i] == '+' || c[i] == '-'){
+			flag = c[i++] == '-' ? -1 : 1;
+		}
+
 		long val = 0;
 		while (i < c.length && Character.isDigit(c[i])) {
 			if (Integer.MAX_VALUE / 10 < val || Integer.MAX_VALUE / 10 == val && Integer.MAX_VALUE % 10 < (c[i] - '0'))
@@ -41,20 +78,7 @@ public class SolutionDay08_L0008 {
 			val = val * 10 + (c[i++] - '0');
 		}
 		val = val * flag;
-//		if (val > Integer.MAX_VALUE) return Integer.MAX_VALUE;
-//		if (val < Integer.MIN_VALUE) return Integer.MIN_VALUE;
 		return (int)val;
-	}
-	
-	private boolean valid(String str){
-		boolean existMinus = false;
-		boolean existPluss = false;
-		for (int i = 0; i < str.length(); ++i){
-			if (str.charAt(i) == '+') existPluss = true;
-			if (str.charAt(i) == '-') existMinus = true;
-		}
-		
-		return ! (existMinus && existPluss);
 	}
 
 	public static void main(String[] args) {
