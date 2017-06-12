@@ -146,3 +146,14 @@
 - Leetcode 609. Find Duplicate File in System (7分)
 - Leetcode 591. Tag Validator (10分)
 - [统一链接](https://github.com/demonSong/leetcode/issues/19)
+
+# **LeetCode Weekly Contest 36解题思路**
+
+## **赛题**
+本次周赛主要分为以下4道题：
+
+- Leetcode 617. Merge Two Binary Trees (4分)
+- Leetcode 604. Design Compressed String Iterator (5分)
+- Leetcode 611. Valid Triangle Number (7分)
+- Leetcode 616. Add Bold Tag in String (10分)
+- [统一链接](https://github.com/demonSong/leetcode/issues/20)
