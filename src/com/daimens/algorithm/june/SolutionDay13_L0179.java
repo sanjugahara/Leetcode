@@ -6,7 +6,9 @@ import java.util.Comparator;
 /**
  * 
  * @author DemonSong
- * 
+ *			
+ *         179. Largest Number
+ *          
  *         Given a list of non negative integers, arrange them such that they
  *         form the largest number.
  * 
