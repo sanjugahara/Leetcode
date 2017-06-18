@@ -157,3 +157,14 @@
 - Leetcode 611. Valid Triangle Number (7分)
 - Leetcode 616. Add Bold Tag in String (10分)
 - [统一链接](https://github.com/demonSong/leetcode/issues/20)
+
+# **LeetCode Weekly Contest 37解题思路**
+
+## **赛题**
+本次周赛主要分为以下4道题：
+
+- Leetcode 624. Maximum Distance in Arrays
+- Leetcode 623. Add One Row to Tree
+- Leetcode 625. Minimum Factorization
+- Leetcode 621. Task Scheduler
+- [统一链接](https://github.com/demonSong/leetcode/issues/21)
