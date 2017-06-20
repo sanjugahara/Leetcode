@@ -67,7 +67,7 @@ import java.util.StringTokenizer;
  *         5 6 6 4 Output for the Sample Input 4 31.000
  *
  */
-public class SolutionDay19_P2224 {
+public class SolutionDay19_A2224 {
 
 	static class Edge implements Comparable<Edge> {
 		int from;
