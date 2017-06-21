@@ -35,7 +35,7 @@ public class QuickMath {
 //	    out.flush();
 		
 		Stopwatch watch = new Stopwatch();
-		for (int i = 2; i <= 570; ++i){
+		for (int i = 1033; i <= 8179; ++i){
 			if(millerRabin(i, 20)) System.out.println(i);
 		}
 		double time1 = watch.elapsedTime();
