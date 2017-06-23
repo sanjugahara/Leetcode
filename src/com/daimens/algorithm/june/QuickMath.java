@@ -34,13 +34,23 @@ public class QuickMath {
 //	    out.printf("(%.2f seconds)\n",time1);
 //	    out.flush();
 		
-		Stopwatch watch = new Stopwatch();
-		for (int i = 1033; i <= 8179; ++i){
-			if(millerRabin(i, 20)) System.out.println(i);
+//		Stopwatch watch = new Stopwatch();
+//		for (int i = 1033; i <= 8179; ++i){
+//			if(millerRabin(i, 20)) System.out.println(i);
+//		}
+//		double time1 = watch.elapsedTime();
+//	    out.printf("(%.2f seconds)\n",time1);
+//	    out.flush();
+		
+		double lf = 0;
+		double rt = 1;
+		int cnt = 0;
+		for (int i = 0; i < 50; ++i){
+			double mid = (lf + rt) / 2;
+			lf = mid;
+			System.out.println(++cnt);
+			System.out.println(lf);
 		}
-		double time1 = watch.elapsedTime();
-	    out.printf("(%.2f seconds)\n",time1);
-	    out.flush();
 	    
 	    
 //		map = new HashMap<>();
