@@ -168,3 +168,14 @@
 - Leetcode 625. Minimum Factorization
 - Leetcode 621. Task Scheduler
 - [统一链接](https://github.com/demonSong/leetcode/issues/21)
+
+# **LeetCode Weekly Contest 38解题思路**
+
+## **赛题**
+本次周赛主要分为以下4道题：
+
+- Leetcode 628. Maximum Product of Three Numbers
+- Leetcode 630. Course Schedule III
+- Leetcode 629. K Inverse Pairs Array
+- Leetcode 631. Design Excel Sum Formula
+- [统一链接](https://github.com/demonSong/leetcode/issues/22)
