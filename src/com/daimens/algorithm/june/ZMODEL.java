@@ -6,85 +6,17 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.InputMismatchException;
 
-public class SolutionDay26_P2010 {
+public class ZMODEL {
 	InputStream is;
 	PrintWriter out;
-	String INPUT = "./data/judge/2010.txt";
-
-	class Cow {
-		int rank;
-		int score;
-		int aid;
-
-		@Override
-		public String toString() {
-			return "[" + score + ", " + aid + "]";
-		}
-	}
-
+	String INPUT = "./data/judge/3662.txt";
+	
 	void solve() {
-		int N = ni();
-		int C = ni();
-		int F = ni();
-		Cow[] scores = new Cow[C];
-		Cow[] aids = new Cow[C];
-		for (int i = 0; i < C; ++i) {
-			int score = ni();
-			int aid = ni();
-			scores[i] = new Cow();
-			scores[i].aid = aid;
-			scores[i].score = score;
-		}
-		Arrays.sort(scores, new Comparator<Cow>() {
-			@Override
-			public int compare(Cow o1, Cow o2) {
-				return o1.score - o2.score;
-			}
-		});
-
-		for (int i = 0; i < C; ++i) {
-			scores[i].rank = i;
-		}
-		aids = Arrays.copyOf(scores, scores.length);
-		Arrays.sort(aids, new Comparator<Cow>() {
-			@Override
-			public int compare(Cow o1, Cow o2) {
-				return o1.aid - o2.aid;
-			}
-		});
-
-		int lb = 0, ub = C, ans = -1;
-		while (ub - lb > 1) {
-			int mid = lb + (ub - lb) / 2;
-			int total = scores[mid].aid;
-			int left = 0, right = 0;
-			for (int i = 0; i < C; ++i) {
-				if (aids[i].rank < mid && total + aids[i].aid <= F && left < N / 2) {
-					total += aids[i].aid;
-					left++;
-				} else if (aids[i].rank > mid && total + aids[i].aid <= F && right < N / 2) {
-					total += aids[i].aid;
-					right++;
-				}
-			}
-			if (left < N / 2 && right < N / 2) {
-				ans = -1;
-				break;
-			} else if (left < N / 2) {
-				lb = mid;
-			} else if (right < N / 2) {
-				ub = mid;
-			} else { // 满足条件的尽可能让mid变大
-				ans = scores[mid].score;
-				lb = mid;
-			}
-		}
-		out.println(ans);
+		
 	}
-
+	
 	void run() throws Exception {
 		is = oj ? System.in : new FileInputStream(new File(INPUT));
 		out = new PrintWriter(System.out);
@@ -96,7 +28,7 @@ public class SolutionDay26_P2010 {
 	}
 
 	public static void main(String[] args) throws Exception {
-		new SolutionDay26_P2010().run();
+		new ZMODEL().run();
 	}
 
 	private byte[] inbuf = new byte[1024];
@@ -220,3 +152,5 @@ public class SolutionDay26_P2010 {
 			System.out.println(Arrays.deepToString(o));
 	}
 }
+
+
