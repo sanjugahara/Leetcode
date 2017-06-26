@@ -1,155 +1,70 @@
 package com.daimens.algorithm.june;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.PrintWriter;
-import java.util.Arrays;
-import java.util.InputMismatchException;
+import java.util.Scanner;
 
 public class SolutionDay26_P3484 {
-	InputStream is;
-	PrintWriter out;
-	String INPUT = "./data/judge/3484.txt";
 	
-	void solve() {
-		
+	static int MAX_CASE = 1000000;
+	static long[] X = new long[MAX_CASE];
+	static long[] Y = new long[MAX_CASE];
+	static long[] Z = new long[MAX_CASE];
+	static long[] C = new long[MAX_CASE];
+	static int N = 0;
+	public static void main(String[] args) {
+		Scanner in = new Scanner(System.in);
+		while (in.hasNext()){
+			String line = in.nextLine();
+			if (!line.equals("")){
+				String[] nums = line.trim().split(" ");
+				X[N] = Long.parseLong(nums[0]);
+				Y[N] = Long.parseLong(nums[1]);
+				Z[N] = Long.parseLong(nums[2]);
+				N++;
+			}
+			else{
+				if (N == 0){
+					continue;
+				}
+				long lst_bit = 0;
+				for (int i = 0; i < N; ++i){
+					C[i] = (Y[i] - X[i]) / Z[i] + 1;
+					lst_bit ^= C[i];
+				}
+				if ((lst_bit & 1) == 0){
+					System.out.println("no corruption");
+				}
+				else{
+					long lf = 0, rt = Long.MAX_VALUE;
+					while (lf < rt){
+						long mid = lf + (rt - lf) / 2;
+						if ((valid(mid) & 1) == 0) lf = mid + 1;
+						else rt = mid;
+					}
+					System.out.println(lf + " " + (valid(lf) - valid(lf -1)));
+				}
+				N = 0;
+				clear();
+			}
+		}
+		in.close();
 	}
 	
-	void run() throws Exception {
-		is = oj ? System.in : new FileInputStream(new File(INPUT));
-		out = new PrintWriter(System.out);
-
-		long s = System.currentTimeMillis();
-		solve();
-		out.flush();
-		tr(System.currentTimeMillis() - s + "ms");
+	public static void clear(){
+		X = new long[MAX_CASE];
+		Y = new long[MAX_CASE];
+		Z = new long[MAX_CASE];
+		C = new long[MAX_CASE];
 	}
-
-	public static void main(String[] args) throws Exception {
-		new SolutionDay26_P3484().run();
-	}
-
-	private byte[] inbuf = new byte[1024];
-	public int lenbuf = 0, ptrbuf = 0;
-
-	private int readByte() {
-		if (lenbuf == -1)
-			throw new InputMismatchException();
-		if (ptrbuf >= lenbuf) {
-			ptrbuf = 0;
-			try {
-				lenbuf = is.read(inbuf);
-			} catch (IOException e) {
-				throw new InputMismatchException();
+	
+	public static long valid(long mid){
+		long sum = 0;
+		for (int i = 0; i < N; ++i){
+			if (mid >= Y[i]) sum += C[i];
+			else if (mid >= X[i]){
+				sum += (mid - X[i]) / Z[i] + 1;
 			}
-			if (lenbuf <= 0)
-				return -1;
 		}
-		return inbuf[ptrbuf++];
-	}
-
-	private boolean isSpaceChar(int c) {
-		return !(c >= 33 && c <= 126);
-	}
-
-	private int skip() {
-		int b;
-		while ((b = readByte()) != -1 && isSpaceChar(b))
-			;
-		return b;
-	}
-
-	private double nd() {
-		return Double.parseDouble(ns());
-	}
-
-	private char nc() {
-		return (char) skip();
-	}
-
-	private String ns() {
-		int b = skip();
-		StringBuilder sb = new StringBuilder();
-		while (!(isSpaceChar(b))) { // when nextLine, (isSpaceChar(b) && b != '
-									// ')
-			sb.appendCodePoint(b);
-			b = readByte();
-		}
-		return sb.toString();
-	}
-
-	private char[] ns(int n) {
-		char[] buf = new char[n];
-		int b = skip(), p = 0;
-		while (p < n && !(isSpaceChar(b))) {
-			buf[p++] = (char) b;
-			b = readByte();
-		}
-		return n == p ? buf : Arrays.copyOf(buf, p);
-	}
-
-	private char[][] nm(int n, int m) {
-		char[][] map = new char[n][];
-		for (int i = 0; i < n; i++)
-			map[i] = ns(m);
-		return map;
-	}
-
-	private int[] na(int n) {
-		int[] a = new int[n];
-		for (int i = 0; i < n; i++)
-			a[i] = ni();
-		return a;
-	}
-
-	private int ni() {
-		int num = 0, b;
-		boolean minus = false;
-		while ((b = readByte()) != -1 && !((b >= '0' && b <= '9') || b == '-'))
-			;
-		if (b == '-') {
-			minus = true;
-			b = readByte();
-		}
-
-		while (true) {
-			if (b >= '0' && b <= '9') {
-				num = num * 10 + (b - '0');
-			} else {
-				return minus ? -num : num;
-			}
-			b = readByte();
-		}
-	}
-
-	private long nl() {
-		long num = 0;
-		int b;
-		boolean minus = false;
-		while ((b = readByte()) != -1 && !((b >= '0' && b <= '9') || b == '-'))
-			;
-		if (b == '-') {
-			minus = true;
-			b = readByte();
-		}
-
-		while (true) {
-			if (b >= '0' && b <= '9') {
-				num = num * 10 + (b - '0');
-			} else {
-				return minus ? -num : num;
-			}
-			b = readByte();
-		}
-	}
-
-	private boolean oj = System.getProperty("ONLINE_JUDGE") != null;
-
-	private void tr(Object... o) {
-		if (!oj)
-			System.out.println(Arrays.deepToString(o));
+		return sum;
 	}
 }
 
