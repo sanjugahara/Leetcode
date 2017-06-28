@@ -5,53 +5,37 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.InputMismatchException;
-import java.util.List;
 
-public class SolutionDay27_P2100 {
+public class SolutionDay27_C627A {
 	InputStream is;
 	PrintWriter out;
-	String INPUT = "./data/judge/2100.txt";
-	
-	class Pair{
-		long l;
-		long r;
-		public Pair(long l, long r){
-			this.l = l;
-			this.r = r;
-		}
-	}
+	String INPUT = "./data/judge/627A.txt";
 	
 	void solve() {
-		long num = nl();
-		long n = (int)Math.sqrt(num);
-		long lb = 1, rb = 1;
-		long sum = 0;
-		List<Pair> list = new ArrayList<Pair>();
-		for (;;){
-			while (lb <= n && sum < num){
-				sum += (rb * rb);
-				rb++;
-			}
-			if (sum < num) break;
-			if (sum == num){
-				list.add(new Pair(lb,rb - 1));
-			}
-			sum -= lb * lb;
-			lb++;
+		int c = ni();
+		int v0 = ni();
+		int v1 = ni();
+		int a = ni();
+		int l = ni();
+		
+		if (c == 1){
+			out.println(1);
+			return;
 		}
-		out.println(list.size());
-		for (Pair p : list){
-			long size = p.r - p.l + 1;
-			StringBuilder sb = new StringBuilder();
-			sb.append(size + " ");
-			for (long i = p.l; i <= p.r; ++i){
-				sb.append(i + " ");
+		
+		int now = 1;
+		int cnt = 0;
+		while (now < c){
+			cnt++;
+			now += v0 - 1;
+			if (cnt != 1){
+				now = now + 1 - l;
 			}
-			out.println(sb.toString().trim());
+			v0 = Math.min(v1, v0 + a);
 		}
+		out.println(cnt);
 	}
 	
 	void run() throws Exception {
@@ -65,7 +49,7 @@ public class SolutionDay27_P2100 {
 	}
 
 	public static void main(String[] args) throws Exception {
-		new SolutionDay27_P2100().run();
+		new SolutionDay27_C627A().run();
 	}
 
 	private byte[] inbuf = new byte[1024];

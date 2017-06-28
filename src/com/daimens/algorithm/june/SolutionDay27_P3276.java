@@ -5,53 +5,18 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.InputMismatchException;
-import java.util.List;
 
-public class SolutionDay27_P2100 {
+public class SolutionDay27_P3276 {
 	InputStream is;
 	PrintWriter out;
-	String INPUT = "./data/judge/2100.txt";
-	
-	class Pair{
-		long l;
-		long r;
-		public Pair(long l, long r){
-			this.l = l;
-			this.r = r;
-		}
-	}
+	String INPUT = "./data/judge/3276.txt";
 	
 	void solve() {
-		long num = nl();
-		long n = (int)Math.sqrt(num);
-		long lb = 1, rb = 1;
-		long sum = 0;
-		List<Pair> list = new ArrayList<Pair>();
-		for (;;){
-			while (lb <= n && sum < num){
-				sum += (rb * rb);
-				rb++;
-			}
-			if (sum < num) break;
-			if (sum == num){
-				list.add(new Pair(lb,rb - 1));
-			}
-			sum -= lb * lb;
-			lb++;
-		}
-		out.println(list.size());
-		for (Pair p : list){
-			long size = p.r - p.l + 1;
-			StringBuilder sb = new StringBuilder();
-			sb.append(size + " ");
-			for (long i = p.l; i <= p.r; ++i){
-				sb.append(i + " ");
-			}
-			out.println(sb.toString().trim());
-		}
+		int N = ni();
+		char[] cow = ns(N);
+		
 	}
 	
 	void run() throws Exception {
@@ -65,7 +30,7 @@ public class SolutionDay27_P2100 {
 	}
 
 	public static void main(String[] args) throws Exception {
-		new SolutionDay27_P2100().run();
+		new SolutionDay27_P3276().run();
 	}
 
 	private byte[] inbuf = new byte[1024];

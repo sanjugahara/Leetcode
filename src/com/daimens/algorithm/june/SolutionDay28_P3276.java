@@ -5,53 +5,128 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.InputMismatchException;
-import java.util.List;
 
-public class SolutionDay27_P2100 {
+public class SolutionDay28_P3276 {
 	InputStream is;
 	PrintWriter out;
-	String INPUT = "./data/judge/2100.txt";
+	String INPUT = "./data/judge/3276.txt";
 	
-	class Pair{
-		long l;
-		long r;
-		public Pair(long l, long r){
-			this.l = l;
-			this.r = r;
-		}
-	}
+//	void solve() {
+//		int N = ni();
+//		char[] cow = new char[N];
+//		for (int i = 0; i < N; ++i) cow[i] = nc();
+//		int k = N;
+//		int min = 1 << 30;
+//		int minK = k;
+//		for (int i = k; i >= 1; --i){
+//			int cnt = 0;
+//			char[] clone = Arrays.copyOf(cow, N);
+//			
+//			for (int j = 0; j < N - i + 1; ++j){
+//				if(clone[j] == 'F' ) continue;
+//				for (int l = j; l < i + j; ++l){
+//					clone[l] = clone[l] == 'F' ? 'B' : 'F';
+//				}
+//				cnt++;
+//			}
+//			boolean isValid = true;
+//			for (int j = N - i + 1; j < N; ++j){
+//				if(clone[j] == 'B'){
+//					isValid = false;
+//					break;
+//				}
+//			}
+//			if (isValid && cnt != 0 && cnt < min){
+//				min = cnt;
+//				minK = i;
+//			}
+//		}
+//		
+//		out.println(minK + " " + min);
+//	}
+	
+//	void solve() {
+//		int N = ni();
+//		char[] cow = new char[N];
+//		for (int i = 0; i < N; ++i) cow[i] = nc();
+//		int[] f = new int[N];
+//		int min = 1 << 30;
+//		int minK = N;
+//		for (int k = N; k >= 1; --k){
+//			f = new int[N];
+//			for (int i = 0; i < N - k + 1; ++i){
+//				int sum = 0;
+//				for (int j = Math.max(0, i - k + 1); j < i; ++j){
+//					sum += f[j];
+//				}
+//				if ((sum & 1) != 0 && cow[i] == 'F') f[i] = 1;
+//				else if ((sum % 2) == 0 && cow[i] == 'B') f[i] = 1;
+// 			}
+//			boolean isValid = true;
+//			for (int i = N - k + 1; i < N; ++i){
+//				int sum = 0;
+//				for (int j = Math.max(0, i - k + 1); j < i; ++j){
+//					sum += f[j];
+//				}
+//				if ((sum & 1) != 0 && cow[i] == 'F') isValid = false;
+//				else if ((sum % 2) == 0 && cow[i] == 'B') isValid = false;
+//			}
+//			
+//			if(isValid){
+//				int cnt = 0;
+//				for (int i = 0; i < N; ++i){
+//					cnt += f[i];
+//				}
+//				if (cnt != 0 && cnt < min){
+//					min = cnt;
+//					minK = k;
+//				}
+//			}
+//		}
+//		out.println(minK + " " + min);
+//	}
 	
 	void solve() {
-		long num = nl();
-		long n = (int)Math.sqrt(num);
-		long lb = 1, rb = 1;
-		long sum = 0;
-		List<Pair> list = new ArrayList<Pair>();
-		for (;;){
-			while (lb <= n && sum < num){
-				sum += (rb * rb);
-				rb++;
+		int N = ni();
+		char[] cow = new char[N];
+		for (int i = 0; i < N; ++i) cow[i] = nc();
+		int[] f = new int[N];
+		int min = 1 << 30;
+		int minK = N;
+		for (int k = N; k >= 1; --k){
+			f = new int[N];
+			int sum = 0;
+			for (int i = 0; i < N - k + 1; ++i){
+				if ((sum & 1) != 0 && cow[i] == 'F') f[i] = 1;
+				else if ((sum % 2) == 0 && cow[i] == 'B') f[i] = 1;
+				sum += f[i];
+				if (i - k + 1 >= 0){
+					sum -= f[i - k + 1];
+				}
+ 			}
+			boolean isValid = true;
+			for (int i = N - k + 1; i < N; ++i){
+				if ((sum & 1) != 0 && cow[i] == 'F') isValid = false;
+				else if ((sum % 2) == 0 && cow[i] == 'B') isValid = false;
+				if (i - k + 1 >= 0){
+					sum -= f[i - k + 1];
+				}
 			}
-			if (sum < num) break;
-			if (sum == num){
-				list.add(new Pair(lb,rb - 1));
+			
+			if(isValid){
+				int cnt = 0;
+				for (int i = 0; i < N; ++i){
+					cnt += f[i];
+				}
+				if (cnt != 0 && cnt < min){
+					min = cnt;
+					minK = k;
+				}
 			}
-			sum -= lb * lb;
-			lb++;
 		}
-		out.println(list.size());
-		for (Pair p : list){
-			long size = p.r - p.l + 1;
-			StringBuilder sb = new StringBuilder();
-			sb.append(size + " ");
-			for (long i = p.l; i <= p.r; ++i){
-				sb.append(i + " ");
-			}
-			out.println(sb.toString().trim());
-		}
+		out.println(minK + " " + min);
 	}
 	
 	void run() throws Exception {
@@ -65,7 +140,7 @@ public class SolutionDay27_P2100 {
 	}
 
 	public static void main(String[] args) throws Exception {
-		new SolutionDay27_P2100().run();
+		new SolutionDay28_P3276().run();
 	}
 
 	private byte[] inbuf = new byte[1024];

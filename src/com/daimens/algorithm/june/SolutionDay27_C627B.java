@@ -5,53 +5,33 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.InputMismatchException;
-import java.util.List;
 
-public class SolutionDay27_P2100 {
+public class SolutionDay27_C627B {
 	InputStream is;
 	PrintWriter out;
-	String INPUT = "./data/judge/2100.txt";
-	
-	class Pair{
-		long l;
-		long r;
-		public Pair(long l, long r){
-			this.l = l;
-			this.r = r;
-		}
-	}
+	String INPUT = "./data/judge/627B.txt";
 	
 	void solve() {
-		long num = nl();
-		long n = (int)Math.sqrt(num);
-		long lb = 1, rb = 1;
-		long sum = 0;
-		List<Pair> list = new ArrayList<Pair>();
-		for (;;){
-			while (lb <= n && sum < num){
-				sum += (rb * rb);
-				rb++;
-			}
-			if (sum < num) break;
-			if (sum == num){
-				list.add(new Pair(lb,rb - 1));
-			}
-			sum -= lb * lb;
-			lb++;
+		int n = ni();
+		int a = ni();
+		double y = (n - 2) * 180 / (n * 1.0);
+		double[] angle = new double[n-2];
+		angle[0] = y;
+		for (int i = 1; i <= n - 3; ++i){
+			angle[i] = y - ((180 * i) - y * i) / 2.0;
 		}
-		out.println(list.size());
-		for (Pair p : list){
-			long size = p.r - p.l + 1;
-			StringBuilder sb = new StringBuilder();
-			sb.append(size + " ");
-			for (long i = p.l; i <= p.r; ++i){
-				sb.append(i + " ");
+		
+		double min = Integer.MAX_VALUE;
+		int index = -1;
+		for (int i = 0; i < angle.length; ++i){
+			if (Math.abs(angle[i] - a) < min){
+				min = Math.abs(angle[i] - a);
+				index = i;
 			}
-			out.println(sb.toString().trim());
 		}
+		out.println(1 + " " + 2 + " " + (2 + index + 1));
 	}
 	
 	void run() throws Exception {
@@ -65,7 +45,7 @@ public class SolutionDay27_P2100 {
 	}
 
 	public static void main(String[] args) throws Exception {
-		new SolutionDay27_P2100().run();
+		new SolutionDay27_C627B().run();
 	}
 
 	private byte[] inbuf = new byte[1024];
