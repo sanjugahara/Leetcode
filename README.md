@@ -179,3 +179,14 @@
 - Leetcode 629. K Inverse Pairs Array
 - Leetcode 631. Design Excel Sum Formula
 - [统一链接](https://github.com/demonSong/leetcode/issues/22)
+
+# **LeetCode Weekly Contest 39解题思路**
+
+## **赛题**
+本次周赛主要分为以下4道题：
+
+- Leetcode 633. Sum of Square Numbers
+- Leetcode 635. Design Log Storage System
+- Leetcode 634. Find the Derangement of An Array
+- Leetcode 632. Smallest Range
+- [统一链接](https://github.com/demonSong/leetcode/issues/23)

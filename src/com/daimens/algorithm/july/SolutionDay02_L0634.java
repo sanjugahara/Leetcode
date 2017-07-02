@@ -1,6 +1,6 @@
 package com.daimens.algorithm.july;
 
-public class SolutionDay02_L0502 {
+public class SolutionDay02_L0634 {
 
 	
 	static final int MOD = 1000000000 + 7;
@@ -18,7 +18,7 @@ public class SolutionDay02_L0502 {
 	}
 	
 	public static void main(String[] args) {
-		SolutionDay02_L0502 day = new SolutionDay02_L0502();
+		SolutionDay02_L0634 day = new SolutionDay02_L0634();
 	}
 	
 }
