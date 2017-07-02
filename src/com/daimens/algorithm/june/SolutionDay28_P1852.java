@@ -8,13 +8,24 @@ import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.InputMismatchException;
 
-public class ZMODEL {
+public class SolutionDay28_P1852 {
 	InputStream is;
 	PrintWriter out;
-	String INPUT = "./data/judge/3977.txt";
+	String INPUT = "./data/judge/1852.txt";
 	
 	void solve() {
-		
+		int c = ni();
+		while (c --> 0){
+			int l = ni();
+			int n = ni();
+			int[] ants = na(n);
+			int min = 0, max = 0;
+			for (int i = 0; i < n; ++i){
+				min = Math.max(min, Math.min(ants[i], l - ants[i]));
+				max = Math.max(max, Math.max(ants[i], l - ants[i]));
+			}
+			out.println(min + " " + max);
+		}
 	}
 	
 	void run() throws Exception {
@@ -28,7 +39,7 @@ public class ZMODEL {
 	}
 
 	public static void main(String[] args) throws Exception {
-		new ZMODEL().run();
+		new SolutionDay28_P1852().run();
 	}
 
 	private byte[] inbuf = new byte[1024];
@@ -152,5 +163,3 @@ public class ZMODEL {
 			System.out.println(Arrays.deepToString(o));
 	}
 }
-
-

@@ -8,13 +8,65 @@ import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.InputMismatchException;
 
-public class ZMODEL {
+public class SolutionDay28_P2785 {
 	InputStream is;
 	PrintWriter out;
-	String INPUT = "./data/judge/3977.txt";
+	String INPUT = "./data/judge/2785.txt";
 	
 	void solve() {
+		int n = ni();
+		int[] A = new int[n];
+		int[] B = new int[n];
+		int[] C = new int[n];
+		int[] D = new int[n];
+		for (int i = 0; i < n; ++i){
+			A[i] = ni();
+			B[i] = ni();
+			C[i] = ni();
+			D[i] = ni();
+		}
 		
+		int[] arra = new int[n * n];
+		for (int i = 0, k = 0; i < n; ++i){
+			for (int j = 0; j < n; ++j){
+				arra[k++] = C[i] + D[j];
+			}
+		}
+		Arrays.sort(arra);
+		
+		long cnt = 0;
+		for (int i = 0; i < n; ++i){
+			for (int j = 0; j < n; ++j){
+				int key = -(A[i] + B[j]);
+				int lo = lowBound(arra, key);
+				int hi = upBound(arra, key);
+				if (lo == -1 || hi == -1) continue;
+				cnt += (hi - lo + 1);
+			}
+		}
+		out.println(cnt);
+	}
+	
+	private int lowBound(int[] arra, int key){
+		int lf = 0, rt = arra.length - 1;
+		while (lf < rt){
+			int mid = lf + (rt - lf) / 2;
+			if (arra[mid] < key) lf = mid + 1;
+			else rt = mid;
+		}
+		if (arra[rt] == key) return rt;
+		return -1;
+	}
+	
+	private int upBound(int[] arra, int key){
+		int lf = 0, rt = arra.length - 1;
+		while (lf < rt){
+			int mid = lf + (rt - lf + 1) / 2;
+			if (arra[mid] > key) rt = mid - 1;
+			else lf = mid;
+		}
+		if (arra[lf] == key) return lf;
+		return -1;
 	}
 	
 	void run() throws Exception {
@@ -28,7 +80,7 @@ public class ZMODEL {
 	}
 
 	public static void main(String[] args) throws Exception {
-		new ZMODEL().run();
+		new SolutionDay28_P2785().run();
 	}
 
 	private byte[] inbuf = new byte[1024];

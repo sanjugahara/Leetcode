@@ -8,13 +8,41 @@ import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.InputMismatchException;
 
-public class ZMODEL {
+public class SolutionDay28_P3684 {
 	InputStream is;
 	PrintWriter out;
-	String INPUT = "./data/judge/3977.txt";
+	String INPUT = "./data/judge/3684.txt";
 	
 	void solve() {
-		
+		int n = ni();
+		while (n-- > 0){
+			int N = ni();
+			int H = ni();
+			int R = ni();
+			int T = ni();
+			double[] ans = new double[N];
+			for (int i = 0; i < N; ++i){
+				ans[i] = calc(T - i, H);
+			}
+			Arrays.sort(ans);
+			for (int i = 0; i < N; ++i){
+				out.printf("%.2f%c",ans[i] + 2 * R * i / 100.0, (i + 1 == N ? '\n' : ' '));
+			}
+		}
+	}
+	
+	double calc(int T, int H){
+		if (T < 0) return H;
+		double t = Math.sqrt(2.0 * H / 10.0);
+		int k = (int) (T * 1.0 / t);
+		if (k % 2 == 0){
+			double d = k * t;
+			return H - 0.5 * 10.0 * (T - d) * (T - d);
+		}
+		else{
+			double d = k * t + t;
+			return H - 0.5 * 10.0 * (T - d) * (T - d);
+		}
 	}
 	
 	void run() throws Exception {
@@ -28,7 +56,7 @@ public class ZMODEL {
 	}
 
 	public static void main(String[] args) throws Exception {
-		new ZMODEL().run();
+		new SolutionDay28_P3684().run();
 	}
 
 	private byte[] inbuf = new byte[1024];
@@ -152,5 +180,3 @@ public class ZMODEL {
 			System.out.println(Arrays.deepToString(o));
 	}
 }
-
-
