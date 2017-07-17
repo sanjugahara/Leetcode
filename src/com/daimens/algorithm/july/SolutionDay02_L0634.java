@@ -17,7 +17,7 @@ public class SolutionDay02_L0634 {
 		return (int)dp[n];
 	}
 	
-	public static void main(String[] args) {
+	public static void main(String[]  args) {
 		SolutionDay02_L0634 day = new SolutionDay02_L0634();
 	}
 	
