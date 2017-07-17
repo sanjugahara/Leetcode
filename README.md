@@ -201,3 +201,14 @@
 - Leetcode 638. Shopping Offers
 - Leetcode 639. Decode Ways II
 - [统一链接](https://github.com/demonSong/leetcode/issues/24)
+
+# **LeetCode Weekly Contest 41解题思路**
+
+## **赛题**
+本次周赛主要分为以下4道题：
+
+- Leetcode 643. Maximum Average Subarray I
+- Leetcode 636. Exclusive Time of Functions
+- Leetcode 644. Maximum Average Subarray II
+- Leetcode 642. Design Search Autocomplete System
+- [统一链接](https://github.com/demonSong/leetcode/issues/25)
