@@ -190,3 +190,14 @@
 - Leetcode 634. Find the Derangement of An Array
 - Leetcode 632. Smallest Range
 - [统一链接](https://github.com/demonSong/leetcode/issues/23)
+
+# **LeetCode Weekly Contest 40解题思路**
+
+## **赛题**
+本次周赛主要分为以下4道题：
+
+- Leetcode 637. Average of Levels in Binary Tree
+- Leetcode 640. Solve the Equation
+- Leetcode 638. Shopping Offers
+- Leetcode 639. Decode Ways II
+- [统一链接](https://github.com/demonSong/leetcode/issues/24)
