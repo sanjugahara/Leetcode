@@ -12,11 +12,13 @@ public class SolutionDay20_P1273 {
 		int from;
 		int to;
 		int cap;
+		int rev;
 		
-		public Edge(int from, int to, int cap){
+		public Edge(int from, int to, int cap, int rev){
 			this.from = from;
 			this.to = to;
 			this.cap = cap;
+			this.rev = rev;
 		}
 		
 		@Override
@@ -41,9 +43,6 @@ public class SolutionDay20_P1273 {
 			g = new ArrayList[N];
 			for (int i = 0; i < N; ++i){ 
 				g[i] = new ArrayList<Edge>();
-				for (int j = 0; j < N; ++j){
-					g[i].add(new Edge(i, j, 0));
-				}
 			}
 			
 			for (int i = 0; i < M; ++i){
@@ -61,7 +60,8 @@ public class SolutionDay20_P1273 {
 	}
 	
 	public static void addEdge(int from, int to, int cap){
-		g[from].add(new Edge(from, to, cap));
+		g[from].add(new Edge(from, to, cap, g[to].size()));
+		g[to].add(new Edge(to, from, 0, g[from].size() - 1));
 	}
 	
 	public static void bfs(int s){
@@ -91,7 +91,7 @@ public class SolutionDay20_P1273 {
 				int d = dfs(to, t, Math.min(f, e.cap), visited);
 				if (d > 0){
 					e.cap -= d;
-					g[to].get(s).cap += d;
+					g[to].get(e.rev).cap += d;
 					return d;
 				}
 			}

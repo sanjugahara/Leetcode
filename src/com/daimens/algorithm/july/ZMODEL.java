@@ -11,7 +11,7 @@ import java.util.InputMismatchException;
 public class ZMODEL {
 	InputStream is;
 	PrintWriter out;
-	String INPUT = "./data/judge/07/3713.txt";
+	String INPUT = "./data/judge/201707/3713.txt";
 	
 	void solve() {
 		
