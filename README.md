@@ -212,3 +212,14 @@
 - Leetcode 644. Maximum Average Subarray II
 - Leetcode 642. Design Search Autocomplete System
 - [统一链接](https://github.com/demonSong/leetcode/issues/25)
+
+# **LeetCode Weekly Contest 42解题思路**
+
+## **赛题**
+本次周赛主要分为以下4道题：
+
+- Leetcode 645. Set Mismatch
+- Leetcode 646. Maximum Length of Pair Chain
+- Leetcode 647. Palindromic Substrings
+- Leetcode 648. Replace Words
+- [统一链接](https://github.com/demonSong/leetcode/issues/26)
