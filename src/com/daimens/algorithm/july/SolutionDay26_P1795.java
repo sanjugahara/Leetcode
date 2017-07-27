@@ -6,122 +6,144 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.InputMismatchException;
+import java.util.Set;
 
 public class SolutionDay26_P1795 {
 	InputStream is;
 	PrintWriter out;
 	String INPUT = "./data/judge/201707/1795.txt";
 	
+	
+	static final int INF = 1 << 29;
+	static final int MAX_N = 15;
+	int[][] cost = new int[MAX_N][MAX_N];
+	int[][] dp = new int[1 << MAX_N][MAX_N];
 	void solve() {
-		int t = ni();
-		for (int i = 0; i < t; ++i){
+		int test = ni();
+		for (int t = 0; t < test; ++t){
 			int len = ni();
 			String[] str = new String[len];
 			for (int j = 0; j < len; ++j){
 				str[j] = ns();
 			}
 			
+			//预处理，去重,把包含的字符串去除
+			for (int i = 0; i < len; ++i){
+				for (int j = 0; j < len; ++j){
+					if (i == j) continue;
+					if (str[i].contains(str[j])){
+						str[j] = str[i];
+					}
+				}
+			}
 			
-			out.println("Scenario #"+(i + 1)+":");
+			Set<String> set = new HashSet<String>(Arrays.asList(str));
+			int N = set.size();
+			String[] newStr = set.toArray(new String[0]);
+			
+			int[] lenStr = new int[N];
+			for (int i = 0; i < N; ++i){
+				lenStr[i] = newStr[i].length();
+			}
+			
+			//i右拼接j左
+			for (int i = 0; i < N; ++i){
+				for (int j = 0; j < N; ++j){
+					for (int l = 0; l < Math.min(lenStr[i], lenStr[j]); ++l){
+						if (newStr[i].substring(lenStr[i] - l).equals(newStr[j].substring(0, l))){
+							cost[i][j] = lenStr[j] - l;
+						}
+					}
+				}
+			}
+			
+			//进行最短距离拼接
+			for (int i = 0; i < 1 << N; ++i){
+				Arrays.fill(dp[i], INF);
+			}
+			
+			//拼接i所需要的最短距离
+			for (int i = 0; i < N; ++i){
+				dp[0 | 1 << i][i] = lenStr[i];
+			}
+			
+			//遍历每种状态，对每种状态进行i和j的拼接
+			for (int s = 0; s < 1 << N; ++s){
+				for (int i = 0; i < N; ++i){
+					if (dp[s][i] != INF){
+						for (int j = 0; j < N; ++j){
+							if ((s & 1 << j) == 0){
+								dp[s | 1 << j][j] = Math.min(dp[s | 1 << j][j], dp[s][i] + cost[i][j]);
+							}
+						}
+					}
+				}
+			}
+			
+			int bestLen = INF;
+			for (int i = 0; i < N; ++i){
+				bestLen = Math.min(dp[(1 << N) - 1][i], bestLen);
+			}
+			
+			for (int i = 0; i < N; ++i){
+				if (dp[(1 << N) - 1][i] == bestLen){
+					dp[(1 << N) - 1][i] = -dp[(1 << N) - 1][i];
+				}
+			}
+			
+			for (int s = (1 << N) - 1; s >= 0; --s){
+				for (int i = 0; i < N; ++i){
+					if (dp[s][i] < 0){
+						for (int j = 0; j < N; ++j){
+							if (i != j && (s & (1 << j)) != 0){
+								if (dp[s & ~(1 << i)][j] + cost[j][i] == -dp[s][i]){
+									dp[s & ~(1 << i)][j] = -dp[s & ~(1 << i)][j];
+								}
+							}
+						}
+					}
+				}
+			}
+
+			String res = new String(new char[]{'z' + 1});
+			int append = 0;
+			int last = -1;
+			for (int i = 0; i < N; ++i){
+				if (dp[append | 1 << i][i] < 0){
+					if (res.compareTo(newStr[i]) > 0){
+						res = newStr[i];
+						last = i;
+					}
+				}
+			}
+			append |= 1 << last;
+			for (int i = 0; i < N - 1; ++i){
+				String tail = new String(new char[]{'z' + 1});
+				int key = -1;
+				for (int j = 0; j < N; ++j){
+					if ((append & 1 << j) == 0){
+						if (dp[append | 1 << j][j] < 0){
+							if (Math.abs(dp[append][last]) + cost[last][j] == Math.abs(dp[append | 1 << j][j])){
+								if (tail.compareTo(newStr[j].substring(lenStr[j] - cost[last][j])) > 0){
+									key = j;
+									tail = newStr[j].substring(lenStr[j] - cost[last][j]);
+								}
+							}
+						}
+					}
+				}
+				last = key;
+				append |= 1 << key;
+				res += tail;
+			}
+			
+			out.println("Scenario #"+(t + 1)+":");
+			out.println(res);
 			out.println();
 		}
 	}
-	
-//	Map<Integer, String> mem;
-//	String cmp = "";
-//	public void dfs(String[] str, int pos, String ans){
-//		if (pos == str.length){
-//			if (cmp.isEmpty()){
-//				cmp = ans;
-//				return;
-//			}
-//			else{
-//				if (cmp.length() >= ans.length()){ 
-//					if (cmp.length() > ans.length()){ 
-//						cmp = ans;
-//					}
-//					else{
-//						if (cmp.compareTo(ans) > 0) cmp = ans;
-//					}
-//					return;
-//				}
-//			}
-//		}
-//		else{
-//			if (ans.contains(str[pos])){
-//				dfs(str, pos + 1, ans);
-//			}
-//			else{
-//				char[] c1 = str[pos].toCharArray();
-//				char[] c2 = ans.toCharArray();
-//				int i = c1.length - 1;
-//				int j = 0;
-//				while (i >= 0 && j < c2.length && c1[i] == c2[j]){
-//					i--;
-//					j++;
-//				}
-//				dfs(str, pos + 1, str[pos] + ans.substring(j));
-//				
-//				int index = 0;
-//				for (; index < c2.length; ++index){
-//					if (str[pos].contains(ans.substring(index))) break;
-//				}
-//				dfs(str, pos + 1, ans.substring(0, index) + str[pos]);
-//				
-//				
-//			}
-//		}
-//	}
-	
-//	public String dfs(String[] str, int pos, String ans){
-//		if (mem.containsKey(pos)) return mem.get(pos);
-//		if (pos == str.length){
-//			return ans;
-//		}
-//		else{
-//			if (ans.contains(str[pos])){
-//				String key = dfs(str, pos + 1, ans);
-//				mem.put(pos, key);
-//				return key;
-//			}
-//			else{
-//				char[] c1 = str[pos].toCharArray();
-//				char[] c2 = ans.toCharArray();
-//				int i = c1.length - 1;
-//				int j = 0;
-//				while (i >= 0 && j < c2.length && c1[i] == c2[j]){
-//					i--;
-//					j++;
-//				}
-//				String key1 = dfs(str, pos + 1, str[pos] + ans.substring(j));
-//				
-//				int index = 0;
-//				for (; index < c2.length; ++index){
-//					if (str[pos].contains(ans.substring(index))) break;
-//				}
-//				String key2 = dfs(str, pos + 1, ans.substring(0, index) + str[pos]);
-//				if (key1.length() < key2.length()){
-//					mem.put(pos, key1);
-//					return key1;
-//				}
-//				else if (key1.length() > key2.length()){
-//					mem.put(pos, key2);
-//					return key2;
-//				}
-//				else{
-//					if (key1.compareTo(key2) > 0){
-//						mem.put(pos, key2);
-//						return key2;
-//					}
-//					else{
-//						mem.put(pos, key1);
-//						return key1;
-//					}
-//				}
-//			}
-//		}
-//	}
 	
 	void run() throws Exception {
 		is = oj ? System.in : new FileInputStream(new File(INPUT));
