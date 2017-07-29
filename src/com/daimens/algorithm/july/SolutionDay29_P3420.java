@@ -5,108 +5,65 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.InputMismatchException;
-import java.util.List;
 
-public class SolutionDay25_P1018 {
+public class SolutionDay29_P3420 {
 	InputStream is;
 	PrintWriter out;
-	String INPUT = "./data/judge/201707/1018.txt";
-	
-//	class Pair{
-//		int B;
-//		int P;
-//		public Pair(int B, int P){
-//			this.B = B;
-//			this.P = P;
-//		}
-//		
-//		public boolean cmp(Pair that){
-//			double thatBP = that.B / (1.0 * that.P);
-//			double thisBP = this.B / (1.0 * this.P);
-//			return thisBP > thatBP;
-//		}
-//		
-//		@Override
-//		public String toString() {
-//			return B + " " + P;
-//		}
-//	}
-	
-	class Pair{
-		int B;
-		int P;
-		public Pair(int B, int P){
-			this.B = B;
-			this.P = P;
-		}
-	}
+	String INPUT = "./data/judge/201707/3420.txt";
 	
 	void solve() {
-		int T = ni();
-		for (int i = 0; i < T; ++i){
+		while (true){
 			int N = ni();
-			List<Pair>[] g = new ArrayList[N];
-			for (int j = 0; j < N; ++j) g[j] = new ArrayList<Pair>();
-			for (int j = 0; j < N; ++j){
-				int m = ni();
-				for (int k = 0; k < m; ++k){
-					g[j].add(new Pair(ni(), ni()));
-				}
-			}
-			
-			double max = 0;
-			out.printf("%.3f\n",max);
+			int M = ni();
+			if (N + M == 0) break;
+			int[][] a = {{1,1,1,1,0},{1,0,0,0,0},{1,0,0,0,1},{2,0,0,1,0},{0,0,1,0,0}};
+			Mat A = new Mat(a);
+			A = A.pow(A, N, M);
+			out.println(A.mat[0][0]);
 		}
 	}
 	
-//	void solve() {
-//		int T = ni();
-//		for (int i = 0; i < T; ++i){
-//			int N = ni();
-//			
-//			
-//			Pair[][] dp = new Pair[N + 16][100 + 16];
-//			for (int k = 0; k < dp.length; ++k){
-//				for (int l = 0; l < dp[0].length; ++l){
-//					dp[k][l] = new Pair(0, 1);
-//				}
-//			}
-//			//阶段0
-//			int m = ni();
-//			for (int j = 0; j < m; ++j){
-//				int b = ni();
-//				int p = ni();
-//				dp[0][j].B = b;
-//				dp[0][j].P = p;
-//			}
-//			
-//			//阶段1开始
-//			int prev = m;
-//			for (int j = 1; j < N; ++j){
-//				m = ni();
-//				for (int k = 0; k < m; ++k){
-//					int b = ni();
-//					int p = ni();
-//					for (int l = 0; l < prev; ++l){
-//						Pair tmp = new Pair(Math.min(dp[j-1][l].B, b),dp[j - 1][l].P + p);
-//						if (tmp.cmp(dp[j][k])){
-//							dp[j][k] = tmp;
-//						}
-//					}
-//				}
-//				prev = m;
-//			}
-//			
-//			double max = 0;
-//			for (int j = 0; j < prev; ++j){
-//				max = Math.max(max, dp[N - 1][j].B / (1.0 * dp[N - 1][j].P));
-//			}
-//			out.printf("%.3f\n",max);
-//		}
-//	}
+	class Mat{
+		int[][] mat;
+		int n;
+		int m;
+		
+		public Mat(int[][] mat){
+			this.mat = mat;
+			this.n = mat.length;
+			this.m = mat[0].length;
+		}
+		
+		public Mat mul(Mat A, Mat B, int MOD){
+			int[][] a = A.mat;
+			int[][] b = B.mat;
+			int[][] res = new int[A.n][B.m];
+			for (int i = 0; i < A.n; ++i){
+				for (int j = 0; j < B.m; ++j){
+					for (int ll = 0; ll < A.m; ++ll){
+						res[i][j] = (res[i][j] + a[i][ll] * b[ll][j]) % MOD;
+					}
+				}
+			}
+			return new Mat(res);
+		}
+		
+		public Mat pow(Mat A, int n, int MOD){
+			int[][] one = new int[A.n][A.n];
+			for (int i = 0; i < A.n; ++i) one[i][i] = 1;
+			Mat res = new Mat(one);
+			while (n > 0){
+				if ((n & 1) != 0){
+					res = mul(res, A, MOD);
+				}
+				n >>= 1;
+				A = mul(A, A, MOD);
+			}
+			return res;
+		}
+	}
 	
 	void run() throws Exception {
 		is = oj ? System.in : new FileInputStream(new File(INPUT));
@@ -119,7 +76,7 @@ public class SolutionDay25_P1018 {
 	}
 
 	public static void main(String[] args) throws Exception {
-		new SolutionDay25_P1018().run();
+		new SolutionDay29_P3420().run();
 	}
 
 	private byte[] inbuf = new byte[1024];
@@ -243,5 +200,3 @@ public class SolutionDay25_P1018 {
 			System.out.println(Arrays.deepToString(o));
 	}
 }
-
-
