@@ -1,6 +1,6 @@
 package com.daimens.algorithm.july;
 
-public class SolutionDay30_L0503 {
+public class SolutionDay30_L0651 {
 
 	public int maxA(int N) {
 		int[] dp = new int[N + 16];
@@ -14,7 +14,7 @@ public class SolutionDay30_L0503 {
 	}
 
 	public static void main(String[] args) {
-		SolutionDay30_L0503 day = new SolutionDay30_L0503();
+		SolutionDay30_L0651 day = new SolutionDay30_L0651();
 		System.out.println(day.maxA(3));
 	}
 

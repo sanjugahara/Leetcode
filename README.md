@@ -223,3 +223,14 @@
 - Leetcode 647. Palindromic Substrings
 - Leetcode 648. Replace Words
 - [统一链接](https://github.com/demonSong/leetcode/issues/26)
+
+# **LeetCode Weekly Contest 43解题思路**
+
+## **赛题**
+本次周赛主要分为以下4道题：
+
+- Leetcode 652. Find Duplicate Subtrees
+- Leetcode 650. 2 Keys Keyboard
+- Leetcode 649. Dota2 Senate
+- Leetcode 651. 4 Keys Keyboard
+- [统一链接](https://github.com/demonSong/leetcode/issues/27)
