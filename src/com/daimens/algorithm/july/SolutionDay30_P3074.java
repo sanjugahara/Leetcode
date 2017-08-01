@@ -13,6 +13,24 @@ public class SolutionDay30_P3074 {
 	PrintWriter out;
 	String INPUT = "./data/judge/201707/3074.txt";
 	
+	class Pair implements Comparable<Pair>{
+		int id;
+		int value;
+		public Pair(int id, int value){
+			this.id = id;
+			this.value = value;
+		}
+		@Override
+		public int compareTo(Pair that) {
+			return this.value - that.value;
+		}
+		
+		@Override
+		public String toString() {
+			return this.value + "";
+		}
+	}
+	
 	void solve() {
 		while (true){
 			String line = ns();
@@ -22,17 +40,119 @@ public class SolutionDay30_P3074 {
 			for (int i = 0; i < sudoku.length; ++i){
 				board[i / 9][i % 9] = sudoku[i];
 			}
-			if (dfs(board, 0)){
+			
+			int[] map = new int[27];
+			for (int col = 0; col < 9; ++col){
+				for (int row = 0; row < 9; ++row){
+					if (board[row][col] == '.'){
+						map[col]++;
+						map[row + 9]++;
+						int nrow = row / 3;
+						int ncol = col / 3;
+						int id = nrow * 3 + ncol;
+						map[id + 18]++;
+					}
+				}
+			}
+			
+			Pair[] pp = new Pair[27];
+			for (int i = 0; i < 27; ++i){
+				pp[i] = new Pair(i, map[i]);
+			}
+			Arrays.sort(pp);
+			
+			if (dfs(board, pp, 0)){
 				pp(board);
 			}
+			
 		}
+	}
+	
+	public boolean dfs(char[][] board, Pair[] pp, int pos){
+		if (pos == pp.length){
+			return true;
+		}
+		int id = pp[pos].id;
+		if (id >= 0 && id < 9){ //所在列
+			for (int row = 0; row < 9; ++row){
+				if (board[row][id] == '.'){
+					boolean valid = false;
+					for (int num = 1; num <= 9; ++num){
+						if (valid(board, row, id, num)){
+							valid = true;
+							board[row][id] = (char)('0' + num);
+							if (dfs(board, pp, pos)){
+								return true;
+							}
+							else{
+								valid = false;
+								board[row][id] = '.';
+							}
+						}
+					}
+					if (!valid) return false;
+				}
+			}
+		}
+		else if (id >= 9 && id < 18){ //所在行
+			int row = id - 9;
+			for (int col = 0; col < 9; ++col){
+				if (board[row][col] == '.'){
+					boolean valid = false;
+					for (int num = 1; num <= 9; ++num){
+						if (valid(board, row, col, num)){
+							valid = true;
+							board[row][col] = (char)('0' + num);
+							if (dfs(board, pp, pos)){
+								return true;
+							}
+							else{
+								valid = false;
+								board[row][col] = '.';
+							}
+						}
+					}
+					if (!valid) return false;
+				}
+			}
+		}
+		else{  //所在块
+			id -= 18;
+			int row = id / 3 * 3;
+			int col = id % 3 * 3;
+			for (int i = 0; i < 3; ++i){
+				for (int j = 0; j < 3; ++j){
+					int nrow = row + i;
+					int ncol = col + j;
+					if (board[nrow][ncol] == '.'){
+						boolean valid = false;
+						for (int num = 1; num <= 9; ++num){
+							if (valid(board, nrow, ncol, num)){
+								valid = true;
+								board[nrow][ncol] = (char)('0' + num);
+								if (dfs(board, pp, pos)){
+									return true;
+								}
+								else{
+									valid = false;
+									board[nrow][ncol] = '.';
+								}
+							}
+						}
+						if (!valid) return false;
+					}
+				}
+			}
+		}
+		if (dfs(board, pp, pos + 1)) return true;
+		return false;
 	}
 	
 	public void pp(char[][] board){
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < 9; ++i){
 			for (int j = 0; j < 9; ++j){
-				sb.append(board[i][j]);
+				sb.append(board[i][j] + (j + 1 == 9 ? "" : ""));
 			}
 		}
 		out.println(sb.toString());
@@ -56,6 +176,8 @@ public class SolutionDay30_P3074 {
 		}
 		return true;
 	}
+	
+	
 	
 	public boolean dfs(char[][] board, int cnt){
 		if (cnt == 81) return true;

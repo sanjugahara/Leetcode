@@ -3,7 +3,7 @@ package com.daimens.algorithm.july;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class SolutionDay30_L0502 {
+public class SolutionDay30_L0649 {
 	
 	public String predictPartyVictory(String senate) {
 		Queue<Character> queue = new LinkedList<>();
@@ -45,7 +45,7 @@ public class SolutionDay30_L0502 {
     }
 	
 	public static void main(String[] args) {
-		SolutionDay30_L0502 day = new SolutionDay30_L0502();
+		SolutionDay30_L0649 day = new SolutionDay30_L0649();
 		System.out.println(day.predictPartyVictory("RDD"));
 	}
 
