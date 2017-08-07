@@ -118,7 +118,7 @@ public class SolutionDay02_P2032 {
 				}
 			}
 		}
-		
+
 		for (int i = H - 1; i >= 0; --i){
 			for (int j = W - 1; j >= 0; --j){
 				if (T[i][j] != 0){
@@ -183,16 +183,6 @@ public class SolutionDay02_P2032 {
 		if (dfs(s + 1, cost + 1)) return true;
 		X = copy(x_backup);
 		return false;
-	}
-	
-	void pp(int[][] arra){
-		StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < arra.length; ++i){
-			for (int j = 0; j < arra[i].length; ++j){
-				sb.append(arra[i][j] + (j + 1 == arra[i].length ? "\n" : " "));
-			}
-		}
-		System.out.println(sb.toString());
 	}
 	
 	int[][] copy(int[][] X){
