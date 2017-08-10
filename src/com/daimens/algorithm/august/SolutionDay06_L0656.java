@@ -3,59 +3,130 @@ package com.daimens.algorithm.august;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Stack;
 
-public class SolutionDay06_L0503 {
+public class SolutionDay06_L0656 {
 	
 	//dp[i][j] 表示最后一位从第j个位置更新
+//	static final int INF = 1 << 29;
+//	public List<Integer> cheapestJump(int[] A, int B) {
+//		List<Integer> ans = new ArrayList<>();
+//		int n = A.length;
+//		if (n == 0) return ans;
+//		int[] dp = new int[n];
+//		Arrays.fill(dp, INF);
+//		dp[0] = A[0];
+//		for (int i = 1; i < n; ++i){
+//			if (A[i] == -1) continue;
+//			for (int j = B; j >= 1; --j){
+//				if (i - j >= 0){
+//					dp[i] = Math.min(dp[i], dp[i - j] + A[i]);
+//				}
+//			}
+//		}
+//		if (dp[n - 1] == INF) return ans;
+//		dp[n - 1] = -dp[n -1];
+//		for (int i = n - 2; i >= 0; --i){
+//			for (int j = B; j >= 1; --j){
+//				if (i + j >= n) continue;
+//				if (dp[i] + A[i + j] == -dp[i + j]){
+//					dp[i] = -dp[i];
+//				}
+//			}
+//		}
+//		
+//		ans.add(1);
+//		int cur = 0;
+//		int i = 1;
+//		while (i < n){
+//			int min = INF;
+//			int id = -1;	
+//			for (int j = i; j < n; ++j){
+//				if (dp[j] <= 0 && Math.abs(dp[j]) == Math.abs(dp[cur]) + A[j]){
+//					id = j;
+//					break;
+////					if (min > A[j]){
+////						min = A[j];
+////						id = j;
+////					}
+//				}
+//			}
+//			if (id != -1){
+//				ans.add(id + 1);
+//				cur = id;
+//				i = id;
+//			}
+//			i ++;
+//		}
+//		return ans;
+//	}
+	
+	
+//	static final int INF = 1 << 29;
+//	public List<Integer> cheapestJump(int[] A, int B) {
+//		int n = A.length;
+//		List<Integer> ans = new ArrayList<>();
+//		if (n == 0) return ans;
+//		int[] dp = new int[n];
+//		int[] path = new int[n];
+//		Arrays.fill(dp, INF);
+//		dp[0] = A[0];
+//		for (int i = 1; i < n; ++i){
+//			if (A[i] == -1) continue;
+//			for (int j = B; j >= 1; --j){
+//				if (i - j >= 0){
+//					if (dp[i] > dp[i - j] + A[i]){
+//						dp[i] = dp[i - j] + A[i];
+//						path[i] = i - j;
+//					}
+//				}
+//			}
+//		}
+//		if (dp[n - 1] == INF) return ans;
+//		
+//		Stack<Integer> stack = new Stack<>();
+//		stack.push(n - 1 + 1);
+//		int cur = n - 1;
+//		while (cur != 0){
+//			stack.push(path[cur] + 1);
+//			cur = path[cur];
+//		}
+//		
+//		while (!stack.isEmpty()) ans.add(stack.pop());
+//		
+//		return ans;
+//	}
+	
 	static final int INF = 1 << 29;
 	public List<Integer> cheapestJump(int[] A, int B) {
-		List<Integer> ans = new ArrayList<>();
 		int n = A.length;
+		List<Integer> ans = new ArrayList<>();
 		if (n == 0) return ans;
 		int[] dp = new int[n];
+		int[] path = new int[n];
 		Arrays.fill(dp, INF);
-		dp[0] = A[0];
-		for (int i = 1; i < n; ++i){
-			if (A[i] == -1) continue;
-			for (int j = B; j >= 1; --j){
-				if (i - j >= 0){
-					dp[i] = Math.min(dp[i], dp[i - j] + A[i]);
-				}
-			}
-		}
-		if (dp[n - 1] == INF) return ans;
-		dp[n - 1] = -dp[n -1];
+		dp[n - 1] = A[n - 1];
 		for (int i = n - 2; i >= 0; --i){
-			for (int j = B; j >= 1; --j){
-				if (i + j >= n) continue;
-				if (dp[i] + A[i + j] == -dp[i + j]){
-					dp[i] = -dp[i];
+			if (A[i] == -1) continue;
+			for (int j = 1; j <= B; ++j){
+				if (i + j >= n || dp[i + j] < 0) continue;
+				if (dp[i + j] + A[i] < dp[i]){
+					dp[i] = dp[i + j] + A[i];
+					path[i] = i + j;
 				}
 			}
 		}
 		
+		if (dp[0] == INF) return ans;
 		ans.add(1);
 		int cur = 0;
-		for (int i = 1; i < n; ++i){
-			int min = INF;
-			int id = -1;
-			for (int j = i; j < n; ++j){
-				if (dp[j] <= 0 && Math.abs(dp[j]) == Math.abs(dp[cur]) + A[j]){
-					if (min > A[j]){
-						min = A[j];
-						id = j;
-					}
-				}
-			}
-			if (id != -1){
-				ans.add(id + 1);
-				cur = id;
-				i = id;
-			}
+		while (cur < n - 1){
+			ans.add(path[cur] + 1);
+			cur = path[cur];
 		}
-		
 		return ans;
 	}
+	
 //	public List<Integer> cheapestJump(int[] A, int B) {
 //		int n = A.length;
 //		List<Integer> ans = new ArrayList<>();
@@ -105,7 +176,7 @@ public class SolutionDay06_L0503 {
 //			}
 //		}
 //		ans.add(id + 1);
-//		
+//			
 //		for (int i = 2; i <= n; ++i){
 //			int nd = -1;
 //			for (int k = 0; k < n; ++k){
@@ -131,7 +202,7 @@ public class SolutionDay06_L0503 {
 	
 	
 	public static void main(String[] args) {
-		SolutionDay06_L0503 day = new SolutionDay06_L0503();
+		SolutionDay06_L0656 day = new SolutionDay06_L0656();
 		int[] A = { 30, 30, 51, 8, 83, 35, 50, 82, 87, -1, 86, 19, 79, 91, 86, 91, 69, 84, 19, 39, 59, 18, 67, 90, 32,
 				22, 68, 71, 73, 66, 6, 33, 60, 52, 21, 67, 59, 19, 65, 94, 92, 75, 44, 95, 23, 80, 34, 54, 64, 4, 59, 8,
 				4, 28, 22, 54, 41, 54, 95, 23, 37, 79, 53, 45, 64, 19, 70, 36, 48, 99, 31, 16, 62, 35, 44, 40, 1, 96,

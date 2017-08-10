@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class SolutionDay06_L0502 {
+public class SolutionDay06_L0655 {
 	
 //	public List<List<String>> printTree(TreeNode root) {
 //        map = new HashMap<>();
@@ -72,9 +72,9 @@ public class SolutionDay06_L0502 {
 	public List<List<String>> printTree(TreeNode root) {
 		List<List<String>> ans = new ArrayList<>();
 		if (root == null) return ans;
-		layer(root, 1);
-		int size = (int) (Math.pow(2, cc) - 1);
-		for (int i = 0; i < cc; ++i){
+		int layer = layer(root);
+		int size = (1 << layer) - 1;
+		for (int i = 0; i < layer; ++i){
 			ans.add(new ArrayList<>());
 			for (int j = 0; j < size; ++j){
 				ans.get(i).add("");
@@ -92,6 +92,12 @@ public class SolutionDay06_L0502 {
 		dfs(ans,root.right, layer + 1, mid + 1, j);
 	}
 	
+	public int layer(TreeNode root){
+		if (root == null) return 0;
+		int lf = layer(root.left) + 1;
+		int rt = layer(root.right) + 1;
+		return Math.max(lf, rt);
+	}
 	
 	int cc;
 	public void layer(TreeNode root, int layer){
@@ -102,7 +108,7 @@ public class SolutionDay06_L0502 {
 	}
 	
 	public static void main(String[] args) {
-		SolutionDay06_L0502 day = new SolutionDay06_L0502();
+		SolutionDay06_L0655 day = new SolutionDay06_L0655();
 		TreeNode root = new TreeNode(1);
 		root.right = new TreeNode(7);
 		root.right.right = new TreeNode(8);
