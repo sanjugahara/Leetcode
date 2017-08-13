@@ -73,13 +73,12 @@ public class SolutionDay10_P3468 {
 		while (in.hasNext()){
 			int N = in.nextInt();
 			int M = in.nextInt();
-			BIT0 = new long[N + 1];
-			BIT1 = new long[N + 1];
+			RangeBIT bit = new RangeBIT(N + 1, n);
 			n = N;
 			int[] nums = new int[N];
 			for (int i = 0; i < N; ++i){
 				nums[i] = in.nextInt();
-				addBIT0(i + 1, nums[i]);
+				bit.bit0.add(i + 1, nums[i]);
 			}
 			
 			for (int i = 0; i < M; ++i){
@@ -89,18 +88,15 @@ public class SolutionDay10_P3468 {
 					int b = in.nextInt();
 					a --;
 					long ans = 0;
-					ans += sum(BIT1, b) * b + sum(BIT0, b);
-					ans -= sum(BIT1, a) * a + sum(BIT0, a);
+					ans += bit.sum(b);
+					ans -= bit.sum(a);
 					System.out.println(ans);
 				}
 				else{
 					int a = in.nextInt();
 					int b = in.nextInt();
 					int x = in.nextInt();
-					addBIT0(a, - x * (a - 1));
-					addBIT1(a, x);
-					addBIT0(b + 1, x * b);
-					addBIT1(b + 1, - x);
+					bit.add(a, b, x);
 				}
 			}
 			
@@ -108,30 +104,78 @@ public class SolutionDay10_P3468 {
 		in.close();
 	}
 	
-	static long[] BIT0;
-	static long[] BIT1;
+//	static long[] BIT0;
+//	static long[] BIT1;
+//	
+//	public static void addBIT0(int pos, int val){
+//		while (pos <= n){
+//			BIT0[pos] += val;
+//			pos += pos & - pos;
+//		}
+//	}
+//	
+//	public static void addBIT1(int pos, int val){
+//		while (pos <= n){
+//			BIT1[pos] += val;
+//			pos += pos & -pos;
+//		}
+//	}
+//	
+//	public static long sum(long[] BIT, int i){
+//		long sum = 0;
+//		while (i > 0){
+//			sum += BIT[i];
+//			i -= i & -i;
+//		}
+//		return sum;
+//	}
 	
-	public static void addBIT0(int pos, int val){
-		while (pos <= n){
-			BIT0[pos] += val;
-			pos += pos & - pos;
+	/***************Binary Index Tree*******************/
+	static class BIT{
+		long[] BIT;
+		int n;
+		public BIT(int N, int n){
+			this.n = n;
+			BIT = new long[N];
+		}
+		
+		public void add(int i, int val){
+			while (i <= n){
+				BIT[i] += val;
+				i += i & -i;
+			}
+		}
+		
+		public long sum(int i){
+			long sum = 0;
+			while (i > 0){
+				sum += BIT[i];
+				i -= i & -i;
+			}
+			return sum;
 		}
 	}
 	
-	public static void addBIT1(int pos, int val){
-		while (pos <= n){
-			BIT1[pos] += val;
-			pos += pos & -pos;
+	static class RangeBIT{
+		BIT bit0;
+		BIT bit1;
+		
+		public RangeBIT(int N, int n){
+			this.bit0 = new BIT(N, n);
+			this.bit1 = new BIT(N, n);
 		}
-	}
-	
-	public static long sum(long[] BIT, int i){
-		long sum = 0;
-		while (i > 0){
-			sum += BIT[i];
-			i -= i & -i;
+		
+		//[L, R]
+		public void add(int l, int r, int val){
+			bit0.add(l, -val * (l - 1));
+			bit1.add(l, val);
+			bit0.add(r + 1, val * r);
+			bit1.add(r + 1, -val);
 		}
-		return sum;
+		
+		public long sum(int i){
+			return bit1.sum(i) * i + bit0.sum(i);
+		}
 	}
 	
 	
