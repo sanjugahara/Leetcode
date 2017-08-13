@@ -245,3 +245,14 @@
 - Leetcode 655. Print Binary Tree
 - Leetcode 656. Coin Path
 - [统一链接](https://github.com/demonSong/leetcode/issues/28)
+
+# **LeetCode Weekly Contest 45解题思路**
+
+## **赛题**
+本次周赛主要分为以下4道题：
+
+- Leetcode 657. Judge Route Circle
+- Leetcode 658. Find K Closest Elements
+- Leetcode 659. Split Array into Consecutive Subsequences
+- Leetcode 660. Remove 9
+- [统一链接](https://github.com/demonSong/leetcode/issues/29)
