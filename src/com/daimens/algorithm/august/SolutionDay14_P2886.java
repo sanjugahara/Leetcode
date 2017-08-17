@@ -6,118 +6,136 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.InputMismatchException;
+import java.util.Map;
+import java.util.Scanner;
 
-public class SolutionDay13_P2155 {
+public class SolutionDay14_P2886 {
 	InputStream is;
 	PrintWriter out;
-	String INPUT = "./data/judge/201708/P2155.txt";
+	String INPUT = "./data/judge/201708/P2886.txt";
 	
-	int N;
+	class Pair{
+		String name;
+		int step;
+		public Pair(String name, int step){
+			this.name = name;
+			this.step = step;
+		}
+	}
+	
+	Scanner in;
+	public SolutionDay14_P2886(){
+		in = new Scanner(System.in);
+	}
+	
+	
+	static final int MAX_N = 500000 + 16;
 	void solve() {
-		int t = ni();
-		while (t --> 0){
-			N = ni();
-			int C = ni();
-			BIT2DTree bit = new BIT2DTree();
-			for (int i = 0; i < C; ++i){
-				char c = nc();
-				if (c == 'C'){
-					int x = ni();
-					int y = ni();
-					int l = ni();
-					int r = ni();
-					x ++;
-					y ++;
-					l ++;
-					r ++;
-					bit.add(l , r, 1);
-					bit.add(x - 1, y - 1, 1);
-					bit.add(x - 1, r, 1);
-					bit.add(l, y - 1, 1);
+		factors();
+		while (in.hasNext()){
+			int N = in.nextInt();
+			int K = in.nextInt();
+			
+			/************** 计算 约数个数 ******************/
+			int[] p = new int[MAX_N];
+			int max = 0;
+			int id = 0;
+			
+			for (int i = 1; i < N + 1; ++i){
+				if (max < table[i]){
+					max = table[i];
+					id = i;
+				}
+				table[i] = max;
+				p[i] = id;
+			}
+			
+			init(N);
+			for (int i = 1; i <= N; ++i) add(i, 1);
+			Pair[] ps = new Pair[N];
+			
+			for (int i = 0; i < N; ++i){
+				String name = in.next();
+				int step = in.nextInt();
+				ps[i] = new Pair(name, step);
+			}
+			
+			int index = 0;
+			int len = N;
+			for (int i = 0; i < p[N]; ++i){
+				index = binarySearch(K);
+				add(index, -1);
+				len --;
+				if (len == 0) break;
+				int step = ps[index - 1].step;
+				if (step < 0){
+					step = -step;
+					K = (sum(index) - 1 + len - (step - 1) % len) % len + 1;
 				}
 				else{
-					int x = ni();
-					int y = ni();
-					out.println(bit.sum(x, y) & 1);
+					K = (sum(index) - 1 + step) % len + 1;
 				}
 			}
-			out.println();
+			
+			System.out.println(ps[index - 1].name + " " + table[N]);
+		}
+		
+	}
+	
+	/******************* Binary Index Tree*******************/
+	int[] bit;
+	int N;
+	
+	public void init(int n){
+		bit = new int[MAX_N];
+		this.N = n;
+	}
+	
+	public void add(int i, int val){
+		while (i <= N){
+			bit[i] += val;
+			i += i & -i;
 		}
 	}
 	
-	/***************Binary Index Tree*******************/
-	
-	static final int MAX_N = 1000 + 16;
-	
-	class BIT2DTree{
-		int[][] bit;
-		
-		public BIT2DTree(){
-			bit = new int[MAX_N][MAX_N];
+	public int sum(int i){
+		int res = 0;
+		while (i > 0){
+			res += bit[i];
+			i -= i & -i;
 		}
-
-		public void add(int x, int y, int val){
-			for (int i = x; i <= N; i += i & -i){
-				for (int j = y; j <= N; j += j & -j){
-					bit[i][j] += val;
+		return res;
+	}
+	
+	/******************* binary search *******************/
+	public int binarySearch(int key){
+		int lf = 1, rt = N;
+		while (lf < rt){
+			int mid = lf + (rt - lf) / 2;
+			if (sum(mid) < key) lf = mid + 1;
+			else rt = mid;
+		}
+		
+		if (sum(lf) == key) return lf;
+		return -1;
+	}
+	
+	// 速度太慢，采用分解为素数的办法
+	int[] table = new int[MAX_N];
+	public void factors(){
+		Arrays.fill(table, 1);
+		for (int i = 2; i < MAX_N; ++i){
+			if (table[i] == 1){
+				for (int j = i; j < MAX_N; j += i){
+					int k = 0;
+					for (int m = j; m % i == 0; m /= i, k++);
+					table[j] *= (k + 1);
 				}
 			}
 		}
-		
-		public int sum(int x, int y){
-			int ans = 0;
-			for (int i = x; i > 0; i -= i & -i){
-				for (int j = y; j > 0; j -= j & -j){
-					ans += bit[i][j];
-				}
-			}
-			return ans;
-		}
 	}
-	
-	
-	//以下代码不能AC
-	BIT2DTree bit_XY, bit_X, bit_Y, bit;
-	
-	public void init(){
-		bit_XY = new BIT2DTree();
-		bit_X = new BIT2DTree();
-		bit_Y = new BIT2DTree();
-		bit = new BIT2DTree();
-	}
-		
-	public int sum (int x, int y){
-		return bit.sum(x, y) + bit_XY.sum(x, y) * x * y + bit_X.sum(x, y) * x + bit_Y.sum(x, y) * y;
-	}
-	
-	public int sumRange(int x, int y, int l, int r){ //l >= x && r >= y
-		return sum(l, r) + sum(x - 1, y - 1) - (sum(l, y - 1) + sum(x - 1, r));
-	}
-	
-	public void add(int x, int y, int l, int r, int val){
-		bit_XY.add(x, y, val);
-		bit_XY.add(x, r + 1, -val);
-		bit_XY.add(l + 1, y, -val);
-		bit_XY.add(l + 1, r + 1, val);
-		
-		bit_X.add(x, y, -val * (y - 1));
-		bit_X.add(x, r + 1, val * r);
-		bit_X.add(l + 1, y, (y - 1) * val);
-		bit_X.add(l + 1, r + 1, - val * r);
-		
-		bit_Y.add(x, y, -val * (x - 1));
-		bit_Y.add(x, r + 1, val * (x - 1));
-		bit_Y.add(l + 1, y, val * l);
-		bit_Y.add(l + 1, r + 1, - val * l);
-		
-		bit.add(x, y, (x - 1) * (y - 1) * val);
-		bit.add(x, r + 1, -r * (x - 1) * val);
-		bit.add(l + 1, y, -l * (y - 1) * val);
-		bit.add(l + 1, r + 1, l * r * val);
-		
-	}
-	
 	
 	void run() throws Exception {
 		is = oj ? System.in : new FileInputStream(new File(INPUT));
@@ -130,7 +148,7 @@ public class SolutionDay13_P2155 {
 	}
 
 	public static void main(String[] args) throws Exception {
-		new SolutionDay13_P2155().run();
+		new SolutionDay14_P2886().run();
 	}
 
 	private byte[] inbuf = new byte[1024];
