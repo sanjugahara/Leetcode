@@ -3,7 +3,7 @@ package com.daimens.algorithm.august;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SolutionDay21_L0501 {
+public class SolutionDay21_L0662 {
 	
 //	public int widthOfBinaryTree(TreeNode root) {
 //        if (root == null) return 0;
@@ -193,7 +193,7 @@ public class SolutionDay21_L0501 {
 	}
 	
 	public static void main(String[] args) {
-		SolutionDay21_L0501 day = new SolutionDay21_L0501();
+		SolutionDay21_L0662 day = new SolutionDay21_L0662();
 		TreeNode root = new TreeNode(1);
 		root.left = new TreeNode(3);
 		root.right = new TreeNode(2);
