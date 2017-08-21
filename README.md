@@ -256,3 +256,14 @@
 - Leetcode 659. Split Array into Consecutive Subsequences
 - Leetcode 660. Remove 9
 - [统一链接](https://github.com/demonSong/leetcode/issues/29)
+
+# **LeetCode Weekly Contest 46解题思路**
+
+## **赛题**
+本次周赛主要分为以下4道题：
+
+- Leetcode 661. Image Smoother
+- Leetcode 662. Maximum Width of Binary Tree
+- Leetcode 663. Equal Tree Partition
+- Leetcode 664. Strange Printer
+- [统一链接](https://github.com/demonSong/leetcode/issues/30)

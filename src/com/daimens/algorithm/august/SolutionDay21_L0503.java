@@ -1,9 +1,5 @@
 package com.daimens.algorithm.august;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
-
 public class SolutionDay21_L0503 {
 	
 //	public int strangePrinter(String s) {
@@ -160,29 +156,71 @@ public class SolutionDay21_L0503 {
 //		return dp[0][s.length() - 1];
 //	}
 	
-	int[][][] dp = new int[101][101][101];
+//	int[][][] dp = new int[101][101][101];
+//	public int strangePrinter(String s) {
+//		for (int i = 0; i < 101; ++i){
+//			for (int j = 0; j < 101; ++j){
+//				for (int k = 0; k < 101; ++k){
+//					dp[i][j][k] = -1;
+//				}
+//			}
+//		}
+//		return f(s.toCharArray(), 0, s.length() - 1, 0, dp);
+//	}
+//	
+//	public int f(char[] cs, int i, int j, int k, int[][][] dp){
+//		if (i > j) return 0;
+//		if (dp[i][j][k] > 0) return dp[i][j][k];
+//		for (;i + 1 <= j && cs[i] == cs[i + 1]; ++i, ++k);
+//		int res = 1 + f(cs, i + 1, j, 0, dp);
+//		for (int m = i + 1; m <= j; ++m){
+//			if (cs[m] == cs[i]){
+//				res = Math.min(res, f(cs, i + 1, m - 1, 0, dp) + f(cs, m, j, k + 1, dp));
+//			}
+//		}
+//		return dp[i][j][k] = res;
+//	}
+	
+//	int[][] dp = new int[101][101];
+//	public int strangePrinter(String s) {
+//		for (int i = 0; i < 101; ++i){
+//			for (int j = 0; j < 101; ++j){
+//					dp[i][j] = -1;
+//			}
+//		}
+//		return f(s.toCharArray(), 0, s.length() - 1, dp);
+//	}
+//	
+//	public int f(char[] cs, int i, int j, int[][] dp){
+//		if (i > j) return 0;
+//		if (dp[i][j] > 0) return dp[i][j];
+//		for (;i + 1 <= j && cs[i] == cs[i + 1]; ++i);
+//		int res = 1 + f(cs, i + 1, j, dp);
+//		for (int m = i + 1; m <= j; ++m){
+//			if (cs[m] == cs[i]){
+//				res = Math.min(res, f(cs, i + 1, m - 1, dp) + f(cs, m, j, dp));
+//			}
+//		}
+//		return dp[i][j] = res;
+//	}
+	
+	// iter
 	public int strangePrinter(String s) {
-		for (int i = 0; i < 101; ++i){
-			for (int j = 0; j < 101; ++j){
-				for (int k = 0; k < 101; ++k){
-					dp[i][j][k] = -1;
+		int[][] dp = new int[101][101];
+		int n = s.length();
+		if (n == 0) return 0;
+		char[] cs = s.toCharArray();
+		for (int i = 0; i < n; ++i) dp[i][i] = 1;
+		for (int i = n - 1; i >= 0; --i){
+			for (int j = i + 1; j < n; ++j){
+				dp[i][j] = dp[i + 1][j] + 1;
+				char c = cs[i];
+				for (int k = i; k < j; ++k){
+					if (cs[k + 1] == c) dp[i][j] = Math.min(dp[i][j], dp[i][k] + dp[k + 1][j] - 1);
 				}
 			}
 		}
-		return f(s.toCharArray(), 0, s.length() - 1, 0, dp);
-	}
-	
-	public int f(char[] cs, int i, int j, int k, int[][][] dp){
-		if (i > j) return 0;
-		if (dp[i][j][k] > 0) return dp[i][j][k];
-		for (;i + 1 <= j && cs[i] == cs[i + 1]; ++i, ++k);
-		int res = 1 + f(cs, i + 1, j, 0, dp);
-		for (int m = i + 1; m <= j; ++m){
-			if (cs[m] == cs[i]){
-				res = Math.min(res, f(cs, i + 1, m - 1, 0, dp) + f(cs, m, j, k + 1, dp));
-			}
-		}
-		return dp[i][j][k] = res;
+		return dp[0][n - 1];
 	}
 	
 	public static void main(String[] args) {
@@ -191,4 +229,5 @@ public class SolutionDay21_L0503 {
 		// tbgtgb
 		System.out.println(day.strangePrinter("baacdddaaddaaaaccbddbcabdaabdbbcdcbbbacbddcabcaaa"));
 	}
+	
 }
