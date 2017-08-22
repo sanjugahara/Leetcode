@@ -1,6 +1,6 @@
 package com.daimens.algorithm.august;
 
-public class SolutionDay21_L0503 {
+public class SolutionDay21_L0664 {
 	
 //	public int strangePrinter(String s) {
 //		return helper(s.toCharArray(), 0, s.length() - 1);
@@ -224,7 +224,7 @@ public class SolutionDay21_L0503 {
 	}
 	
 	public static void main(String[] args) {
-		SolutionDay21_L0503 day = new SolutionDay21_L0503();
+		SolutionDay21_L0664 day = new SolutionDay21_L0664();
 		String s = "baacdddaaddaaaaccbddbcabdaabdbbcdcbbbacbddcabcaaa";
 		// tbgtgb
 		System.out.println(day.strangePrinter("baacdddaaddaaaaccbddbcabdaabdbbcdcbbbacbddcabcaaa"));
